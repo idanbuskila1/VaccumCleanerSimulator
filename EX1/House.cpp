@@ -5,6 +5,7 @@ House::House(const tuple<int,int> dockingLoc,vector<vector<int>> map):houseSize(
         for(int j=0;j<get<1>(houseSize);j++){
             if(map[i][j]>0)
                 totalDirt+=map[i][j];
+                std::cout<< ":" << map[i][j]<<" ";
         }
     }
     totalDirtLeft=totalDirt;
