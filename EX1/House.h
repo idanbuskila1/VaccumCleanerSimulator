@@ -15,5 +15,6 @@ public:
     int getDirtLevel(tuple<int,int> loc);//returns dirt level on loc, or 0 if there is no dirt/wall.
     bool isWallInDirection(int direction, tuple<int,int> curLoc);//according to direction and current location return if there is a wall. use enums in index.h.
     int getTotalDirtLeft(){return totalDirtLeft;}
+    tuple<int,int> getDockingStationLoc(){return dockingStationLoc;}
 };
 #endif
