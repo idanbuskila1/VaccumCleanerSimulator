@@ -14,7 +14,7 @@ HDRS = index.h House.h VaccumCleaner.h
 OBJS = $(SRCS:.cpp=.o)
 
 # Target executable
-TARGET = out
+TARGET = myrobot
 
 # Build the executable
 $(TARGET): $(OBJS)

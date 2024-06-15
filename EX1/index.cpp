@@ -13,7 +13,7 @@ void cleaningAlgorithm(VaccumCleaner& vc, House& h, int maxSteps) {
     std::string step;
     std::vector<std::string> stepLog; // Vector to store steps log
 
-    while (steps < maxSteps && h.getTotalDirtLeft() > 0) {
+    while (steps < maxSteps) {
         std::ostringstream oss;
         oss << "step: " << steps << ". battery: " << vc.getBatterySteps() 
             << " location: [" << std::get<0>(vc.getCurrentLoc()) << "," 
@@ -21,7 +21,13 @@ void cleaningAlgorithm(VaccumCleaner& vc, House& h, int maxSteps) {
         std::string stepDetails = oss.str();
         std::cout << stepDetails;
         stepLog.push_back(stepDetails);
-
+        if(maxSteps-steps==vc.getStepsFromDocking()){
+             // The way back to the docking station is exactly as long as the steps left. Go back to docking station and finish (without charging) so we wont fail in mission.
+            std::cout << "finished." << std::endl;
+            stepLog.push_back("finished.");
+            steps += vc.goCharge(maxSteps - steps, true);
+            continue;
+        }
         if (vc.getBatterySteps() - 1 == vc.getStepsFromDocking()) {
             steps += vc.goCharge(maxSteps - steps);
             dir = -1;
@@ -38,27 +44,21 @@ void cleaningAlgorithm(VaccumCleaner& vc, House& h, int maxSteps) {
             continue;
         }
 
-        if (h.getTotalDirtLeft() > 0) {
-            // Having charge and current location is clean, but there is more to clean. Decide on direction to move forward.
-            if (dir == -1)
-                dir = chooseNextDirection(h, vc.getCurrentLoc());
-            // Move in this direction.
-            vc.move(dir);
-            steps++;
-            std::ostringstream moveOss;
-            moveOss << "MOVED IN DIR " << dir << ".";
-            std::string moveDetails = moveOss.str();
-            std::cout << moveDetails << std::endl;
-            stepLog.push_back(moveDetails);
-            // If there is a wall 1 step towards dir in the new location, discard dir. Else vc will continue to go in direction dir.
-            if (h.isWallInDirection(dir, vc.getCurrentLoc()))
-                dir = -1;
-        } else {
-            // Having charge and nothing to clean. Go back to docking station and finish (without charging).
-            std::cout << "finished." << std::endl;
-            stepLog.push_back("finished.");
-            steps += vc.goCharge(maxSteps - steps, true);
-        }
+        // Having charge, maxSteps boundary is not reached and current location is clean- advance to another spot. Decide on direction to move forward.
+        if (dir == -1)
+            dir = chooseNextDirection(h, vc.getCurrentLoc());
+        // Move in this direction.
+        vc.move(dir);
+        steps++;
+        std::ostringstream moveOss;
+        moveOss << "MOVED IN DIR " << dir << ".";
+        std::string moveDetails = moveOss.str();
+        std::cout << moveDetails << std::endl;
+        stepLog.push_back(moveDetails);
+        // If there is a wall 1 step towards dir in the new location, discard dir. Else vc will continue to go in direction dir.
+        if (h.isWallInDirection(dir, vc.getCurrentLoc()))
+            dir = -1;
+
     }
     std::cout << "Total steps: " << steps << std::endl;
     std::cout << "Total dirt left: " << h.getTotalDirtLeft() << std::endl;
@@ -75,8 +75,8 @@ void cleaningAlgorithm(VaccumCleaner& vc, House& h, int maxSteps) {
         if (vc.getBatterySteps() <= 0) {
             file << "Battery is dead." << std::endl;
         }
-        if (h.getTotalDirtLeft() > 0) {
-            file << "There is more dirt left." << std::endl;
+        if (h.getTotalDirtLeft() > 0 || vc.getStepsFromDocking()>0) {
+            file << "Clean wasn't successful. There is more dirt left and/or the cleaner is not in the docking station." << std::endl;
         } else {
             file << "Clean was successful." << std::endl;
         }
