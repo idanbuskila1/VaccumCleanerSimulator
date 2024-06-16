@@ -5,8 +5,8 @@ House::House(const tuple<int,int> dockingLoc,vector<vector<int>> map):houseSize(
         for(int j=0;j<get<1>(houseSize);j++){
             if(map[i][j]>0)
                 totalDirt+=map[i][j];
-                std::cout<< ":" << map[i][j]<<" ";
-        }
+                //std::cout<< ":" << map[i][j]<<" ";
+        }  
     }
     totalDirtLeft=totalDirt;
 }
@@ -30,7 +30,7 @@ bool House::isWallInDirection(int direction, tuple<int,int> curLoc){
 int House::getDirtLevel(tuple<int,int> loc){
     //cout<<"entered "<<get<0>(loc)<<","<<get<1>(loc)<<endl;
     if(get<0>(loc)<get<0>(this->houseSize)&&get<1>(loc)<get<1>(this->houseSize) &&get<0>(loc)>=0 && get<1>(loc)>=0  )
-        return max(this->houseMap[get<0>(loc)][get<1>(loc)],0);//if there is WALL==-1 on loc, max will return 0.
+        return max(this->houseMap[get<0>(loc)][get<1>(loc)],0);//if there is WALL==-1 on loc, max will return 0, bacause there is no dirt there.
     else {
         //cout<<"wrong loc";
         return 0;

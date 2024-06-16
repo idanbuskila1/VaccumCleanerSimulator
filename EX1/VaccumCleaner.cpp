@@ -7,10 +7,10 @@ void VaccumCleaner::stay(House& h){
     }
     else{//stay for cleaning
     h.updateCleaningState(this->curLoc);
-    this->batterySteps--;
+    this->batterySteps--; 
     this->history.push(CLEAN);
     }
-}
+} 
 //according to  dir, move 1 step towards the direction.
 void VaccumCleaner::move(int dir){
     this->batterySteps--;

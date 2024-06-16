@@ -9,7 +9,7 @@
 #include "VaccumCleaner.h"
 #include <fstream>
 #include <sstream>
-using namespace std;
+using namespace std; 
 
 enum {WALL=-1,DIRT0,DIRT1,DIRT2,DIRT3,DIRT4,DIRT5,DIRT6,DIRT7,DIRT8,DIRT9};
 enum{NORTH, EAST, SOUTH, WEST,CLEAN, CHARGE};
