@@ -1,6 +1,6 @@
 #include "index.h"
 //randomly chosses 1 of 4 directions, and if there is no wall 1 step in this direction-return it.
-int chooseNextDirection(House h, tuple<int,int> loc){
+int chooseNextDirection(House h, std::tuple<int,int> loc){
     int lb=0,ub=3;
     int ret = (rand() % (ub - lb + 1)) + lb;
     while(h.isWallInDirection(ret,loc))
@@ -9,18 +9,18 @@ int chooseNextDirection(House h, tuple<int,int> loc){
 }
 //go back to docking station according to the path in the stack. if dontCahrge==false stay until fully charged.
 //return number of steps taken in the process.
-int goToDockingStation(int maxStepsAllowed,stack<int>* path,VaccumCleaner& vc, House& h,bool dontCharge=false){
+int goToDockingStation(int maxStepsAllowed,std::stack<int>& path,VaccumCleaner& vc, House& h,bool dontCharge=false){
     int curDir;
-    int stepsToDocking = path->size();
+    int stepsToDocking = path.size();
     //reach docking station.
-    while (path->size()>0 && maxStepsAllowed>0)
+    while (path.size()>0 && maxStepsAllowed>0)
     {
-        curDir=path->top();
+        curDir=path.top();
         vc.move(curDir);
-        path->pop();
+        path.pop();
         maxStepsAllowed--;
     }
-    if(maxStepsAllowed==0) return stepsToDocking-path->size();//if we stoped because steps limit, stop and return the steps we made.
+    if(maxStepsAllowed==0) return stepsToDocking-path.size();//if we stoped because steps limit, stop and return the steps we made.
     if(dontCharge) return stepsToDocking;//dont charge, only go back to docking.
     //stay until full battery or steps limit is reached.
     int stepsStayed= 0;
@@ -37,7 +37,7 @@ void cleaningAlgorithm(VaccumCleaner& vc, House& h, int maxSteps) {
     int steps = 0;
     int dir = -1;
     int stepsInGoToCharge;
-    stack<int>* pathToDocking = new stack<int>();
+    std::stack<int> pathToDocking;
     std::string step;
     std::vector<std::string> stepLog; // Vector to store steps log
 
@@ -49,21 +49,21 @@ void cleaningAlgorithm(VaccumCleaner& vc, House& h, int maxSteps) {
         std::string stepDetails = oss.str();
         std::cout << stepDetails;
         stepLog.push_back(stepDetails);
-        if(vc.getBatterySteps()<=0 && pathToDocking->size()>0){
+        if(vc.getBatterySteps()<=0 && pathToDocking.size()>0){
              std::cout << "failure. battery is empty and not on docking station" << std::endl;
              stepLog.push_back("\tfailure. battery is empty and not on docking station" );
              break;
         }
-        if(maxSteps-steps==pathToDocking->size()){
+        if(maxSteps-steps==pathToDocking.size()){
              // The way back to the docking station is exactly as long as the steps left. Go back to docking station and finish (without charging) so we wont fail in mission.
             std::cout << "finished. return to docking station." << std::endl;
             stepLog.push_back("\tfinished. return to docking station.");
             steps += goToDockingStation(maxSteps - steps,pathToDocking,vc,h, true);
             continue;
         }
-        if (vc.getBatterySteps() - pathToDocking->size() <2 ) {
+        if (vc.getBatterySteps() - pathToDocking.size() <2 ) {
             //we have exactly the battery to go back to charge before dying - go charge to full.
-            int pathLen = pathToDocking->size();
+            int pathLen = pathToDocking.size();
             float oldBattery = vc.getBatterySteps();
             std::ostringstream chargeOss;
             chargeOss<<"\tCHARGE. went to the docking station in "<<pathLen<<" steps, and stayed charging for ";
@@ -72,7 +72,7 @@ void cleaningAlgorithm(VaccumCleaner& vc, House& h, int maxSteps) {
             chargeOss<<stepsInGoToCharge-pathLen<<" steps. battery charged from "<<oldBattery<<" to "<<vc.getBatterySteps();
             dir = -1;
             stepLog.push_back(chargeOss.str());
-            cout<<chargeOss.str()<<endl;
+            std::cout<<chargeOss.str()<<std::endl;
             continue;
         }
 
@@ -90,13 +90,13 @@ void cleaningAlgorithm(VaccumCleaner& vc, House& h, int maxSteps) {
         vc.move(dir); //move 1 step in this direction.
         steps++;
         //update pathToDocking stack
-        if(!pathToDocking->empty() && dir == pathToDocking->top())//if we just made the first step in the stack - pop it.
-                pathToDocking->pop();
+        if(!pathToDocking.empty() && dir == pathToDocking.top())//if we just made the first step in the stack - pop it.
+                pathToDocking.pop();
         else{//push the oposite direction to the stack
-            if(dir == NORTH) pathToDocking->push(SOUTH);
-            else if(dir == SOUTH) pathToDocking->push(NORTH);
-            else if(dir == EAST) pathToDocking->push(WEST);
-            else if(dir == WEST) pathToDocking->push(EAST);
+            if(dir == NORTH) pathToDocking.push(SOUTH);
+            else if(dir == SOUTH) pathToDocking.push(NORTH);
+            else if(dir == EAST) pathToDocking.push(WEST);
+            else if(dir == WEST) pathToDocking.push(EAST);
         }
 
         std::ostringstream moveOss;
@@ -118,13 +118,13 @@ void cleaningAlgorithm(VaccumCleaner& vc, House& h, int maxSteps) {
         file << "Total steps: " << steps <<"."<< std::endl;
         file << "Total dirt left: " << h.getTotalDirtLeft() <<"."<< std::endl;
         file << "Vaccum Cleaner battery is: " <<vc.getBatterySteps()<<"."<< std::endl;
-        if (h.getTotalDirtLeft() > 0 || pathToDocking->size()>0) {
+        if (h.getTotalDirtLeft() > 0 || pathToDocking.size()>0) {
             file << "Clean wasn't successful. There is more dirt left and/or the cleaner is not in the docking station." << std::endl;
         } else {
             file << "Clean was successful. the house is clean and the Vaccum Cleaner is at the docking station." << std::endl;
         }
-        file<<endl;
-        file<<"Logging of all steps performed by the Vaccum Cleaner:"<<endl;
+        file<<std::endl;
+        file<<"Logging of all steps performed by the Vaccum Cleaner:"<<std::endl;
         for (const auto& log : stepLog) {
             file << log << std::endl;
         }
@@ -132,7 +132,6 @@ void cleaningAlgorithm(VaccumCleaner& vc, House& h, int maxSteps) {
     } else {
         std::cerr << "Error: Failed to open file result.txt." << std::endl;
     }
-    delete pathToDocking;
 }
 
 
@@ -253,8 +252,8 @@ int main(int argc, char *argv[]){
         std::cerr << "Error:must pass exactly 1 argument of input file name." << std::endl;
         return 1;
     }
-    tuple<int,int> dockingStationLoc;
-    vector<vector<int> > houseMap;
+    std::tuple<int,int> dockingStationLoc;
+    std::vector<std::vector<int> > houseMap;
     int maxBatterySteps=0, MaxSteps=0;
     int isError = updateDataFromFile(argv[1],dockingStationLoc,houseMap,maxBatterySteps,MaxSteps);
     if(isError)

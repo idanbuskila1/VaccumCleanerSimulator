@@ -1,34 +1,34 @@
 #include "index.h"
 void VaccumCleaner::stay(House& h){
-    if(get<0>(this->curLoc)==get<0>(h.getDockingStationLoc()) && get<1>(this->curLoc)==get<1>(h.getDockingStationLoc()) ){//stay in docking station is charging
+    if(std::get<0>(this->curLoc)==std::get<0>(h.getDockingStationLoc()) && std::get<1>(this->curLoc)==std::get<1>(h.getDockingStationLoc()) ){//stay in docking station means charging
         float chargePerStep = this->getChargePerStep();
-        this->batterySteps=min(this->batterySteps+chargePerStep,(float)this->maxBatterySteps);//dont overflow max battery.
-        this->history.push(CHARGE);
+        this->batterySteps=std::min(this->batterySteps+chargePerStep,(float)this->maxBatterySteps);//dont overflow max battery.
+        //this->history.push(CHARGE);
     }
     else{//stay for cleaning
-    h.updateCleaningState(this->curLoc);
-    this->batterySteps--; 
-    this->history.push(CLEAN);
+        h.updateCleaningState(this->curLoc);
+        this->batterySteps--; 
+        //this->history.push(CLEAN);
     }
 } 
 //according to  dir, move 1 step towards the direction.
 void VaccumCleaner::move(int dir){
     this->batterySteps--;
-    this->history.push(dir);
+    //this->history.push(dir);
     if(dir == NORTH){
-        get<0>(this->curLoc)=get<0>(this->curLoc)+1;
+        std::get<0>(this->curLoc)=std::get<0>(this->curLoc)+1;
         return;
     }
     if(dir == SOUTH){
-        get<0>(this->curLoc)=get<0>(this->curLoc)-1;
+        std::get<0>(this->curLoc)=std::get<0>(this->curLoc)-1;
         return;
     }
     if(dir == EAST){
-        get<1>(this->curLoc)=get<1>(this->curLoc)+1;
+        std::get<1>(this->curLoc)=std::get<1>(this->curLoc)+1;
         return;
     }
     if(dir == WEST){
-        get<1>(this->curLoc)=get<1>(this->curLoc)-1;
+        std::get<1>(this->curLoc)=std::get<1>(this->curLoc)-1;
         return;
     }
 }
