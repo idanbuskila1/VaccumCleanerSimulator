@@ -5,10 +5,10 @@ CXX = g++
 CXXFLAGS =-fsanitize=address -g -Wall -Wextra  -pedantic -std=c++20 
 
 # Source files
-SRCS = index.cpp House.cpp VaccumCleaner.cpp
+SRCS = index.cpp House.cpp VaccumCleaner.cpp CleaningAlgorithm.cpp
 
 # Header files
-HDRS = index.h House.h VaccumCleaner.h
+HDRS = index.h House.h VaccumCleaner.h CleaningAlgorithm.h
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)

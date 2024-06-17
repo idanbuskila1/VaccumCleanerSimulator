@@ -1,4 +1,6 @@
 #include "index.h"
+
+/*
 //randomly chosses 1 of 4 directions, and if there is no wall 1 step in this direction-return it.
 int chooseNextDirection(House h, std::tuple<int,int> loc){
     int lb=0,ub=3;
@@ -33,12 +35,12 @@ int goToDockingStation(int maxStepsAllowed,std::stack<int>& path,VaccumCleaner& 
     }
     return stepsToDocking + stepsStayed;
 }
+
 void cleaningAlgorithm(VaccumCleaner& vc, House& h, int maxSteps) {
     int steps = 0;
     int dir = -1;
     int stepsInGoToCharge;
     std::stack<int> pathToDocking;
-    std::string step;
     std::vector<std::string> stepLog; // Vector to store steps log
 
     while (steps < maxSteps) {
@@ -132,7 +134,7 @@ void cleaningAlgorithm(VaccumCleaner& vc, House& h, int maxSteps) {
     } else {
         std::cerr << "Error: Failed to open file result.txt." << std::endl;
     }
-}
+}*/
 
 
 
@@ -243,7 +245,7 @@ int updateDataFromFile(const std::string& fileName, std::tuple<int, int>& dockin
 }
 
 
-// void makeOutputFile(VaccumCleaner& vc, House& h){
+// void makeOutputFile(std::vector<std::string>* stepLog){
 //     //#TODO
 // }
 
@@ -258,11 +260,11 @@ int main(int argc, char *argv[]){
     int isError = updateDataFromFile(argv[1],dockingStationLoc,houseMap,maxBatterySteps,MaxSteps);
     if(isError)
         return 1;
-    House* h = new House(dockingStationLoc,houseMap);
-    VaccumCleaner* vc = new VaccumCleaner(maxBatterySteps,dockingStationLoc);
-    cleaningAlgorithm(*vc,*h,MaxSteps);
-    //makeOutputFile(*vc,*h)  ;
-    delete h;
-    delete vc;
+    House h(dockingStationLoc,houseMap);
+    VaccumCleaner vc(maxBatterySteps,dockingStationLoc);
+    CleaningAlgorithm alg(maxBatterySteps,MaxSteps);
+    std::vector<std::string>* stepLog = vc.cleanHouse(h,alg,MaxSteps);
+    //makeOutputFile(stepLog)  ;
+    delete stepLog;
     return 0;
 }
