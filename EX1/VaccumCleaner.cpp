@@ -6,7 +6,7 @@ int VaccumCleaner::stay(House& h){
         //this->history.push(CHARGE);
     }
     else{//stay for cleaning
-        if(batterySteps<1)
+        if(batterySteps<1)//no battery for cleaning
             return 1;
         h.updateCleaningState(this->curLoc);
         this->batterySteps--; 
@@ -60,14 +60,14 @@ std::vector<std::string>* VaccumCleaner::cleanHouse(House& h,CleaningAlgorithm& 
         action = alg.getNextMove(dirtSensor,getBatterySteps(),wallSensor);
         //perform the move we got from the algorithm
         if(action == -1){
-            std::cout<<"failure."<<std::endl;
+            std::cout << "failure. battery is empty and not on docking station" << std::endl;
             break;
         }
         if(action == STAY){
             steps++;
             int err = stay(h);
             if(err){
-                std::cout<<"failure. algorithm tried to activate vaccum cleaner with no battery."<<std::endl;
+                std::cout<<"failure. algorithm tried to make vaccum cleaner clean with no battery."<<std::endl;
                 break;
             }
             if(curLoc == h.getDockingStationLoc()){
@@ -78,40 +78,19 @@ std::vector<std::string>* VaccumCleaner::cleanHouse(House& h,CleaningAlgorithm& 
         }
         else{//need to advance 1 step in the direction returned with action
             steps++;
+            if(h.isWallInDirection(action,curLoc)){
+                std::cout<<"failure. algorithm tried to move vaccum cleaner into a wall."<<std::endl;
+                break;
+            }
             int err =move(action);
             if(err){
-                std::cout<<"failure. algorithm tried to activate vaccum cleaner with no battery."<<std::endl;
+                std::cout<<"failure. algorithm tried to move vaccum cleaner with no battery."<<std::endl;
                 break;
             }
             std::cout<<"step: "<<steps<<"."<<"battery: "<<getBatterySteps()<<". current location: ["<<std::get<0>(curLoc)<<","<<std::get<1>(curLoc)<<"]. action: move in direction "<<action<<std::endl;
             continue;
         }
     }
+    std::cout<<"dirt left: "<<h.getTotalDirtLeft()<<"."<<std::endl;
     return stepLog;//for printing to out file in main.
 }
-/*int VaccumCleaner::goCharge(int maxStepsAllowed,bool dontCharge){
-    stack<int>& path = this->pathToDocking;
-    int curDir;
-    int stepsToDocking = path.size();
-    //reach docking station.
-    while (path.size()>0 && maxStepsAllowed>0)
-    {
-        curDir=path.top();
-        this->move(curDir,true);
-        path.pop();
-        maxStepsAllowed--;
-    }
-    if(maxStepsAllowed==0) return stepsToDocking-path.size();//if we stoped because steps limit, stop and return the steps we made.
-    if(dontCharge) return stepsToDocking;//dont charge, only go back to docking.
-    //stay until full battery or steps limit is reached.
-    int stepsStayed= 0;
-    int chargePerStep = floor(this->maxBatterySteps/20);
-    while(maxStepsAllowed>0 && this->batterySteps+chargePerStep<this->maxBatterySteps){
-        this->history.push(CHARGE);
-        stepsStayed++;
-        maxStepsAllowed--;
-        this->batterySteps+=chargePerStep;
-    }
-    return stepsToDocking + stepsStayed;
-}*/
-    

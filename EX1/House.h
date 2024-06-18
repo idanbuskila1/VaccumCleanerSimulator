@@ -8,6 +8,7 @@ class House{
     int totalDirtLeft;
     std::vector<std::vector<int>> houseMap;//vector of vectors 
 
+    bool isLocInsideHouse(const std::tuple<int,int>& loc) const;//returns true iff loc is valid with regard to houseSize
 public:
     House(const std::tuple<int,int> dockingLoc,std::vector<std::vector<int> > map);
     void updateCleaningState(const std::tuple<int,int> loc);//updates cleaning step on location loc, and decreases dirt level by 1.

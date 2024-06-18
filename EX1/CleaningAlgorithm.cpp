@@ -15,12 +15,11 @@ void CleaningAlgorithm::chooseNextDirection(const std::vector<int> wallSensor){
 int CleaningAlgorithm::getNextMove(int dirtSensor,const int batterySensor,const std::vector<int>& wallSensor){
     int ret;
     if(batterySensor<=0 && pathToDocking.size()>0){
-        std::cout << "failure. battery is empty and not on docking station" << std::endl;
         return -1;
     }
     if(maxSteps-curStep==pathToDocking.size() && pathToDocking.size()>0){
          // The way back to the docking station is exactly as long as the steps left. Go back to docking station and finish (without charging) so we wont fail in mission.
-        std::cout << "return to docking station and end.";
+        std::cout << "number of steps left is of length of the way back to docking. return to docking station and end."<<std::endl;
         ret = pathToDocking.top();
         pathToDocking.pop();
         curStep++;

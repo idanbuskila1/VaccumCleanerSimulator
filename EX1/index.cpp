@@ -188,7 +188,10 @@ int updateDataFromFile(const std::string& fileName, std::tuple<int, int>& dockin
             row++;
         }
         file.close();
-
+        if (houseMap.empty() || houseMap[0].empty()) {
+            std::cerr << "Error: houseMap is empty or not properly populated" << std::endl;
+            return 1;
+        }
         // Check if all rows have the same length
         for (size_t i = 1; i < rowLengths.size(); i++) {
             if (rowLengths[i] != rowLengths[0]) {
@@ -233,10 +236,7 @@ int updateDataFromFile(const std::string& fileName, std::tuple<int, int>& dockin
                 houseMap[i][cols - 1] = -1;
             }
         }
-        if (houseMap.empty() || houseMap[0].empty()) {
-            std::cerr << "Error: houseMap is empty or not properly populated" << std::endl;
-            return 1;
-        }
+
     } else {
         std::cerr << "Error: Failed to open file " << fileName << "." << std::endl;
         return 1;
