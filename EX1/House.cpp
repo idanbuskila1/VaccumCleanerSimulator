@@ -5,7 +5,6 @@ House::House(const std::tuple<int,int> dockingLoc,std::vector<std::vector<int>> 
         for(int j=0;j<std::get<1>(houseSize);j++){
             if(map[i][j]>0)
                 totalDirt+=map[i][j];
-                //std::cout<< ":" << map[i][j]<<" ";
         }  
     }
     totalDirtLeft=totalDirt;
@@ -25,11 +24,11 @@ void House::updateCleaningState(const std::tuple<int,int> loc){
     this->totalDirtLeft -=1;
 }
 bool House::isWallInDirection(const int direction, const std::tuple<int,int> curLoc) const{
-    if(direction == NORTH && isLocInsideHouse({std::get<0>(curLoc)+1,std::get<1>(curLoc)})){
-        return this->houseMap[std::get<0>(curLoc)+1][std::get<1>(curLoc)] == WALL;
-    }
-    if(direction == SOUTH && isLocInsideHouse({std::get<0>(curLoc)-1,std::get<1>(curLoc)})){
+    if(direction == NORTH && isLocInsideHouse({std::get<0>(curLoc)-1,std::get<1>(curLoc)})){
         return this->houseMap[std::get<0>(curLoc)-1][std::get<1>(curLoc)] == WALL;
+    }
+    if(direction == SOUTH && isLocInsideHouse({std::get<0>(curLoc)+1,std::get<1>(curLoc)})){
+        return this->houseMap[std::get<0>(curLoc)+1][std::get<1>(curLoc)] == WALL;
     }
     if(direction == EAST && isLocInsideHouse({std::get<0>(curLoc),std::get<1>(curLoc)+1})){
         return this->houseMap[std::get<0>(curLoc)][std::get<1>(curLoc)+1] == WALL;
@@ -45,3 +44,14 @@ int House::getDirtLevel(const std::tuple<int,int> loc)const{
     return std::max(this->houseMap[std::get<0>(loc)][std::get<1>(loc)],0);//if there is WALL==-1 on loc, max will return 0, bacause there is no dirt there.
 
 };
+std::string House::toString() const{
+    std::ostringstream ret;
+     for(int i=0;i<std::get<0>(houseSize);i++){
+        for(int j=0;j<std::get<1>(houseSize);j++){
+            ret<<houseMap[i][j]<<" ";
+        } 
+        ret<<"\n"; 
+    }
+    ret<<"\n"; 
+    return ret.str();
+}

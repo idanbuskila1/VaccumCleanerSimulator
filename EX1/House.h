@@ -16,5 +16,6 @@ public:
     bool isWallInDirection(int direction, const std::tuple<int,int> curLoc) const;//according to direction and current location return if there is a wall.
     int getTotalDirtLeft()const{return totalDirtLeft;}//returns the sum of dirt left in the entire house.
     std::tuple<int,int> getDockingStationLoc()const{return dockingStationLoc;}//returns the location of the docking station.
+    std::string toString() const;
 };
 #endif

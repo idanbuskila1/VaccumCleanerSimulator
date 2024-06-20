@@ -1,239 +1,1021 @@
-step: 0. battery: 80 location: [2,3]. direction: -1.
-MOVED IN DIR 2.
-step: 1. battery: 79 location: [1,3]. direction: -1.
-CLEAN.
-step: 2. battery: 78 location: [1,3]. direction: -1.
-CLEAN.
-step: 3. battery: 77 location: [1,3]. direction: -1.
-CLEAN.
-step: 4. battery: 76 location: [1,3]. direction: -1.
-MOVED IN DIR 0.
-step: 5. battery: 75 location: [2,3]. direction: 0.
-MOVED IN DIR 0.
-step: 6. battery: 74 location: [3,3]. direction: -1.
-CLEAN.
-step: 7. battery: 73 location: [3,3]. direction: -1.
-CLEAN.
-step: 8. battery: 72 location: [3,3]. direction: -1.
-MOVED IN DIR 2.
-step: 9. battery: 71 location: [2,3]. direction: 2.
-MOVED IN DIR 2.
-step: 10. battery: 70 location: [1,3]. direction: -1.
-MOVED IN DIR 1.
-step: 11. battery: 69 location: [1,4]. direction: 1.
-CLEAN.
-step: 12. battery: 68 location: [1,4]. direction: 1.
-CLEAN.
-step: 13. battery: 67 location: [1,4]. direction: 1.
-CLEAN.
-step: 14. battery: 66 location: [1,4]. direction: 1.
-CLEAN.
-step: 15. battery: 65 location: [1,4]. direction: 1.
-CLEAN.
-step: 16. battery: 64 location: [1,4]. direction: 1.
-CLEAN.
-step: 17. battery: 63 location: [1,4]. direction: 1.
-CLEAN.
-step: 18. battery: 62 location: [1,4]. direction: 1.
-MOVED IN DIR 1.
-step: 19. battery: 61 location: [1,5]. direction: -1.
-CLEAN.
-step: 20. battery: 60 location: [1,5]. direction: -1.
-CLEAN.
-step: 21. battery: 59 location: [1,5]. direction: -1.
-CLEAN.
-step: 22. battery: 58 location: [1,5]. direction: -1.
-CLEAN.
-step: 23. battery: 57 location: [1,5]. direction: -1.
-CLEAN.
-step: 24. battery: 56 location: [1,5]. direction: -1.
-CLEAN.
-step: 25. battery: 55 location: [1,5]. direction: -1.
-CLEAN.
-step: 26. battery: 54 location: [1,5]. direction: -1.
-CLEAN.
-step: 27. battery: 53 location: [1,5]. direction: -1.
-CLEAN.
-step: 28. battery: 52 location: [1,5]. direction: -1.
-CLEAN.
-step: 29. battery: 51 location: [1,5]. direction: -1.
-CLEAN.
-step: 30. battery: 50 location: [1,5]. direction: -1.
-CLEAN.
-step: 31. battery: 49 location: [1,5]. direction: -1.
-MOVED IN DIR 0.
-step: 32. battery: 48 location: [2,5]. direction: 0.
-CLEAN.
-step: 33. battery: 47 location: [2,5]. direction: 0.
-CLEAN.
-step: 34. battery: 46 location: [2,5]. direction: 0.
-CLEAN.
-step: 35. battery: 45 location: [2,5]. direction: 0.
-CLEAN.
-step: 36. battery: 44 location: [2,5]. direction: 0.
-CLEAN.
-step: 37. battery: 43 location: [2,5]. direction: 0.
-MOVED IN DIR 0.
-step: 38. battery: 42 location: [3,5]. direction: -1.
-CLEAN.
-step: 39. battery: 41 location: [3,5]. direction: -1.
-MOVED IN DIR 2.
-step: 40. battery: 40 location: [2,5]. direction: 2.
-MOVED IN DIR 2.
-step: 41. battery: 39 location: [1,5]. direction: -1.
-MOVED IN DIR 3.
-step: 42. battery: 38 location: [1,4]. direction: 3.
-MOVED IN DIR 3.
-step: 43. battery: 37 location: [1,3]. direction: -1.
-MOVED IN DIR 1.
-step: 44. battery: 36 location: [1,4]. direction: 1.
-MOVED IN DIR 1.
-step: 45. battery: 35 location: [1,5]. direction: -1.
-MOVED IN DIR 0.
-step: 46. battery: 34 location: [2,5]. direction: 0.
-MOVED IN DIR 0.
-step: 47. battery: 33 location: [3,5]. direction: -1.
-MOVED IN DIR 2.
-step: 48. battery: 32 location: [2,5]. direction: 2.
-MOVED IN DIR 2.
-step: 49. battery: 31 location: [1,5]. direction: -1.
-MOVED IN DIR 0.
-step: 50. battery: 30 location: [2,5]. direction: 0.
-MOVED IN DIR 0.
-step: 51. battery: 29 location: [3,5]. direction: -1.
-MOVED IN DIR 2.
-step: 52. battery: 28 location: [2,5]. direction: 2.
-MOVED IN DIR 2.
-step: 53. battery: 27 location: [1,5]. direction: -1.
-MOVED IN DIR 0.
-step: 54. battery: 26 location: [2,5]. direction: 0.
-MOVED IN DIR 0.
-step: 55. battery: 25 location: [3,5]. direction: -1.
-MOVED IN DIR 2.
-step: 56. battery: 24 location: [2,5]. direction: 2.
-MOVED IN DIR 2.
-step: 57. battery: 23 location: [1,5]. direction: -1.
-MOVED IN DIR 3.
-step: 58. battery: 22 location: [1,4]. direction: 3.
-MOVED IN DIR 3.
-step: 59. battery: 21 location: [1,3]. direction: -1.
-MOVED IN DIR 1.
-step: 60. battery: 20 location: [1,4]. direction: 1.
-MOVED IN DIR 1.
-step: 61. battery: 19 location: [1,5]. direction: -1.
-MOVED IN DIR 3.
-step: 62. battery: 18 location: [1,4]. direction: 3.
-MOVED IN DIR 3.
-step: 63. battery: 17 location: [1,3]. direction: -1.
-MOVED IN DIR 1.
-step: 64. battery: 16 location: [1,4]. direction: 1.
-MOVED IN DIR 1.
-step: 65. battery: 15 location: [1,5]. direction: -1.
-MOVED IN DIR 3.
-step: 66. battery: 14 location: [1,4]. direction: 3.
-MOVED IN DIR 3.
-step: 67. battery: 13 location: [1,3]. direction: -1.
-MOVED IN DIR 0.
-step: 68. battery: 12 location: [2,3]. direction: 0.
-MOVED IN DIR 0.
-step: 69. battery: 11 location: [3,3]. direction: -1.
-MOVED IN DIR 3.
-step: 70. battery: 10 location: [3,2]. direction: 3.
-CLEAN.
-step: 71. battery: 9 location: [3,2]. direction: 3.
-CLEAN.
-step: 72. battery: 8 location: [3,2]. direction: 3.
-CLEAN.
-step: 73. battery: 7 location: [3,2]. direction: 3.
-MOVED IN DIR 3.
-step: 74. battery: 6 location: [3,1]. direction: -1.
-CLEAN.
-step: 75. battery: 5 location: [3,1]. direction: -1.
-CLEAN.
-step: 76. battery: 4 location: [3,1]. direction: -1.
-CHARGE.
-step: 98. battery: 77 location: [2,3]. direction: -1.
-MOVED IN DIR 2.
-step: 99. battery: 76 location: [1,3]. direction: -1.
-MOVED IN DIR 1.
-step: 100. battery: 75 location: [1,4]. direction: 1.
-MOVED IN DIR 1.
-step: 101. battery: 74 location: [1,5]. direction: -1.
-MOVED IN DIR 0.
-step: 102. battery: 73 location: [2,5]. direction: 0.
-MOVED IN DIR 0.
-step: 103. battery: 72 location: [3,5]. direction: -1.
-MOVED IN DIR 2.
-step: 104. battery: 71 location: [2,5]. direction: 2.
-MOVED IN DIR 2.
-step: 105. battery: 70 location: [1,5]. direction: -1.
-MOVED IN DIR 0.
-step: 106. battery: 69 location: [2,5]. direction: 0.
-MOVED IN DIR 0.
-step: 107. battery: 68 location: [3,5]. direction: -1.
-MOVED IN DIR 2.
-step: 108. battery: 67 location: [2,5]. direction: 2.
-MOVED IN DIR 2.
-step: 109. battery: 66 location: [1,5]. direction: -1.
-MOVED IN DIR 3.
-step: 110. battery: 65 location: [1,4]. direction: 3.
-MOVED IN DIR 3.
-step: 111. battery: 64 location: [1,3]. direction: -1.
-MOVED IN DIR 1.
-step: 112. battery: 63 location: [1,4]. direction: 1.
-MOVED IN DIR 1.
-step: 113. battery: 62 location: [1,5]. direction: -1.
-MOVED IN DIR 0.
-step: 114. battery: 61 location: [2,5]. direction: 0.
-MOVED IN DIR 0.
-step: 115. battery: 60 location: [3,5]. direction: -1.
-MOVED IN DIR 2.
-step: 116. battery: 59 location: [2,5]. direction: 2.
-MOVED IN DIR 2.
-step: 117. battery: 58 location: [1,5]. direction: -1.
-MOVED IN DIR 3.
-step: 118. battery: 57 location: [1,4]. direction: 3.
-MOVED IN DIR 3.
-step: 119. battery: 56 location: [1,3]. direction: -1.
-MOVED IN DIR 1.
-step: 120. battery: 55 location: [1,4]. direction: 1.
-MOVED IN DIR 1.
-step: 121. battery: 54 location: [1,5]. direction: -1.
-MOVED IN DIR 3.
-step: 122. battery: 53 location: [1,4]. direction: 3.
-MOVED IN DIR 3.
-step: 123. battery: 52 location: [1,3]. direction: -1.
-MOVED IN DIR 0.
-step: 124. battery: 51 location: [2,3]. direction: 0.
-MOVED IN DIR 0.
-step: 125. battery: 50 location: [3,3]. direction: -1.
-MOVED IN DIR 3.
-step: 126. battery: 49 location: [3,2]. direction: 3.
-MOVED IN DIR 3.
-step: 127. battery: 48 location: [3,1]. direction: -1.
-CLEAN.
-step: 128. battery: 47 location: [3,1]. direction: -1.
-CLEAN.
-step: 129. battery: 46 location: [3,1]. direction: -1.
-CLEAN.
-step: 130. battery: 45 location: [3,1]. direction: -1.
-CLEAN.
-step: 131. battery: 44 location: [3,1]. direction: -1.
-CLEAN.
-step: 132. battery: 43 location: [3,1]. direction: -1.
-MOVED IN DIR 2.
-step: 133. battery: 42 location: [2,1]. direction: 2.
-CLEAN.
-step: 134. battery: 41 location: [2,1]. direction: 2.
-CLEAN.
-step: 135. battery: 40 location: [2,1]. direction: 2.
-CLEAN.
-step: 136. battery: 39 location: [2,1]. direction: 2.
-CLEAN.
-step: 137. battery: 38 location: [2,1]. direction: 2.
-MOVED IN DIR 2.
-step: 138. battery: 37 location: [1,1]. direction: -1.
-CLEAN.
-Total steps: 139
-Total dirt left: 0
-Clean was successful.
+Total steps: 1000.
+Total dirt left: 45.
+Vacuum Cleaner battery is: 118.
+House's state after cleaning:
+-1 -1 -1 -1 -1 -1 -1 -1 -1 -1 
+-1 0 0 -1 0 0 0 0 0 -1 
+-1 0 2 -1 0 0 0 -1 0 -1 
+-1 0 5 -1 0 0 0 -1 0 -1 
+-1 0 -1 -1 0 0 0 -1 -1 -1 
+-1 0 8 7 -1 0 0 0 0 -1 
+-1 0 5 6 0 0 0 3 0 -1 
+-1 0 -1 2 0 0 0 7 0 -1 
+-1 0 0 0 0 0 0 0 0 -1 
+-1 0 -1 -1 0 0 0 -1 0 -1 
+-1 0 0 -1 0 0 0 -1 0 -1 
+-1 0 0 -1 0 0 0 -1 0 -1 
+-1 -1 -1 -1 -1 -1 -1 -1 -1 -1 
+
+Clean wasn't successful. There is more dirt left and/or the cleaner is not in the docking station.
+
+Logging of all steps performed by the Vacuum Cleaner:
+step: 1. battery: 169.000000. current location: [8,3]. action: move in direction East
+step: 2. battery: 168.000000. current location: [8,4]. action: clean.
+step: 3. battery: 167.000000. current location: [8,4]. action: clean.
+step: 4. battery: 166.000000. current location: [8,4]. action: move in direction East
+step: 5. battery: 165.000000. current location: [8,5]. action: clean.
+step: 6. battery: 164.000000. current location: [8,5]. action: clean.
+step: 7. battery: 163.000000. current location: [8,5]. action: move in direction East
+step: 8. battery: 162.000000. current location: [8,6]. action: clean.
+step: 9. battery: 161.000000. current location: [8,6]. action: clean.
+step: 10. battery: 160.000000. current location: [8,6]. action: clean.
+step: 11. battery: 159.000000. current location: [8,6]. action: clean.
+step: 12. battery: 158.000000. current location: [8,6]. action: clean.
+step: 13. battery: 157.000000. current location: [8,6]. action: move in direction East
+step: 14. battery: 156.000000. current location: [8,7]. action: clean.
+step: 15. battery: 155.000000. current location: [8,7]. action: clean.
+step: 16. battery: 154.000000. current location: [8,7]. action: clean.
+step: 17. battery: 153.000000. current location: [8,7]. action: clean.
+step: 18. battery: 152.000000. current location: [8,7]. action: clean.
+step: 19. battery: 151.000000. current location: [8,7]. action: clean.
+step: 20. battery: 150.000000. current location: [8,7]. action: move in direction East
+step: 21. battery: 149.000000. current location: [8,8]. action: clean.
+step: 22. battery: 148.000000. current location: [8,8]. action: clean.
+step: 23. battery: 147.000000. current location: [8,8]. action: clean.
+step: 24. battery: 146.000000. current location: [8,8]. action: move in direction South
+step: 25. battery: 145.000000. current location: [9,8]. action: clean.
+step: 26. battery: 144.000000. current location: [9,8]. action: clean.
+step: 27. battery: 143.000000. current location: [9,8]. action: clean.
+step: 28. battery: 142.000000. current location: [9,8]. action: move in direction South
+step: 29. battery: 141.000000. current location: [10,8]. action: clean.
+step: 30. battery: 140.000000. current location: [10,8]. action: move in direction South
+step: 31. battery: 139.000000. current location: [11,8]. action: clean.
+step: 32. battery: 138.000000. current location: [11,8]. action: clean.
+step: 33. battery: 137.000000. current location: [11,8]. action: clean.
+step: 34. battery: 136.000000. current location: [11,8]. action: clean.
+step: 35. battery: 135.000000. current location: [11,8]. action: move in direction North
+step: 36. battery: 134.000000. current location: [10,8]. action: move in direction North
+step: 37. battery: 133.000000. current location: [9,8]. action: move in direction North
+step: 38. battery: 132.000000. current location: [8,8]. action: move in direction North
+step: 39. battery: 131.000000. current location: [7,8]. action: clean.
+step: 40. battery: 130.000000. current location: [7,8]. action: clean.
+step: 41. battery: 129.000000. current location: [7,8]. action: clean.
+step: 42. battery: 128.000000. current location: [7,8]. action: clean.
+step: 43. battery: 127.000000. current location: [7,8]. action: clean.
+step: 44. battery: 126.000000. current location: [7,8]. action: clean.
+step: 45. battery: 125.000000. current location: [7,8]. action: clean.
+step: 46. battery: 124.000000. current location: [7,8]. action: clean.
+step: 47. battery: 123.000000. current location: [7,8]. action: move in direction North
+step: 48. battery: 122.000000. current location: [6,8]. action: clean.
+step: 49. battery: 121.000000. current location: [6,8]. action: clean.
+step: 50. battery: 120.000000. current location: [6,8]. action: clean.
+step: 51. battery: 119.000000. current location: [6,8]. action: clean.
+step: 52. battery: 118.000000. current location: [6,8]. action: move in direction North
+step: 53. battery: 117.000000. current location: [5,8]. action: clean.
+step: 54. battery: 116.000000. current location: [5,8]. action: clean.
+step: 55. battery: 115.000000. current location: [5,8]. action: move in direction South
+step: 56. battery: 114.000000. current location: [6,8]. action: move in direction South
+step: 57. battery: 113.000000. current location: [7,8]. action: move in direction South
+step: 58. battery: 112.000000. current location: [8,8]. action: move in direction South
+step: 59. battery: 111.000000. current location: [9,8]. action: move in direction South
+step: 60. battery: 110.000000. current location: [10,8]. action: move in direction South
+step: 61. battery: 109.000000. current location: [11,8]. action: move in direction North
+step: 62. battery: 108.000000. current location: [10,8]. action: move in direction North
+step: 63. battery: 107.000000. current location: [9,8]. action: move in direction North
+step: 64. battery: 106.000000. current location: [8,8]. action: move in direction North
+step: 65. battery: 105.000000. current location: [7,8]. action: move in direction North
+step: 66. battery: 104.000000. current location: [6,8]. action: move in direction North
+step: 67. battery: 103.000000. current location: [5,8]. action: move in direction South
+step: 68. battery: 102.000000. current location: [6,8]. action: move in direction South
+step: 69. battery: 101.000000. current location: [7,8]. action: move in direction South
+step: 70. battery: 100.000000. current location: [8,8]. action: move in direction South
+step: 71. battery: 99.000000. current location: [9,8]. action: move in direction South
+step: 72. battery: 98.000000. current location: [10,8]. action: move in direction South
+step: 73. battery: 97.000000. current location: [11,8]. action: move in direction North
+step: 74. battery: 96.000000. current location: [10,8]. action: move in direction North
+step: 75. battery: 95.000000. current location: [9,8]. action: move in direction North
+step: 76. battery: 94.000000. current location: [8,8]. action: move in direction North
+step: 77. battery: 93.000000. current location: [7,8]. action: move in direction North
+step: 78. battery: 92.000000. current location: [6,8]. action: move in direction North
+step: 79. battery: 91.000000. current location: [5,8]. action: move in direction South
+step: 80. battery: 90.000000. current location: [6,8]. action: move in direction South
+step: 81. battery: 89.000000. current location: [7,8]. action: move in direction South
+step: 82. battery: 88.000000. current location: [8,8]. action: move in direction South
+step: 83. battery: 87.000000. current location: [9,8]. action: move in direction South
+step: 84. battery: 86.000000. current location: [10,8]. action: move in direction South
+step: 85. battery: 85.000000. current location: [11,8]. action: move in direction North
+step: 86. battery: 84.000000. current location: [10,8]. action: move in direction North
+step: 87. battery: 83.000000. current location: [9,8]. action: move in direction North
+step: 88. battery: 82.000000. current location: [8,8]. action: move in direction North
+step: 89. battery: 81.000000. current location: [7,8]. action: move in direction North
+step: 90. battery: 80.000000. current location: [6,8]. action: move in direction North
+step: 91. battery: 79.000000. current location: [5,8]. action: move in direction West
+step: 92. battery: 78.000000. current location: [5,7]. action: clean.
+step: 93. battery: 77.000000. current location: [5,7]. action: clean.
+step: 94. battery: 76.000000. current location: [5,7]. action: clean.
+step: 95. battery: 75.000000. current location: [5,7]. action: move in direction West
+step: 96. battery: 74.000000. current location: [5,6]. action: clean.
+step: 97. battery: 73.000000. current location: [5,6]. action: clean.
+step: 98. battery: 72.000000. current location: [5,6]. action: clean.
+step: 99. battery: 71.000000. current location: [5,6]. action: clean.
+step: 100. battery: 70.000000. current location: [5,6]. action: move in direction West
+step: 101. battery: 69.000000. current location: [5,5]. action: clean.
+step: 102. battery: 68.000000. current location: [5,5]. action: clean.
+step: 103. battery: 67.000000. current location: [5,5]. action: clean.
+step: 104. battery: 66.000000. current location: [5,5]. action: clean.
+step: 105. battery: 65.000000. current location: [5,5]. action: clean.
+step: 106. battery: 64.000000. current location: [5,5]. action: move in direction East
+step: 107. battery: 63.000000. current location: [5,6]. action: move in direction East
+step: 108. battery: 62.000000. current location: [5,7]. action: move in direction East
+step: 109. battery: 61.000000. current location: [5,8]. action: move in direction West
+step: 110. battery: 60.000000. current location: [5,7]. action: move in direction West
+step: 111. battery: 59.000000. current location: [5,6]. action: move in direction West
+step: 112. battery: 58.000000. current location: [5,5]. action: move in direction North
+step: 113. battery: 57.000000. current location: [4,5]. action: clean.
+step: 114. battery: 56.000000. current location: [4,5]. action: clean.
+step: 115. battery: 55.000000. current location: [4,5]. action: clean.
+step: 116. battery: 54.000000. current location: [4,5]. action: clean.
+step: 117. battery: 53.000000. current location: [4,5]. action: clean.
+step: 118. battery: 52.000000. current location: [4,5]. action: move in direction North
+step: 119. battery: 51.000000. current location: [3,5]. action: clean.
+step: 120. battery: 50.000000. current location: [3,5]. action: clean.
+step: 121. battery: 49.000000. current location: [3,5]. action: clean.
+step: 122. battery: 48.000000. current location: [3,5]. action: clean.
+step: 123. battery: 47.000000. current location: [3,5]. action: clean.
+step: 124. battery: 46.000000. current location: [3,5]. action: clean.
+step: 125. battery: 45.000000. current location: [3,5]. action: clean.
+step: 126. battery: 44.000000. current location: [3,5]. action: clean.
+step: 127. battery: 43.000000. current location: [3,5]. action: move in direction North
+step: 128. battery: 42.000000. current location: [2,5]. action: clean.
+step: 129. battery: 41.000000. current location: [2,5]. action: clean.
+step: 130. battery: 40.000000. current location: [2,5]. action: move in direction North
+step: 131. battery: 39.000000. current location: [1,5]. action: clean.
+step: 132. battery: 38.000000. current location: [1,5]. action: clean.
+step: 133. battery: 37.000000. current location: [1,5]. action: clean.
+step: 134. battery: 36.000000. current location: [1,5]. action: clean.
+step: 135. battery: 35.000000. current location: [1,5]. action: clean.
+step: 136. battery: 34.000000. current location: [1,5]. action: clean.
+step: 137. battery: 33.000000. current location: [1,5]. action: move in direction West
+step: 138. battery: 32.000000. current location: [1,4]. action: clean.
+step: 139. battery: 31.000000. current location: [1,4]. action: clean.
+step: 140. battery: 30.000000. current location: [1,4]. action: clean.
+step: 141. battery: 29.000000. current location: [1,4]. action: move in direction East
+step: 142. battery: 28.000000. current location: [1,5]. action: move in direction East
+step: 143. battery: 27.000000. current location: [1,6]. action: move in direction East
+step: 144. battery: 26.000000. current location: [1,7]. action: clean.
+step: 145. battery: 25.000000. current location: [1,7]. action: clean.
+step: 146. battery: 24.000000. current location: [1,7]. action: clean.
+step: 147. battery: 23.000000. current location: [1,7]. action: clean.
+step: 148. battery: 22.000000. current location: [1,7]. action: clean.
+step: 149. battery: 21.000000. current location: [1,7]. action: clean.
+step: 150. battery: 20.000000. current location: [1,7]. action: move in direction East
+step: 151. battery: 19.000000. current location: [1,8]. action: move in direction South
+step: 152. battery: 18.000000. current location: [2,8]. action: move in direction North
+step: 153. battery: 17.000000. current location: [1,8]. action: move in direction West
+step: 154. battery: 16.000000. current location: [1,7]. action: move in direction West
+step: 155. battery: 15.000000. current location: [1,6]. action: move in direction West
+step: 156. battery: 14.000000. current location: [1,5]. action: move in direction South
+step: 157. battery: 13.000000. current location: [2,5]. action: move in direction South
+step: 158. battery: 12.000000. current location: [3,5]. action: move in direction South
+step: 159. battery: 11.000000. current location: [4,5]. action: move in direction South
+step: 160. battery: 10.000000. current location: [5,5]. action: move in direction East
+step: 161. battery: 9.000000. current location: [5,6]. action: move in direction East
+step: 162. battery: 8.000000. current location: [5,7]. action: move in direction East
+step: 163. battery: 7.000000. current location: [5,8]. action: move in direction South
+step: 164. battery: 6.000000. current location: [6,8]. action: move in direction South
+step: 165. battery: 5.000000. current location: [7,8]. action: move in direction South
+step: 166. battery: 4.000000. current location: [8,8]. action: move in direction West
+step: 167. battery: 3.000000. current location: [8,7]. action: move in direction West
+step: 168. battery: 2.000000. current location: [8,6]. action: move in direction West
+step: 169. battery: 1.000000. current location: [8,5]. action: move in direction West
+step: 170. battery: 0.000000. current location: [8,4]. action: move in direction West
+step: 171. battery: 8.500000. current location: [8,3]. action: charge
+step: 172. battery: 17.000000. current location: [8,3]. action: charge
+step: 173. battery: 25.500000. current location: [8,3]. action: charge
+step: 174. battery: 34.000000. current location: [8,3]. action: charge
+step: 175. battery: 42.500000. current location: [8,3]. action: charge
+step: 176. battery: 51.000000. current location: [8,3]. action: charge
+step: 177. battery: 59.500000. current location: [8,3]. action: charge
+step: 178. battery: 68.000000. current location: [8,3]. action: charge
+step: 179. battery: 76.500000. current location: [8,3]. action: charge
+step: 180. battery: 85.000000. current location: [8,3]. action: charge
+step: 181. battery: 93.500000. current location: [8,3]. action: charge
+step: 182. battery: 102.000000. current location: [8,3]. action: charge
+step: 183. battery: 110.500000. current location: [8,3]. action: charge
+step: 184. battery: 119.000000. current location: [8,3]. action: charge
+step: 185. battery: 127.500000. current location: [8,3]. action: charge
+step: 186. battery: 136.000000. current location: [8,3]. action: charge
+step: 187. battery: 144.500000. current location: [8,3]. action: charge
+step: 188. battery: 153.000000. current location: [8,3]. action: charge
+step: 189. battery: 161.500000. current location: [8,3]. action: charge
+step: 190. battery: 170.000000. current location: [8,3]. action: charge
+step: 191. battery: 169.000000. current location: [8,3]. action: move in direction East
+step: 192. battery: 168.000000. current location: [8,4]. action: move in direction East
+step: 193. battery: 167.000000. current location: [8,5]. action: move in direction East
+step: 194. battery: 166.000000. current location: [8,6]. action: move in direction East
+step: 195. battery: 165.000000. current location: [8,7]. action: move in direction East
+step: 196. battery: 164.000000. current location: [8,8]. action: move in direction North
+step: 197. battery: 163.000000. current location: [7,8]. action: move in direction North
+step: 198. battery: 162.000000. current location: [6,8]. action: move in direction North
+step: 199. battery: 161.000000. current location: [5,8]. action: move in direction South
+step: 200. battery: 160.000000. current location: [6,8]. action: move in direction South
+step: 201. battery: 159.000000. current location: [7,8]. action: move in direction South
+step: 202. battery: 158.000000. current location: [8,8]. action: move in direction South
+step: 203. battery: 157.000000. current location: [9,8]. action: move in direction South
+step: 204. battery: 156.000000. current location: [10,8]. action: move in direction South
+step: 205. battery: 155.000000. current location: [11,8]. action: move in direction North
+step: 206. battery: 154.000000. current location: [10,8]. action: move in direction North
+step: 207. battery: 153.000000. current location: [9,8]. action: move in direction North
+step: 208. battery: 152.000000. current location: [8,8]. action: move in direction North
+step: 209. battery: 151.000000. current location: [7,8]. action: move in direction North
+step: 210. battery: 150.000000. current location: [6,8]. action: move in direction North
+step: 211. battery: 149.000000. current location: [5,8]. action: move in direction West
+step: 212. battery: 148.000000. current location: [5,7]. action: move in direction West
+step: 213. battery: 147.000000. current location: [5,6]. action: move in direction West
+step: 214. battery: 146.000000. current location: [5,5]. action: move in direction East
+step: 215. battery: 145.000000. current location: [5,6]. action: move in direction East
+step: 216. battery: 144.000000. current location: [5,7]. action: move in direction East
+step: 217. battery: 143.000000. current location: [5,8]. action: move in direction South
+step: 218. battery: 142.000000. current location: [6,8]. action: move in direction South
+step: 219. battery: 141.000000. current location: [7,8]. action: move in direction South
+step: 220. battery: 140.000000. current location: [8,8]. action: move in direction South
+step: 221. battery: 139.000000. current location: [9,8]. action: move in direction South
+step: 222. battery: 138.000000. current location: [10,8]. action: move in direction South
+step: 223. battery: 137.000000. current location: [11,8]. action: move in direction North
+step: 224. battery: 136.000000. current location: [10,8]. action: move in direction North
+step: 225. battery: 135.000000. current location: [9,8]. action: move in direction North
+step: 226. battery: 134.000000. current location: [8,8]. action: move in direction North
+step: 227. battery: 133.000000. current location: [7,8]. action: move in direction North
+step: 228. battery: 132.000000. current location: [6,8]. action: move in direction North
+step: 229. battery: 131.000000. current location: [5,8]. action: move in direction South
+step: 230. battery: 130.000000. current location: [6,8]. action: move in direction South
+step: 231. battery: 129.000000. current location: [7,8]. action: move in direction South
+step: 232. battery: 128.000000. current location: [8,8]. action: move in direction South
+step: 233. battery: 127.000000. current location: [9,8]. action: move in direction South
+step: 234. battery: 126.000000. current location: [10,8]. action: move in direction South
+step: 235. battery: 125.000000. current location: [11,8]. action: move in direction North
+step: 236. battery: 124.000000. current location: [10,8]. action: move in direction North
+step: 237. battery: 123.000000. current location: [9,8]. action: move in direction North
+step: 238. battery: 122.000000. current location: [8,8]. action: move in direction North
+step: 239. battery: 121.000000. current location: [7,8]. action: move in direction North
+step: 240. battery: 120.000000. current location: [6,8]. action: move in direction North
+step: 241. battery: 119.000000. current location: [5,8]. action: move in direction West
+step: 242. battery: 118.000000. current location: [5,7]. action: move in direction West
+step: 243. battery: 117.000000. current location: [5,6]. action: move in direction West
+step: 244. battery: 116.000000. current location: [5,5]. action: move in direction East
+step: 245. battery: 115.000000. current location: [5,6]. action: move in direction East
+step: 246. battery: 114.000000. current location: [5,7]. action: move in direction East
+step: 247. battery: 113.000000. current location: [5,8]. action: move in direction South
+step: 248. battery: 112.000000. current location: [6,8]. action: move in direction South
+step: 249. battery: 111.000000. current location: [7,8]. action: move in direction South
+step: 250. battery: 110.000000. current location: [8,8]. action: move in direction South
+step: 251. battery: 109.000000. current location: [9,8]. action: move in direction South
+step: 252. battery: 108.000000. current location: [10,8]. action: move in direction South
+step: 253. battery: 107.000000. current location: [11,8]. action: move in direction North
+step: 254. battery: 106.000000. current location: [10,8]. action: move in direction North
+step: 255. battery: 105.000000. current location: [9,8]. action: move in direction North
+step: 256. battery: 104.000000. current location: [8,8]. action: move in direction North
+step: 257. battery: 103.000000. current location: [7,8]. action: move in direction North
+step: 258. battery: 102.000000. current location: [6,8]. action: move in direction North
+step: 259. battery: 101.000000. current location: [5,8]. action: move in direction West
+step: 260. battery: 100.000000. current location: [5,7]. action: move in direction West
+step: 261. battery: 99.000000. current location: [5,6]. action: move in direction West
+step: 262. battery: 98.000000. current location: [5,5]. action: move in direction South
+step: 263. battery: 97.000000. current location: [6,5]. action: clean.
+step: 264. battery: 96.000000. current location: [6,5]. action: clean.
+step: 265. battery: 95.000000. current location: [6,5]. action: clean.
+step: 266. battery: 94.000000. current location: [6,5]. action: clean.
+step: 267. battery: 93.000000. current location: [6,5]. action: clean.
+step: 268. battery: 92.000000. current location: [6,5]. action: clean.
+step: 269. battery: 91.000000. current location: [6,5]. action: clean.
+step: 270. battery: 90.000000. current location: [6,5]. action: clean.
+step: 271. battery: 89.000000. current location: [6,5]. action: move in direction South
+step: 272. battery: 88.000000. current location: [7,5]. action: clean.
+step: 273. battery: 87.000000. current location: [7,5]. action: move in direction South
+step: 274. battery: 86.000000. current location: [8,5]. action: move in direction South
+step: 275. battery: 85.000000. current location: [9,5]. action: clean.
+step: 276. battery: 84.000000. current location: [9,5]. action: clean.
+step: 277. battery: 83.000000. current location: [9,5]. action: clean.
+step: 278. battery: 82.000000. current location: [9,5]. action: clean.
+step: 279. battery: 81.000000. current location: [9,5]. action: clean.
+step: 280. battery: 80.000000. current location: [9,5]. action: clean.
+step: 281. battery: 79.000000. current location: [9,5]. action: move in direction South
+step: 282. battery: 78.000000. current location: [10,5]. action: clean.
+step: 283. battery: 77.000000. current location: [10,5]. action: clean.
+step: 284. battery: 76.000000. current location: [10,5]. action: clean.
+step: 285. battery: 75.000000. current location: [10,5]. action: clean.
+step: 286. battery: 74.000000. current location: [10,5]. action: clean.
+step: 287. battery: 73.000000. current location: [10,5]. action: move in direction South
+step: 288. battery: 72.000000. current location: [11,5]. action: clean.
+step: 289. battery: 71.000000. current location: [11,5]. action: clean.
+step: 290. battery: 70.000000. current location: [11,5]. action: clean.
+step: 291. battery: 69.000000. current location: [11,5]. action: clean.
+step: 292. battery: 68.000000. current location: [11,5]. action: clean.
+step: 293. battery: 67.000000. current location: [11,5]. action: clean.
+step: 294. battery: 66.000000. current location: [11,5]. action: clean.
+step: 295. battery: 65.000000. current location: [11,5]. action: clean.
+step: 296. battery: 64.000000. current location: [11,5]. action: move in direction West
+step: 297. battery: 63.000000. current location: [11,4]. action: clean.
+step: 298. battery: 62.000000. current location: [11,4]. action: clean.
+step: 299. battery: 61.000000. current location: [11,4]. action: clean.
+step: 300. battery: 60.000000. current location: [11,4]. action: clean.
+step: 301. battery: 59.000000. current location: [11,4]. action: clean.
+step: 302. battery: 58.000000. current location: [11,4]. action: clean.
+step: 303. battery: 57.000000. current location: [11,4]. action: clean.
+step: 304. battery: 56.000000. current location: [11,4]. action: move in direction North
+step: 305. battery: 55.000000. current location: [10,4]. action: clean.
+step: 306. battery: 54.000000. current location: [10,4]. action: clean.
+step: 307. battery: 53.000000. current location: [10,4]. action: clean.
+step: 308. battery: 52.000000. current location: [10,4]. action: clean.
+step: 309. battery: 51.000000. current location: [10,4]. action: clean.
+step: 310. battery: 50.000000. current location: [10,4]. action: clean.
+step: 311. battery: 49.000000. current location: [10,4]. action: clean.
+step: 312. battery: 48.000000. current location: [10,4]. action: clean.
+step: 313. battery: 47.000000. current location: [10,4]. action: move in direction North
+step: 314. battery: 46.000000. current location: [9,4]. action: clean.
+step: 315. battery: 45.000000. current location: [9,4]. action: clean.
+step: 316. battery: 44.000000. current location: [9,4]. action: clean.
+step: 317. battery: 43.000000. current location: [9,4]. action: move in direction North
+step: 318. battery: 42.000000. current location: [8,4]. action: move in direction North
+step: 319. battery: 41.000000. current location: [7,4]. action: clean.
+step: 320. battery: 40.000000. current location: [7,4]. action: move in direction North
+step: 321. battery: 39.000000. current location: [6,4]. action: clean.
+step: 322. battery: 38.000000. current location: [6,4]. action: clean.
+step: 323. battery: 37.000000. current location: [6,4]. action: clean.
+step: 324. battery: 36.000000. current location: [6,4]. action: clean.
+step: 325. battery: 35.000000. current location: [6,4]. action: clean.
+step: 326. battery: 34.000000. current location: [6,4]. action: clean.
+step: 327. battery: 33.000000. current location: [6,4]. action: clean.
+step: 328. battery: 32.000000. current location: [6,4]. action: move in direction South
+step: 329. battery: 31.000000. current location: [7,4]. action: move in direction South
+step: 330. battery: 30.000000. current location: [8,4]. action: move in direction South
+step: 331. battery: 29.000000. current location: [9,4]. action: move in direction South
+step: 332. battery: 28.000000. current location: [10,4]. action: move in direction South
+step: 333. battery: 27.000000. current location: [11,4]. action: move in direction East
+step: 334. battery: 26.000000. current location: [11,5]. action: move in direction East
+step: 335. battery: 25.000000. current location: [11,6]. action: clean.
+step: 336. battery: 24.000000. current location: [11,6]. action: clean.
+step: 337. battery: 23.000000. current location: [11,6]. action: move in direction North
+step: 338. battery: 22.000000. current location: [10,6]. action: clean.
+step: 339. battery: 21.000000. current location: [10,6]. action: clean.
+step: 340. battery: 20.000000. current location: [10,6]. action: clean.
+step: 341. battery: 19.000000. current location: [10,6]. action: move in direction South
+step: 342. battery: 18.000000. current location: [11,6]. action: move in direction West
+step: 343. battery: 17.000000. current location: [11,5]. action: move in direction North
+step: 344. battery: 16.000000. current location: [10,5]. action: move in direction North
+step: 345. battery: 15.000000. current location: [9,5]. action: move in direction North
+step: 346. battery: 14.000000. current location: [8,5]. action: move in direction North
+step: 347. battery: 13.000000. current location: [7,5]. action: move in direction North
+step: 348. battery: 12.000000. current location: [6,5]. action: move in direction North
+step: 349. battery: 11.000000. current location: [5,5]. action: move in direction East
+step: 350. battery: 10.000000. current location: [5,6]. action: move in direction East
+step: 351. battery: 9.000000. current location: [5,7]. action: move in direction East
+step: 352. battery: 8.000000. current location: [5,8]. action: move in direction South
+step: 353. battery: 7.000000. current location: [6,8]. action: move in direction South
+step: 354. battery: 6.000000. current location: [7,8]. action: move in direction South
+step: 355. battery: 5.000000. current location: [8,8]. action: move in direction West
+step: 356. battery: 4.000000. current location: [8,7]. action: move in direction West
+step: 357. battery: 3.000000. current location: [8,6]. action: move in direction West
+step: 358. battery: 2.000000. current location: [8,5]. action: move in direction West
+step: 359. battery: 1.000000. current location: [8,4]. action: move in direction West
+step: 360. battery: 9.500000. current location: [8,3]. action: charge
+step: 361. battery: 18.000000. current location: [8,3]. action: charge
+step: 362. battery: 26.500000. current location: [8,3]. action: charge
+step: 363. battery: 35.000000. current location: [8,3]. action: charge
+step: 364. battery: 43.500000. current location: [8,3]. action: charge
+step: 365. battery: 52.000000. current location: [8,3]. action: charge
+step: 366. battery: 60.500000. current location: [8,3]. action: charge
+step: 367. battery: 69.000000. current location: [8,3]. action: charge
+step: 368. battery: 77.500000. current location: [8,3]. action: charge
+step: 369. battery: 86.000000. current location: [8,3]. action: charge
+step: 370. battery: 94.500000. current location: [8,3]. action: charge
+step: 371. battery: 103.000000. current location: [8,3]. action: charge
+step: 372. battery: 111.500000. current location: [8,3]. action: charge
+step: 373. battery: 120.000000. current location: [8,3]. action: charge
+step: 374. battery: 128.500000. current location: [8,3]. action: charge
+step: 375. battery: 137.000000. current location: [8,3]. action: charge
+step: 376. battery: 145.500000. current location: [8,3]. action: charge
+step: 377. battery: 154.000000. current location: [8,3]. action: charge
+step: 378. battery: 162.500000. current location: [8,3]. action: charge
+step: 379. battery: 170.000000. current location: [8,3]. action: charge
+step: 380. battery: 169.000000. current location: [8,3]. action: move in direction East
+step: 381. battery: 168.000000. current location: [8,4]. action: move in direction East
+step: 382. battery: 167.000000. current location: [8,5]. action: move in direction East
+step: 383. battery: 166.000000. current location: [8,6]. action: move in direction East
+step: 384. battery: 165.000000. current location: [8,7]. action: move in direction East
+step: 385. battery: 164.000000. current location: [8,8]. action: move in direction North
+step: 386. battery: 163.000000. current location: [7,8]. action: move in direction North
+step: 387. battery: 162.000000. current location: [6,8]. action: move in direction North
+step: 388. battery: 161.000000. current location: [5,8]. action: move in direction West
+step: 389. battery: 160.000000. current location: [5,7]. action: move in direction West
+step: 390. battery: 159.000000. current location: [5,6]. action: move in direction West
+step: 391. battery: 158.000000. current location: [5,5]. action: move in direction East
+step: 392. battery: 157.000000. current location: [5,6]. action: move in direction East
+step: 393. battery: 156.000000. current location: [5,7]. action: move in direction East
+step: 394. battery: 155.000000. current location: [5,8]. action: move in direction West
+step: 395. battery: 154.000000. current location: [5,7]. action: move in direction West
+step: 396. battery: 153.000000. current location: [5,6]. action: move in direction West
+step: 397. battery: 152.000000. current location: [5,5]. action: move in direction South
+step: 398. battery: 151.000000. current location: [6,5]. action: move in direction South
+step: 399. battery: 150.000000. current location: [7,5]. action: move in direction South
+step: 400. battery: 149.000000. current location: [8,5]. action: move in direction South
+step: 401. battery: 148.000000. current location: [9,5]. action: move in direction South
+step: 402. battery: 147.000000. current location: [10,5]. action: move in direction South
+step: 403. battery: 146.000000. current location: [11,5]. action: move in direction East
+step: 404. battery: 145.000000. current location: [11,6]. action: move in direction North
+step: 405. battery: 144.000000. current location: [10,6]. action: clean.
+step: 406. battery: 143.000000. current location: [10,6]. action: clean.
+step: 407. battery: 142.000000. current location: [10,6]. action: clean.
+step: 408. battery: 141.000000. current location: [10,6]. action: clean.
+step: 409. battery: 140.000000. current location: [10,6]. action: move in direction North
+step: 410. battery: 139.000000. current location: [9,6]. action: clean.
+step: 411. battery: 138.000000. current location: [9,6]. action: clean.
+step: 412. battery: 137.000000. current location: [9,6]. action: clean.
+step: 413. battery: 136.000000. current location: [9,6]. action: move in direction North
+step: 414. battery: 135.000000. current location: [8,6]. action: move in direction North
+step: 415. battery: 134.000000. current location: [7,6]. action: clean.
+step: 416. battery: 133.000000. current location: [7,6]. action: clean.
+step: 417. battery: 132.000000. current location: [7,6]. action: clean.
+step: 418. battery: 131.000000. current location: [7,6]. action: clean.
+step: 419. battery: 130.000000. current location: [7,6]. action: clean.
+step: 420. battery: 129.000000. current location: [7,6]. action: move in direction North
+step: 421. battery: 128.000000. current location: [6,6]. action: clean.
+step: 422. battery: 127.000000. current location: [6,6]. action: clean.
+step: 423. battery: 126.000000. current location: [6,6]. action: move in direction North
+step: 424. battery: 125.000000. current location: [5,6]. action: move in direction North
+step: 425. battery: 124.000000. current location: [4,6]. action: clean.
+step: 426. battery: 123.000000. current location: [4,6]. action: clean.
+step: 427. battery: 122.000000. current location: [4,6]. action: clean.
+step: 428. battery: 121.000000. current location: [4,6]. action: clean.
+step: 429. battery: 120.000000. current location: [4,6]. action: clean.
+step: 430. battery: 119.000000. current location: [4,6]. action: clean.
+step: 431. battery: 118.000000. current location: [4,6]. action: move in direction North
+step: 432. battery: 117.000000. current location: [3,6]. action: clean.
+step: 433. battery: 116.000000. current location: [3,6]. action: clean.
+step: 434. battery: 115.000000. current location: [3,6]. action: clean.
+step: 435. battery: 114.000000. current location: [3,6]. action: clean.
+step: 436. battery: 113.000000. current location: [3,6]. action: clean.
+step: 437. battery: 112.000000. current location: [3,6]. action: clean.
+step: 438. battery: 111.000000. current location: [3,6]. action: clean.
+step: 439. battery: 110.000000. current location: [3,6]. action: clean.
+step: 440. battery: 109.000000. current location: [3,6]. action: clean.
+step: 441. battery: 108.000000. current location: [3,6]. action: move in direction North
+step: 442. battery: 107.000000. current location: [2,6]. action: clean.
+step: 443. battery: 106.000000. current location: [2,6]. action: clean.
+step: 444. battery: 105.000000. current location: [2,6]. action: clean.
+step: 445. battery: 104.000000. current location: [2,6]. action: clean.
+step: 446. battery: 103.000000. current location: [2,6]. action: clean.
+step: 447. battery: 102.000000. current location: [2,6]. action: clean.
+step: 448. battery: 101.000000. current location: [2,6]. action: clean.
+step: 449. battery: 100.000000. current location: [2,6]. action: clean.
+step: 450. battery: 99.000000. current location: [2,6]. action: clean.
+step: 451. battery: 98.000000. current location: [2,6]. action: move in direction North
+step: 452. battery: 97.000000. current location: [1,6]. action: move in direction West
+step: 453. battery: 96.000000. current location: [1,5]. action: move in direction West
+step: 454. battery: 95.000000. current location: [1,4]. action: move in direction South
+step: 455. battery: 94.000000. current location: [2,4]. action: clean.
+step: 456. battery: 93.000000. current location: [2,4]. action: clean.
+step: 457. battery: 92.000000. current location: [2,4]. action: clean.
+step: 458. battery: 91.000000. current location: [2,4]. action: clean.
+step: 459. battery: 90.000000. current location: [2,4]. action: clean.
+step: 460. battery: 89.000000. current location: [2,4]. action: clean.
+step: 461. battery: 88.000000. current location: [2,4]. action: clean.
+step: 462. battery: 87.000000. current location: [2,4]. action: clean.
+step: 463. battery: 86.000000. current location: [2,4]. action: move in direction South
+step: 464. battery: 85.000000. current location: [3,4]. action: clean.
+step: 465. battery: 84.000000. current location: [3,4]. action: clean.
+step: 466. battery: 83.000000. current location: [3,4]. action: clean.
+step: 467. battery: 82.000000. current location: [3,4]. action: clean.
+step: 468. battery: 81.000000. current location: [3,4]. action: clean.
+step: 469. battery: 80.000000. current location: [3,4]. action: clean.
+step: 470. battery: 79.000000. current location: [3,4]. action: clean.
+step: 471. battery: 78.000000. current location: [3,4]. action: move in direction South
+step: 472. battery: 77.000000. current location: [4,4]. action: clean.
+step: 473. battery: 76.000000. current location: [4,4]. action: clean.
+step: 474. battery: 75.000000. current location: [4,4]. action: clean.
+step: 475. battery: 74.000000. current location: [4,4]. action: clean.
+step: 476. battery: 73.000000. current location: [4,4]. action: move in direction North
+step: 477. battery: 72.000000. current location: [3,4]. action: move in direction North
+step: 478. battery: 71.000000. current location: [2,4]. action: move in direction North
+step: 479. battery: 70.000000. current location: [1,4]. action: move in direction South
+step: 480. battery: 69.000000. current location: [2,4]. action: move in direction South
+step: 481. battery: 68.000000. current location: [3,4]. action: move in direction South
+step: 482. battery: 67.000000. current location: [4,4]. action: move in direction East
+step: 483. battery: 66.000000. current location: [4,5]. action: move in direction East
+step: 484. battery: 65.000000. current location: [4,6]. action: move in direction West
+step: 485. battery: 64.000000. current location: [4,5]. action: move in direction West
+step: 486. battery: 63.000000. current location: [4,4]. action: move in direction North
+step: 487. battery: 62.000000. current location: [3,4]. action: move in direction North
+step: 488. battery: 61.000000. current location: [2,4]. action: move in direction North
+step: 489. battery: 60.000000. current location: [1,4]. action: move in direction East
+step: 490. battery: 59.000000. current location: [1,5]. action: move in direction East
+step: 491. battery: 58.000000. current location: [1,6]. action: move in direction East
+step: 492. battery: 57.000000. current location: [1,7]. action: move in direction East
+step: 493. battery: 56.000000. current location: [1,8]. action: move in direction South
+step: 494. battery: 55.000000. current location: [2,8]. action: clean.
+step: 495. battery: 54.000000. current location: [2,8]. action: clean.
+step: 496. battery: 53.000000. current location: [2,8]. action: clean.
+step: 497. battery: 52.000000. current location: [2,8]. action: clean.
+step: 498. battery: 51.000000. current location: [2,8]. action: move in direction South
+step: 499. battery: 50.000000. current location: [3,8]. action: clean.
+step: 500. battery: 49.000000. current location: [3,8]. action: clean.
+step: 501. battery: 48.000000. current location: [3,8]. action: clean.
+step: 502. battery: 47.000000. current location: [3,8]. action: clean.
+step: 503. battery: 46.000000. current location: [3,8]. action: move in direction North
+step: 504. battery: 45.000000. current location: [2,8]. action: move in direction North
+step: 505. battery: 44.000000. current location: [1,8]. action: move in direction South
+step: 506. battery: 43.000000. current location: [2,8]. action: move in direction South
+step: 507. battery: 42.000000. current location: [3,8]. action: move in direction North
+step: 508. battery: 41.000000. current location: [2,8]. action: move in direction North
+step: 509. battery: 40.000000. current location: [1,8]. action: move in direction West
+step: 510. battery: 39.000000. current location: [1,7]. action: move in direction West
+step: 511. battery: 38.000000. current location: [1,6]. action: move in direction West
+step: 512. battery: 37.000000. current location: [1,5]. action: move in direction West
+step: 513. battery: 36.000000. current location: [1,4]. action: move in direction South
+step: 514. battery: 35.000000. current location: [2,4]. action: move in direction South
+step: 515. battery: 34.000000. current location: [3,4]. action: move in direction South
+step: 516. battery: 33.000000. current location: [4,4]. action: move in direction North
+step: 517. battery: 32.000000. current location: [3,4]. action: move in direction North
+step: 518. battery: 31.000000. current location: [2,4]. action: move in direction North
+step: 519. battery: 30.000000. current location: [1,4]. action: move in direction East
+step: 520. battery: 29.000000. current location: [1,5]. action: move in direction East
+step: 521. battery: 28.000000. current location: [1,6]. action: move in direction South
+step: 522. battery: 27.000000. current location: [2,6]. action: move in direction South
+step: 523. battery: 26.000000. current location: [3,6]. action: move in direction South
+step: 524. battery: 25.000000. current location: [4,6]. action: move in direction South
+step: 525. battery: 24.000000. current location: [5,6]. action: move in direction South
+step: 526. battery: 23.000000. current location: [6,6]. action: move in direction South
+step: 527. battery: 22.000000. current location: [7,6]. action: move in direction South
+step: 528. battery: 21.000000. current location: [8,6]. action: move in direction South
+step: 529. battery: 20.000000. current location: [9,6]. action: move in direction South
+step: 530. battery: 19.000000. current location: [10,6]. action: move in direction South
+step: 531. battery: 18.000000. current location: [11,6]. action: move in direction West
+step: 532. battery: 17.000000. current location: [11,5]. action: move in direction North
+step: 533. battery: 16.000000. current location: [10,5]. action: move in direction North
+step: 534. battery: 15.000000. current location: [9,5]. action: move in direction North
+step: 535. battery: 14.000000. current location: [8,5]. action: move in direction North
+step: 536. battery: 13.000000. current location: [7,5]. action: move in direction North
+step: 537. battery: 12.000000. current location: [6,5]. action: move in direction North
+step: 538. battery: 11.000000. current location: [5,5]. action: move in direction East
+step: 539. battery: 10.000000. current location: [5,6]. action: move in direction East
+step: 540. battery: 9.000000. current location: [5,7]. action: move in direction East
+step: 541. battery: 8.000000. current location: [5,8]. action: move in direction South
+step: 542. battery: 7.000000. current location: [6,8]. action: move in direction South
+step: 543. battery: 6.000000. current location: [7,8]. action: move in direction South
+step: 544. battery: 5.000000. current location: [8,8]. action: move in direction West
+step: 545. battery: 4.000000. current location: [8,7]. action: move in direction West
+step: 546. battery: 3.000000. current location: [8,6]. action: move in direction West
+step: 547. battery: 2.000000. current location: [8,5]. action: move in direction West
+step: 548. battery: 1.000000. current location: [8,4]. action: move in direction West
+step: 549. battery: 9.500000. current location: [8,3]. action: charge
+step: 550. battery: 18.000000. current location: [8,3]. action: charge
+step: 551. battery: 26.500000. current location: [8,3]. action: charge
+step: 552. battery: 35.000000. current location: [8,3]. action: charge
+step: 553. battery: 43.500000. current location: [8,3]. action: charge
+step: 554. battery: 52.000000. current location: [8,3]. action: charge
+step: 555. battery: 60.500000. current location: [8,3]. action: charge
+step: 556. battery: 69.000000. current location: [8,3]. action: charge
+step: 557. battery: 77.500000. current location: [8,3]. action: charge
+step: 558. battery: 86.000000. current location: [8,3]. action: charge
+step: 559. battery: 94.500000. current location: [8,3]. action: charge
+step: 560. battery: 103.000000. current location: [8,3]. action: charge
+step: 561. battery: 111.500000. current location: [8,3]. action: charge
+step: 562. battery: 120.000000. current location: [8,3]. action: charge
+step: 563. battery: 128.500000. current location: [8,3]. action: charge
+step: 564. battery: 137.000000. current location: [8,3]. action: charge
+step: 565. battery: 145.500000. current location: [8,3]. action: charge
+step: 566. battery: 154.000000. current location: [8,3]. action: charge
+step: 567. battery: 162.500000. current location: [8,3]. action: charge
+step: 568. battery: 170.000000. current location: [8,3]. action: charge
+step: 569. battery: 169.000000. current location: [8,3]. action: move in direction East
+step: 570. battery: 168.000000. current location: [8,4]. action: move in direction East
+step: 571. battery: 167.000000. current location: [8,5]. action: move in direction East
+step: 572. battery: 166.000000. current location: [8,6]. action: move in direction East
+step: 573. battery: 165.000000. current location: [8,7]. action: move in direction East
+step: 574. battery: 164.000000. current location: [8,8]. action: move in direction North
+step: 575. battery: 163.000000. current location: [7,8]. action: move in direction North
+step: 576. battery: 162.000000. current location: [6,8]. action: move in direction North
+step: 577. battery: 161.000000. current location: [5,8]. action: move in direction South
+step: 578. battery: 160.000000. current location: [6,8]. action: move in direction South
+step: 579. battery: 159.000000. current location: [7,8]. action: move in direction South
+step: 580. battery: 158.000000. current location: [8,8]. action: move in direction South
+step: 581. battery: 157.000000. current location: [9,8]. action: move in direction South
+step: 582. battery: 156.000000. current location: [10,8]. action: move in direction South
+step: 583. battery: 155.000000. current location: [11,8]. action: move in direction North
+step: 584. battery: 154.000000. current location: [10,8]. action: move in direction North
+step: 585. battery: 153.000000. current location: [9,8]. action: move in direction North
+step: 586. battery: 152.000000. current location: [8,8]. action: move in direction North
+step: 587. battery: 151.000000. current location: [7,8]. action: move in direction North
+step: 588. battery: 150.000000. current location: [6,8]. action: move in direction North
+step: 589. battery: 149.000000. current location: [5,8]. action: move in direction South
+step: 590. battery: 148.000000. current location: [6,8]. action: move in direction South
+step: 591. battery: 147.000000. current location: [7,8]. action: move in direction South
+step: 592. battery: 146.000000. current location: [8,8]. action: move in direction South
+step: 593. battery: 145.000000. current location: [9,8]. action: move in direction South
+step: 594. battery: 144.000000. current location: [10,8]. action: move in direction South
+step: 595. battery: 143.000000. current location: [11,8]. action: move in direction North
+step: 596. battery: 142.000000. current location: [10,8]. action: move in direction North
+step: 597. battery: 141.000000. current location: [9,8]. action: move in direction North
+step: 598. battery: 140.000000. current location: [8,8]. action: move in direction North
+step: 599. battery: 139.000000. current location: [7,8]. action: move in direction North
+step: 600. battery: 138.000000. current location: [6,8]. action: move in direction North
+step: 601. battery: 137.000000. current location: [5,8]. action: move in direction South
+step: 602. battery: 136.000000. current location: [6,8]. action: move in direction South
+step: 603. battery: 135.000000. current location: [7,8]. action: move in direction South
+step: 604. battery: 134.000000. current location: [8,8]. action: move in direction South
+step: 605. battery: 133.000000. current location: [9,8]. action: move in direction South
+step: 606. battery: 132.000000. current location: [10,8]. action: move in direction South
+step: 607. battery: 131.000000. current location: [11,8]. action: move in direction North
+step: 608. battery: 130.000000. current location: [10,8]. action: move in direction North
+step: 609. battery: 129.000000. current location: [9,8]. action: move in direction North
+step: 610. battery: 128.000000. current location: [8,8]. action: move in direction North
+step: 611. battery: 127.000000. current location: [7,8]. action: move in direction North
+step: 612. battery: 126.000000. current location: [6,8]. action: move in direction North
+step: 613. battery: 125.000000. current location: [5,8]. action: move in direction West
+step: 614. battery: 124.000000. current location: [5,7]. action: move in direction West
+step: 615. battery: 123.000000. current location: [5,6]. action: move in direction West
+step: 616. battery: 122.000000. current location: [5,5]. action: move in direction East
+step: 617. battery: 121.000000. current location: [5,6]. action: move in direction East
+step: 618. battery: 120.000000. current location: [5,7]. action: move in direction East
+step: 619. battery: 119.000000. current location: [5,8]. action: move in direction West
+step: 620. battery: 118.000000. current location: [5,7]. action: move in direction West
+step: 621. battery: 117.000000. current location: [5,6]. action: move in direction West
+step: 622. battery: 116.000000. current location: [5,5]. action: move in direction East
+step: 623. battery: 115.000000. current location: [5,6]. action: move in direction East
+step: 624. battery: 114.000000. current location: [5,7]. action: move in direction East
+step: 625. battery: 113.000000. current location: [5,8]. action: move in direction South
+step: 626. battery: 112.000000. current location: [6,8]. action: move in direction South
+step: 627. battery: 111.000000. current location: [7,8]. action: move in direction South
+step: 628. battery: 110.000000. current location: [8,8]. action: move in direction South
+step: 629. battery: 109.000000. current location: [9,8]. action: move in direction South
+step: 630. battery: 108.000000. current location: [10,8]. action: move in direction South
+step: 631. battery: 107.000000. current location: [11,8]. action: move in direction North
+step: 632. battery: 106.000000. current location: [10,8]. action: move in direction North
+step: 633. battery: 105.000000. current location: [9,8]. action: move in direction North
+step: 634. battery: 104.000000. current location: [8,8]. action: move in direction North
+step: 635. battery: 103.000000. current location: [7,8]. action: move in direction North
+step: 636. battery: 102.000000. current location: [6,8]. action: move in direction North
+step: 637. battery: 101.000000. current location: [5,8]. action: move in direction South
+step: 638. battery: 100.000000. current location: [6,8]. action: move in direction South
+step: 639. battery: 99.000000. current location: [7,8]. action: move in direction South
+step: 640. battery: 98.000000. current location: [8,8]. action: move in direction South
+step: 641. battery: 97.000000. current location: [9,8]. action: move in direction South
+step: 642. battery: 96.000000. current location: [10,8]. action: move in direction South
+step: 643. battery: 95.000000. current location: [11,8]. action: move in direction North
+step: 644. battery: 94.000000. current location: [10,8]. action: move in direction North
+step: 645. battery: 93.000000. current location: [9,8]. action: move in direction North
+step: 646. battery: 92.000000. current location: [8,8]. action: move in direction North
+step: 647. battery: 91.000000. current location: [7,8]. action: move in direction North
+step: 648. battery: 90.000000. current location: [6,8]. action: move in direction North
+step: 649. battery: 89.000000. current location: [5,8]. action: move in direction West
+step: 650. battery: 88.000000. current location: [5,7]. action: move in direction West
+step: 651. battery: 87.000000. current location: [5,6]. action: move in direction West
+step: 652. battery: 86.000000. current location: [5,5]. action: move in direction South
+step: 653. battery: 85.000000. current location: [6,5]. action: move in direction South
+step: 654. battery: 84.000000. current location: [7,5]. action: move in direction South
+step: 655. battery: 83.000000. current location: [8,5]. action: move in direction South
+step: 656. battery: 82.000000. current location: [9,5]. action: move in direction South
+step: 657. battery: 81.000000. current location: [10,5]. action: move in direction South
+step: 658. battery: 80.000000. current location: [11,5]. action: move in direction North
+step: 659. battery: 79.000000. current location: [10,5]. action: move in direction North
+step: 660. battery: 78.000000. current location: [9,5]. action: move in direction North
+step: 661. battery: 77.000000. current location: [8,5]. action: move in direction North
+step: 662. battery: 76.000000. current location: [7,5]. action: move in direction North
+step: 663. battery: 75.000000. current location: [6,5]. action: move in direction North
+step: 664. battery: 74.000000. current location: [5,5]. action: move in direction North
+step: 665. battery: 73.000000. current location: [4,5]. action: move in direction North
+step: 666. battery: 72.000000. current location: [3,5]. action: move in direction North
+step: 667. battery: 71.000000. current location: [2,5]. action: move in direction North
+step: 668. battery: 70.000000. current location: [1,5]. action: move in direction West
+step: 669. battery: 69.000000. current location: [1,4]. action: move in direction East
+step: 670. battery: 68.000000. current location: [1,5]. action: move in direction East
+step: 671. battery: 67.000000. current location: [1,6]. action: move in direction East
+step: 672. battery: 66.000000. current location: [1,7]. action: move in direction East
+step: 673. battery: 65.000000. current location: [1,8]. action: move in direction West
+step: 674. battery: 64.000000. current location: [1,7]. action: move in direction West
+step: 675. battery: 63.000000. current location: [1,6]. action: move in direction West
+step: 676. battery: 62.000000. current location: [1,5]. action: move in direction West
+step: 677. battery: 61.000000. current location: [1,4]. action: move in direction East
+step: 678. battery: 60.000000. current location: [1,5]. action: move in direction East
+step: 679. battery: 59.000000. current location: [1,6]. action: move in direction East
+step: 680. battery: 58.000000. current location: [1,7]. action: move in direction East
+step: 681. battery: 57.000000. current location: [1,8]. action: move in direction South
+step: 682. battery: 56.000000. current location: [2,8]. action: move in direction South
+step: 683. battery: 55.000000. current location: [3,8]. action: move in direction North
+step: 684. battery: 54.000000. current location: [2,8]. action: move in direction North
+step: 685. battery: 53.000000. current location: [1,8]. action: move in direction West
+step: 686. battery: 52.000000. current location: [1,7]. action: move in direction West
+step: 687. battery: 51.000000. current location: [1,6]. action: move in direction West
+step: 688. battery: 50.000000. current location: [1,5]. action: move in direction West
+step: 689. battery: 49.000000. current location: [1,4]. action: move in direction East
+step: 690. battery: 48.000000. current location: [1,5]. action: move in direction East
+step: 691. battery: 47.000000. current location: [1,6]. action: move in direction East
+step: 692. battery: 46.000000. current location: [1,7]. action: move in direction East
+step: 693. battery: 45.000000. current location: [1,8]. action: move in direction South
+step: 694. battery: 44.000000. current location: [2,8]. action: move in direction South
+step: 695. battery: 43.000000. current location: [3,8]. action: move in direction North
+step: 696. battery: 42.000000. current location: [2,8]. action: move in direction North
+step: 697. battery: 41.000000. current location: [1,8]. action: move in direction South
+step: 698. battery: 40.000000. current location: [2,8]. action: move in direction South
+step: 699. battery: 39.000000. current location: [3,8]. action: move in direction North
+step: 700. battery: 38.000000. current location: [2,8]. action: move in direction North
+step: 701. battery: 37.000000. current location: [1,8]. action: move in direction South
+step: 702. battery: 36.000000. current location: [2,8]. action: move in direction South
+step: 703. battery: 35.000000. current location: [3,8]. action: move in direction North
+step: 704. battery: 34.000000. current location: [2,8]. action: move in direction North
+step: 705. battery: 33.000000. current location: [1,8]. action: move in direction South
+step: 706. battery: 32.000000. current location: [2,8]. action: move in direction South
+step: 707. battery: 31.000000. current location: [3,8]. action: move in direction North
+step: 708. battery: 30.000000. current location: [2,8]. action: move in direction North
+step: 709. battery: 29.000000. current location: [1,8]. action: move in direction South
+step: 710. battery: 28.000000. current location: [2,8]. action: move in direction South
+step: 711. battery: 27.000000. current location: [3,8]. action: move in direction North
+step: 712. battery: 26.000000. current location: [2,8]. action: move in direction North
+step: 713. battery: 25.000000. current location: [1,8]. action: move in direction West
+step: 714. battery: 24.000000. current location: [1,7]. action: move in direction West
+step: 715. battery: 23.000000. current location: [1,6]. action: move in direction West
+step: 716. battery: 22.000000. current location: [1,5]. action: move in direction West
+step: 717. battery: 21.000000. current location: [1,4]. action: move in direction South
+step: 718. battery: 20.000000. current location: [2,4]. action: move in direction South
+step: 719. battery: 19.000000. current location: [3,4]. action: move in direction South
+step: 720. battery: 18.000000. current location: [4,4]. action: move in direction North
+step: 721. battery: 17.000000. current location: [3,4]. action: move in direction North
+step: 722. battery: 16.000000. current location: [2,4]. action: move in direction North
+step: 723. battery: 15.000000. current location: [1,4]. action: move in direction East
+step: 724. battery: 14.000000. current location: [1,5]. action: move in direction South
+step: 725. battery: 13.000000. current location: [2,5]. action: move in direction South
+step: 726. battery: 12.000000. current location: [3,5]. action: move in direction South
+step: 727. battery: 11.000000. current location: [4,5]. action: move in direction South
+step: 728. battery: 10.000000. current location: [5,5]. action: move in direction East
+step: 729. battery: 9.000000. current location: [5,6]. action: move in direction East
+step: 730. battery: 8.000000. current location: [5,7]. action: move in direction East
+step: 731. battery: 7.000000. current location: [5,8]. action: move in direction South
+step: 732. battery: 6.000000. current location: [6,8]. action: move in direction South
+step: 733. battery: 5.000000. current location: [7,8]. action: move in direction South
+step: 734. battery: 4.000000. current location: [8,8]. action: move in direction West
+step: 735. battery: 3.000000. current location: [8,7]. action: move in direction West
+step: 736. battery: 2.000000. current location: [8,6]. action: move in direction West
+step: 737. battery: 1.000000. current location: [8,5]. action: move in direction West
+step: 738. battery: 0.000000. current location: [8,4]. action: move in direction West
+step: 739. battery: 8.500000. current location: [8,3]. action: charge
+step: 740. battery: 17.000000. current location: [8,3]. action: charge
+step: 741. battery: 25.500000. current location: [8,3]. action: charge
+step: 742. battery: 34.000000. current location: [8,3]. action: charge
+step: 743. battery: 42.500000. current location: [8,3]. action: charge
+step: 744. battery: 51.000000. current location: [8,3]. action: charge
+step: 745. battery: 59.500000. current location: [8,3]. action: charge
+step: 746. battery: 68.000000. current location: [8,3]. action: charge
+step: 747. battery: 76.500000. current location: [8,3]. action: charge
+step: 748. battery: 85.000000. current location: [8,3]. action: charge
+step: 749. battery: 93.500000. current location: [8,3]. action: charge
+step: 750. battery: 102.000000. current location: [8,3]. action: charge
+step: 751. battery: 110.500000. current location: [8,3]. action: charge
+step: 752. battery: 119.000000. current location: [8,3]. action: charge
+step: 753. battery: 127.500000. current location: [8,3]. action: charge
+step: 754. battery: 136.000000. current location: [8,3]. action: charge
+step: 755. battery: 144.500000. current location: [8,3]. action: charge
+step: 756. battery: 153.000000. current location: [8,3]. action: charge
+step: 757. battery: 161.500000. current location: [8,3]. action: charge
+step: 758. battery: 170.000000. current location: [8,3]. action: charge
+step: 759. battery: 169.000000. current location: [8,3]. action: move in direction East
+step: 760. battery: 168.000000. current location: [8,4]. action: move in direction East
+step: 761. battery: 167.000000. current location: [8,5]. action: move in direction East
+step: 762. battery: 166.000000. current location: [8,6]. action: move in direction East
+step: 763. battery: 165.000000. current location: [8,7]. action: move in direction East
+step: 764. battery: 164.000000. current location: [8,8]. action: move in direction West
+step: 765. battery: 163.000000. current location: [8,7]. action: move in direction West
+step: 766. battery: 162.000000. current location: [8,6]. action: move in direction West
+step: 767. battery: 161.000000. current location: [8,5]. action: move in direction West
+step: 768. battery: 160.000000. current location: [8,4]. action: move in direction West
+step: 769. battery: 159.000000. current location: [8,3]. action: move in direction West
+step: 770. battery: 158.000000. current location: [8,2]. action: clean.
+step: 771. battery: 157.000000. current location: [8,2]. action: clean.
+step: 772. battery: 156.000000. current location: [8,2]. action: clean.
+step: 773. battery: 155.000000. current location: [8,2]. action: move in direction West
+step: 774. battery: 154.000000. current location: [8,1]. action: clean.
+step: 775. battery: 153.000000. current location: [8,1]. action: move in direction North
+step: 776. battery: 152.000000. current location: [7,1]. action: clean.
+step: 777. battery: 151.000000. current location: [7,1]. action: clean.
+step: 778. battery: 150.000000. current location: [7,1]. action: clean.
+step: 779. battery: 149.000000. current location: [7,1]. action: clean.
+step: 780. battery: 148.000000. current location: [7,1]. action: clean.
+step: 781. battery: 147.000000. current location: [7,1]. action: move in direction North
+step: 782. battery: 146.000000. current location: [6,1]. action: clean.
+step: 783. battery: 145.000000. current location: [6,1]. action: clean.
+step: 784. battery: 144.000000. current location: [6,1]. action: clean.
+step: 785. battery: 143.000000. current location: [6,1]. action: clean.
+step: 786. battery: 142.000000. current location: [6,1]. action: move in direction North
+step: 787. battery: 141.000000. current location: [5,1]. action: clean.
+step: 788. battery: 140.000000. current location: [5,1]. action: clean.
+step: 789. battery: 139.000000. current location: [5,1]. action: clean.
+step: 790. battery: 138.000000. current location: [5,1]. action: clean.
+step: 791. battery: 137.000000. current location: [5,1]. action: clean.
+step: 792. battery: 136.000000. current location: [5,1]. action: clean.
+step: 793. battery: 135.000000. current location: [5,1]. action: clean.
+step: 794. battery: 134.000000. current location: [5,1]. action: clean.
+step: 795. battery: 133.000000. current location: [5,1]. action: clean.
+step: 796. battery: 132.000000. current location: [5,1]. action: move in direction North
+step: 797. battery: 131.000000. current location: [4,1]. action: clean.
+step: 798. battery: 130.000000. current location: [4,1]. action: move in direction North
+step: 799. battery: 129.000000. current location: [3,1]. action: clean.
+step: 800. battery: 128.000000. current location: [3,1]. action: move in direction North
+step: 801. battery: 127.000000. current location: [2,1]. action: clean.
+step: 802. battery: 126.000000. current location: [2,1]. action: clean.
+step: 803. battery: 125.000000. current location: [2,1]. action: clean.
+step: 804. battery: 124.000000. current location: [2,1]. action: clean.
+step: 805. battery: 123.000000. current location: [2,1]. action: clean.
+step: 806. battery: 122.000000. current location: [2,1]. action: move in direction North
+step: 807. battery: 121.000000. current location: [1,1]. action: clean.
+step: 808. battery: 120.000000. current location: [1,1]. action: clean.
+step: 809. battery: 119.000000. current location: [1,1]. action: move in direction East
+step: 810. battery: 118.000000. current location: [1,2]. action: clean.
+step: 811. battery: 117.000000. current location: [1,2]. action: clean.
+step: 812. battery: 116.000000. current location: [1,2]. action: clean.
+step: 813. battery: 115.000000. current location: [1,2]. action: clean.
+step: 814. battery: 114.000000. current location: [1,2]. action: clean.
+step: 815. battery: 113.000000. current location: [1,2]. action: clean.
+step: 816. battery: 112.000000. current location: [1,2]. action: clean.
+step: 817. battery: 111.000000. current location: [1,2]. action: move in direction West
+step: 818. battery: 110.000000. current location: [1,1]. action: move in direction South
+step: 819. battery: 109.000000. current location: [2,1]. action: move in direction South
+step: 820. battery: 108.000000. current location: [3,1]. action: move in direction South
+step: 821. battery: 107.000000. current location: [4,1]. action: move in direction South
+step: 822. battery: 106.000000. current location: [5,1]. action: move in direction South
+step: 823. battery: 105.000000. current location: [6,1]. action: move in direction South
+step: 824. battery: 104.000000. current location: [7,1]. action: move in direction South
+step: 825. battery: 103.000000. current location: [8,1]. action: move in direction South
+step: 826. battery: 102.000000. current location: [9,1]. action: clean.
+step: 827. battery: 101.000000. current location: [9,1]. action: clean.
+step: 828. battery: 100.000000. current location: [9,1]. action: clean.
+step: 829. battery: 99.000000. current location: [9,1]. action: clean.
+step: 830. battery: 98.000000. current location: [9,1]. action: move in direction South
+step: 831. battery: 97.000000. current location: [10,1]. action: clean.
+step: 832. battery: 96.000000. current location: [10,1]. action: clean.
+step: 833. battery: 95.000000. current location: [10,1]. action: move in direction South
+step: 834. battery: 94.000000. current location: [11,1]. action: clean.
+step: 835. battery: 93.000000. current location: [11,1]. action: clean.
+step: 836. battery: 92.000000. current location: [11,1]. action: clean.
+step: 837. battery: 91.000000. current location: [11,1]. action: clean.
+step: 838. battery: 90.000000. current location: [11,1]. action: move in direction North
+step: 839. battery: 89.000000. current location: [10,1]. action: move in direction North
+step: 840. battery: 88.000000. current location: [9,1]. action: move in direction North
+step: 841. battery: 87.000000. current location: [8,1]. action: move in direction North
+step: 842. battery: 86.000000. current location: [7,1]. action: move in direction North
+step: 843. battery: 85.000000. current location: [6,1]. action: move in direction North
+step: 844. battery: 84.000000. current location: [5,1]. action: move in direction North
+step: 845. battery: 83.000000. current location: [4,1]. action: move in direction North
+step: 846. battery: 82.000000. current location: [3,1]. action: move in direction North
+step: 847. battery: 81.000000. current location: [2,1]. action: move in direction North
+step: 848. battery: 80.000000. current location: [1,1]. action: move in direction South
+step: 849. battery: 79.000000. current location: [2,1]. action: move in direction South
+step: 850. battery: 78.000000. current location: [3,1]. action: move in direction South
+step: 851. battery: 77.000000. current location: [4,1]. action: move in direction South
+step: 852. battery: 76.000000. current location: [5,1]. action: move in direction South
+step: 853. battery: 75.000000. current location: [6,1]. action: move in direction South
+step: 854. battery: 74.000000. current location: [7,1]. action: move in direction South
+step: 855. battery: 73.000000. current location: [8,1]. action: move in direction South
+step: 856. battery: 72.000000. current location: [9,1]. action: move in direction South
+step: 857. battery: 71.000000. current location: [10,1]. action: move in direction South
+step: 858. battery: 70.000000. current location: [11,1]. action: move in direction North
+step: 859. battery: 69.000000. current location: [10,1]. action: move in direction North
+step: 860. battery: 68.000000. current location: [9,1]. action: move in direction North
+step: 861. battery: 67.000000. current location: [8,1]. action: move in direction North
+step: 862. battery: 66.000000. current location: [7,1]. action: move in direction North
+step: 863. battery: 65.000000. current location: [6,1]. action: move in direction North
+step: 864. battery: 64.000000. current location: [5,1]. action: move in direction North
+step: 865. battery: 63.000000. current location: [4,1]. action: move in direction North
+step: 866. battery: 62.000000. current location: [3,1]. action: move in direction North
+step: 867. battery: 61.000000. current location: [2,1]. action: move in direction North
+step: 868. battery: 60.000000. current location: [1,1]. action: move in direction South
+step: 869. battery: 59.000000. current location: [2,1]. action: move in direction South
+step: 870. battery: 58.000000. current location: [3,1]. action: move in direction South
+step: 871. battery: 57.000000. current location: [4,1]. action: move in direction South
+step: 872. battery: 56.000000. current location: [5,1]. action: move in direction South
+step: 873. battery: 55.000000. current location: [6,1]. action: move in direction South
+step: 874. battery: 54.000000. current location: [7,1]. action: move in direction South
+step: 875. battery: 53.000000. current location: [8,1]. action: move in direction South
+step: 876. battery: 52.000000. current location: [9,1]. action: move in direction South
+step: 877. battery: 51.000000. current location: [10,1]. action: move in direction South
+step: 878. battery: 50.000000. current location: [11,1]. action: move in direction East
+step: 879. battery: 49.000000. current location: [11,2]. action: clean.
+step: 880. battery: 48.000000. current location: [11,2]. action: clean.
+step: 881. battery: 47.000000. current location: [11,2]. action: clean.
+step: 882. battery: 46.000000. current location: [11,2]. action: clean.
+step: 883. battery: 45.000000. current location: [11,2]. action: clean.
+step: 884. battery: 44.000000. current location: [11,2]. action: move in direction West
+step: 885. battery: 43.000000. current location: [11,1]. action: move in direction North
+step: 886. battery: 42.000000. current location: [10,1]. action: move in direction North
+step: 887. battery: 41.000000. current location: [9,1]. action: move in direction North
+step: 888. battery: 40.000000. current location: [8,1]. action: move in direction North
+step: 889. battery: 39.000000. current location: [7,1]. action: move in direction North
+step: 890. battery: 38.000000. current location: [6,1]. action: move in direction North
+step: 891. battery: 37.000000. current location: [5,1]. action: move in direction North
+step: 892. battery: 36.000000. current location: [4,1]. action: move in direction North
+step: 893. battery: 35.000000. current location: [3,1]. action: move in direction North
+step: 894. battery: 34.000000. current location: [2,1]. action: move in direction North
+step: 895. battery: 33.000000. current location: [1,1]. action: move in direction South
+step: 896. battery: 32.000000. current location: [2,1]. action: move in direction South
+step: 897. battery: 31.000000. current location: [3,1]. action: move in direction South
+step: 898. battery: 30.000000. current location: [4,1]. action: move in direction South
+step: 899. battery: 29.000000. current location: [5,1]. action: move in direction South
+step: 900. battery: 28.000000. current location: [6,1]. action: move in direction South
+step: 901. battery: 27.000000. current location: [7,1]. action: move in direction South
+step: 902. battery: 26.000000. current location: [8,1]. action: move in direction South
+step: 903. battery: 25.000000. current location: [9,1]. action: move in direction South
+step: 904. battery: 24.000000. current location: [10,1]. action: move in direction South
+step: 905. battery: 23.000000. current location: [11,1]. action: move in direction East
+step: 906. battery: 22.000000. current location: [11,2]. action: move in direction North
+step: 907. battery: 21.000000. current location: [10,2]. action: clean.
+step: 908. battery: 20.000000. current location: [10,2]. action: clean.
+step: 909. battery: 19.000000. current location: [10,2]. action: clean.
+step: 910. battery: 18.000000. current location: [10,2]. action: clean.
+step: 911. battery: 17.000000. current location: [10,2]. action: clean.
+step: 912. battery: 16.000000. current location: [10,2]. action: move in direction South
+step: 913. battery: 15.000000. current location: [11,2]. action: move in direction North
+step: 914. battery: 14.000000. current location: [10,2]. action: move in direction South
+step: 915. battery: 13.000000. current location: [11,2]. action: move in direction West
+step: 916. battery: 12.000000. current location: [11,1]. action: move in direction North
+step: 917. battery: 11.000000. current location: [10,1]. action: move in direction North
+step: 918. battery: 10.000000. current location: [9,1]. action: move in direction North
+step: 919. battery: 9.000000. current location: [8,1]. action: move in direction North
+step: 920. battery: 8.000000. current location: [7,1]. action: move in direction North
+step: 921. battery: 7.000000. current location: [6,1]. action: move in direction North
+step: 922. battery: 6.000000. current location: [5,1]. action: move in direction North
+step: 923. battery: 5.000000. current location: [4,1]. action: move in direction South
+step: 924. battery: 4.000000. current location: [5,1]. action: move in direction South
+step: 925. battery: 3.000000. current location: [6,1]. action: move in direction South
+step: 926. battery: 2.000000. current location: [7,1]. action: move in direction South
+step: 927. battery: 1.000000. current location: [8,1]. action: move in direction East
+step: 928. battery: 0.000000. current location: [8,2]. action: move in direction East
+step: 929. battery: 8.500000. current location: [8,3]. action: charge
+step: 930. battery: 17.000000. current location: [8,3]. action: charge
+step: 931. battery: 25.500000. current location: [8,3]. action: charge
+step: 932. battery: 34.000000. current location: [8,3]. action: charge
+step: 933. battery: 42.500000. current location: [8,3]. action: charge
+step: 934. battery: 51.000000. current location: [8,3]. action: charge
+step: 935. battery: 59.500000. current location: [8,3]. action: charge
+step: 936. battery: 68.000000. current location: [8,3]. action: charge
+step: 937. battery: 76.500000. current location: [8,3]. action: charge
+step: 938. battery: 85.000000. current location: [8,3]. action: charge
+step: 939. battery: 93.500000. current location: [8,3]. action: charge
+step: 940. battery: 102.000000. current location: [8,3]. action: charge
+step: 941. battery: 110.500000. current location: [8,3]. action: charge
+step: 942. battery: 119.000000. current location: [8,3]. action: charge
+step: 943. battery: 127.500000. current location: [8,3]. action: charge
+step: 944. battery: 136.000000. current location: [8,3]. action: charge
+step: 945. battery: 144.500000. current location: [8,3]. action: charge
+step: 946. battery: 153.000000. current location: [8,3]. action: charge
+step: 947. battery: 161.500000. current location: [8,3]. action: charge
+step: 948. battery: 170.000000. current location: [8,3]. action: charge
+step: 949. battery: 169.000000. current location: [8,3]. action: move in direction East
+step: 950. battery: 168.000000. current location: [8,4]. action: move in direction East
+step: 951. battery: 167.000000. current location: [8,5]. action: move in direction East
+step: 952. battery: 166.000000. current location: [8,6]. action: move in direction East
+step: 953. battery: 165.000000. current location: [8,7]. action: move in direction East
+step: 954. battery: 164.000000. current location: [8,8]. action: move in direction West
+step: 955. battery: 163.000000. current location: [8,7]. action: move in direction West
+step: 956. battery: 162.000000. current location: [8,6]. action: move in direction West
+step: 957. battery: 161.000000. current location: [8,5]. action: move in direction West
+step: 958. battery: 160.000000. current location: [8,4]. action: move in direction West
+step: 959. battery: 159.000000. current location: [8,3]. action: move in direction West
+step: 960. battery: 158.000000. current location: [8,2]. action: move in direction West
+step: 961. battery: 157.000000. current location: [8,1]. action: move in direction South
+step: 962. battery: 156.000000. current location: [9,1]. action: move in direction South
+step: 963. battery: 155.000000. current location: [10,1]. action: move in direction South
+step: 964. battery: 154.000000. current location: [11,1]. action: move in direction East
+step: 965. battery: 153.000000. current location: [11,2]. action: move in direction North
+step: 966. battery: 152.000000. current location: [10,2]. action: move in direction West
+step: 967. battery: 151.000000. current location: [10,1]. action: move in direction South
+step: 968. battery: 150.000000. current location: [11,1]. action: move in direction East
+step: 969. battery: 149.000000. current location: [11,2]. action: move in direction North
+step: 970. battery: 148.000000. current location: [10,2]. action: move in direction West
+step: 971. battery: 147.000000. current location: [10,1]. action: move in direction South
+step: 972. battery: 146.000000. current location: [11,1]. action: move in direction North
+step: 973. battery: 145.000000. current location: [10,1]. action: move in direction North
+step: 974. battery: 144.000000. current location: [9,1]. action: move in direction North
+step: 975. battery: 143.000000. current location: [8,1]. action: move in direction North
+step: 976. battery: 142.000000. current location: [7,1]. action: move in direction North
+step: 977. battery: 141.000000. current location: [6,1]. action: move in direction North
+step: 978. battery: 140.000000. current location: [5,1]. action: move in direction North
+step: 979. battery: 139.000000. current location: [4,1]. action: move in direction North
+step: 980. battery: 138.000000. current location: [3,1]. action: move in direction North
+step: 981. battery: 137.000000. current location: [2,1]. action: move in direction South
+step: 982. battery: 136.000000. current location: [3,1]. action: move in direction South
+step: 983. battery: 135.000000. current location: [4,1]. action: move in direction South
+step: 984. battery: 134.000000. current location: [5,1]. action: move in direction South
+step: 985. battery: 133.000000. current location: [6,1]. action: move in direction South
+step: 986. battery: 132.000000. current location: [7,1]. action: move in direction South
+step: 987. battery: 131.000000. current location: [8,1]. action: move in direction South
+step: 988. battery: 130.000000. current location: [9,1]. action: move in direction South
+step: 989. battery: 129.000000. current location: [10,1]. action: move in direction East
+step: 990. battery: 128.000000. current location: [10,2]. action: move in direction South
+step: 991. battery: 127.000000. current location: [11,2]. action: move in direction West
+step: 992. battery: 126.000000. current location: [11,1]. action: move in direction North
+step: 993. battery: 125.000000. current location: [10,1]. action: move in direction East
+step: 994. battery: 124.000000. current location: [10,2]. action: move in direction South
+step: 995. battery: 123.000000. current location: [11,2]. action: move in direction West
+step: 996. battery: 122.000000. current location: [11,1]. action: move in direction North
+step: 997. battery: 121.000000. current location: [10,1]. action: move in direction North
+step: 998. battery: 120.000000. current location: [9,1]. action: move in direction North
+step: 999. battery: 119.000000. current location: [8,1]. action: move in direction East
+step: 1000. battery: 118.000000. current location: [8,2]. action: move in direction East
