@@ -173,6 +173,10 @@ int updateDataFromFile(const std::string& fileName, std::tuple<int, int>& dockin
             std::istringstream iss(line);
             int num;
             while (iss >> num) {
+                if (num < -1 || num > 9){
+                    std::cerr << "Error: Invalid value detected at line " << row << "." << std::endl;
+                    file.close();
+                    return 1;
                 rowData.push_back(num);
             }
 
@@ -199,6 +203,17 @@ int updateDataFromFile(const std::string& fileName, std::tuple<int, int>& dockin
                 return 1;
             }
         }
+
+        //  check that the docking station location is within the houseMap boundaries and has a value of 0
+        if (std::get<0>(dockingStationLoc) >= houseMap.size() || std::get<1>(dockingStationLoc) >= houseMap[0].size()) {
+            std::cerr << "Error: Docking station location is out of bounds." << std::endl;
+            return 1;
+        }
+        if (houseMap[std::get<0>(dockingStationLoc)][std::get<1>(dockingStationLoc)] != 0) {
+            std::cerr << "Error: Docking station location must have a value of 0." << std::endl;
+            return 1;
+        }
+                
 
         int rows = houseMap.size();
         int cols = houseMap[0].size();
@@ -236,18 +251,43 @@ int updateDataFromFile(const std::string& fileName, std::tuple<int, int>& dockin
                 houseMap[i][cols - 1] = -1;
             }
         }
-
-    } else {
+        }
+    } 
+    else {
         std::cerr << "Error: Failed to open file " << fileName << "." << std::endl;
         return 1;
     }
     return 0;
 }
 
+void makeOutputFile(VaccumCleaner& vc, House& h, const std::vector<std::string>& stepLog) {
+    std::ofstream file("result.txt");
+    if (file.is_open()) {
+        file << "Total steps: " << stepLog.size() << "." << std::endl;
+        file << "Total dirt left: " << h.getTotalDirtLeft() << "." << std::endl;
+        file << "Vacuum Cleaner battery is: " << vc.getBatterySteps() << "." << std::endl;
+        
+        std::tuple<int, int> curLoc = vc.getCurrentLoc();
+        std::tuple<int, int> dockLoc = h.getDockingStationLoc();
 
-// void makeOutputFile(std::vector<std::string>* stepLog){
-//     //#TODO
-// }
+        if (h.getTotalDirtLeft() > 0 || curLoc != dockLoc) {
+            file << "Clean wasn't successful. There is more dirt left and/or the cleaner is not in the docking station." << std::endl;
+        } else {
+            file << "Clean was successful. The house is clean and the Vacuum Cleaner is at the docking station." << std::endl;
+        }
+
+        file << std::endl;
+        file << "Logging of all steps performed by the Vacuum Cleaner:" << std::endl;
+        for (const auto& log : stepLog) {
+            file << log << std::endl;
+        }
+        file.close();
+    } else {
+        std::cerr << "Error: Failed to open file result.txt." << std::endl;
+    }
+}
+
+
 
 int main(int argc, char *argv[]){ 
     if(argc!=2 || !argv[1]){
@@ -264,7 +304,7 @@ int main(int argc, char *argv[]){
     VaccumCleaner vc(maxBatterySteps,dockingStationLoc);
     CleaningAlgorithm alg(maxBatterySteps,MaxSteps);
     std::vector<std::string>* stepLog = vc.cleanHouse(h,alg,MaxSteps);
-    //makeOutputFile(stepLog)  ;
+    makeOutputFile(vc, h, stepLog);
     delete stepLog;
     return 0;
 }

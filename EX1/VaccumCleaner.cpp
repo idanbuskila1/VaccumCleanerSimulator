@@ -38,59 +38,84 @@ int VaccumCleaner::move(int dir){
     }
     return 1;
 }
-std::vector<std::string>* VaccumCleaner::cleanHouse(House& h,CleaningAlgorithm& alg,int maxSteps){
-    int steps=0,action;
+
+std::vector<std::string>* VaccumCleaner::cleanHouse(House& h, CleaningAlgorithm& alg, int maxSteps) {
+    int steps = 0, action;
     int dirtSensor;
-    std::tuple<int,int> curLoc;
-    std::vector<int> wallSensor{0,0,0,0};//wallSensor[i]==1 iff there is a wall in direction dir, where NORTH=0, EAST=1, SOUTH=2, WEST=3
+    std::tuple<int, int> curLoc;
+    std::vector<int> wallSensor{0, 0, 0, 0}; // wallSensor[i] == 1 if there is a wall in direction dir, where NORTH=0, EAST=1, SOUTH=2, WEST=3
     std::vector<std::string>* stepLog = new std::vector<std::string>(); // Vector to store steps log
-    while(steps<maxSteps){
+
+    while (steps < maxSteps) {
         curLoc = getCurrentLoc();
-        if(getCurrentLoc()==h.getDockingStationLoc() && h.getTotalDirtLeft()==0){
-            std::cout<<"finished with success: house is clean and the vaccum cleaner is at docking station"<<std::endl;
+        if (curLoc == h.getDockingStationLoc() && h.getTotalDirtLeft() == 0) {
+            std::string logMessage = "finished with success: house is clean and the vacuum cleaner is at docking station";
+            std::cout << logMessage << std::endl;
+            stepLog->push_back(logMessage);
             break;
         }
-        //initialize arguments for next algorithm move decision
+        
+        // Initialize arguments for next algorithm move decision
         dirtSensor = h.getDirtLevel(curLoc);
-        wallSensor[NORTH] = h.isWallInDirection(NORTH,curLoc);
-        wallSensor[SOUTH] = h.isWallInDirection(SOUTH,curLoc);
-        wallSensor[WEST] = h.isWallInDirection(WEST,curLoc);
-        wallSensor[EAST] = h.isWallInDirection(EAST,curLoc);
-        //ask algorithm for next move decision
-        action = alg.getNextMove(dirtSensor,getBatterySteps(),wallSensor);
-        //perform the move we got from the algorithm
-        if(action == -1){
-            std::cout << "failure. battery is empty and not on docking station" << std::endl;
+        wallSensor[NORTH] = h.isWallInDirection(NORTH, curLoc);
+        wallSensor[SOUTH] = h.isWallInDirection(SOUTH, curLoc);
+        wallSensor[WEST] = h.isWallInDirection(WEST, curLoc);
+        wallSensor[EAST] = h.isWallInDirection(EAST, curLoc);
+        
+        // Ask algorithm for next move decision
+        action = alg.getNextMove(dirtSensor, getBatterySteps(), wallSensor);
+        
+        // Perform the move we got from the algorithm
+        if (action == -1) {
+            std::string logMessage = "failure. battery is empty and not on docking station";
+            std::cout << logMessage << std::endl;
+            stepLog->push_back(logMessage);
             break;
         }
-        if(action == STAY){
+        
+        if (action == STAY) {
             steps++;
             int err = stay(h);
-            if(err){
-                std::cout<<"failure. algorithm tried to make vaccum cleaner clean with no battery."<<std::endl;
+            if (err) {
+                std::string logMessage = "failure. algorithm tried to make vacuum cleaner clean with no battery.";
+                std::cout << logMessage << std::endl;
+                stepLog->push_back(logMessage);
                 break;
             }
-            if(curLoc == h.getDockingStationLoc()){
-                std::cout<<"step: "<<steps<<"."<<"battery: "<<getBatterySteps()<<". current location: ["<<std::get<0>(curLoc)<<","<<std::get<1>(curLoc)<<"]. action: charge"<<std::endl;
+            if (curLoc == h.getDockingStationLoc()) {
+                std::string logMessage = "step: " + std::to_string(steps) + ". battery: " + std::to_string(getBatterySteps()) + ". current location: [" + std::to_string(std::get<0>(curLoc)) + "," + std::to_string(std::get<1>(curLoc)) + "]. action: charge";
+                std::cout << logMessage << std::endl;
+                stepLog->push_back(logMessage);
+            } else {
+                std::string logMessage = "step: " + std::to_string(steps) + ". battery: " + std::to_string(getBatterySteps()) + ". current location: [" + std::to_string(std::get<0>(curLoc)) + "," + std::to_string(std::get<1>(curLoc)) + "]. action: clean.";
+                std::cout << logMessage << std::endl;
+                stepLog->push_back(logMessage);
             }
-            else std::cout<<"step: "<<steps<<"."<<"battery: "<<getBatterySteps()<<". current location: ["<<std::get<0>(curLoc)<<","<<std::get<1>(curLoc)<<"]. action: clean."<<std::endl;
             continue;
-        }
-        else{//need to advance 1 step in the direction returned with action
+        } else { // need to advance 1 step in the direction returned with action
             steps++;
-            if(h.isWallInDirection(action,curLoc)){
-                std::cout<<"failure. algorithm tried to move vaccum cleaner into a wall."<<std::endl;
+            if (h.isWallInDirection(action, curLoc)) {
+                std::string logMessage = "failure. algorithm tried to move vacuum cleaner into a wall.";
+                std::cout << logMessage << std::endl;
+                stepLog->push_back(logMessage);
                 break;
             }
-            int err =move(action);
-            if(err){
-                std::cout<<"failure. algorithm tried to move vaccum cleaner with no battery."<<std::endl;
+            int err = move(action);
+            if (err) {
+                std::string logMessage = "failure. algorithm tried to move vacuum cleaner with no battery.";
+                std::cout << logMessage << std::endl;
+                stepLog->push_back(logMessage);
                 break;
             }
-            std::cout<<"step: "<<steps<<"."<<"battery: "<<getBatterySteps()<<". current location: ["<<std::get<0>(curLoc)<<","<<std::get<1>(curLoc)<<"]. action: move in direction "<<action<<std::endl;
+            std::string logMessage = "step: " + std::to_string(steps) + ". battery: " + std::to_string(getBatterySteps()) + ". current location: [" + std::to_string(std::get<0>(curLoc)) + "," + std::to_string(std::get<1>(curLoc)) + "]. action: move in direction " + std::to_string(action);
+            std::cout << logMessage << std::endl;
+            stepLog->push_back(logMessage);
             continue;
         }
     }
-    std::cout<<"dirt left: "<<h.getTotalDirtLeft()<<"."<<std::endl;
-    return stepLog;//for printing to out file in main.
+    
+    std::string logMessage = "dirt left: " + std::to_string(h.getTotalDirtLeft()) + ".";
+    std::cout << logMessage << std::endl;
+    stepLog->push_back(logMessage);
+    return stepLog; // for printing to out file in main.
 }

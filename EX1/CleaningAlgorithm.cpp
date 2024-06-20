@@ -25,11 +25,11 @@ int CleaningAlgorithm::getNextMove(int dirtSensor,const int batterySensor,const 
         curStep++;
         return ret;
     }
-    if(pathToDocking.size()==0 && batterySensor==maxBattery && isCharging){// if vc is at docking, with full battery and on charging mode - we just finished charging, so disable charging mode.
+    if(static_cast<int>(pathToDocking.size()) == 0 && batterySensor == static_cast<int>(maxBattery) && isCharging){// if vc is at docking, with full battery and on charging mode - we just finished charging, so disable charging mode.
         isCharging=false;
         curDirection=-1;//choose new direction after exiting charge mode.
     }
-    if(pathToDocking.size()==0 && batterySensor<maxBattery && isCharging){// if vc is at docking, with non-full battery and on charging mode - charge for another step.
+    if (static_cast<int>(pathToDocking.size()) == 0 && batterySensor < static_cast<int>(maxBattery) && isCharging) {// if vc is at docking, with non-full battery and on charging mode - charge for another step.
         curStep++;
         return STAY;//stay at docking 
     }

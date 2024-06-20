@@ -1,372 +1,239 @@
-Total steps: 300.
-Total dirt left: 0.
-Vaccum Cleaner battery is: 25.
-Clean was successful. the house is clean and the Vaccum Cleaner is at the docking station.
-
-Logging of all steps performed by the Vaccum Cleaner:
-step: 0. battery: 40 location: [2,3]. direction: -1.
-	MOVED IN DIR 1.
-step: 1. battery: 39 location: [2,4]. direction: 1.
-	CLEAN.
-step: 2. battery: 38 location: [2,4]. direction: 1.
-	CLEAN.
-step: 3. battery: 37 location: [2,4]. direction: 1.
-	MOVED IN DIR 1.
-step: 4. battery: 36 location: [2,5]. direction: -1.
-	CLEAN.
-step: 5. battery: 35 location: [2,5]. direction: -1.
-	CLEAN.
-step: 6. battery: 34 location: [2,5]. direction: -1.
-	CLEAN.
-step: 7. battery: 33 location: [2,5]. direction: -1.
-	CLEAN.
-step: 8. battery: 32 location: [2,5]. direction: -1.
-	CLEAN.
-step: 9. battery: 31 location: [2,5]. direction: -1.
-	MOVED IN DIR 2.
-step: 10. battery: 30 location: [1,5]. direction: -1.
-	CLEAN.
-step: 11. battery: 29 location: [1,5]. direction: -1.
-	CLEAN.
-step: 12. battery: 28 location: [1,5]. direction: -1.
-	CLEAN.
-step: 13. battery: 27 location: [1,5]. direction: -1.
-	CLEAN.
-step: 14. battery: 26 location: [1,5]. direction: -1.
-	CLEAN.
-step: 15. battery: 25 location: [1,5]. direction: -1.
-	CLEAN.
-step: 16. battery: 24 location: [1,5]. direction: -1.
-	CLEAN.
-step: 17. battery: 23 location: [1,5]. direction: -1.
-	CLEAN.
-step: 18. battery: 22 location: [1,5]. direction: -1.
-	MOVED IN DIR 0.
-step: 19. battery: 21 location: [2,5]. direction: 0.
-	MOVED IN DIR 0.
-step: 20. battery: 20 location: [3,5]. direction: -1.
-	CLEAN.
-step: 21. battery: 19 location: [3,5]. direction: -1.
-	MOVED IN DIR 2.
-step: 22. battery: 18 location: [2,5]. direction: 2.
-	MOVED IN DIR 2.
-step: 23. battery: 17 location: [1,5]. direction: -1.
-	MOVED IN DIR 3.
-step: 24. battery: 16 location: [1,4]. direction: 3.
-	CLEAN.
-step: 25. battery: 15 location: [1,4]. direction: 3.
-	CLEAN.
-step: 26. battery: 14 location: [1,4]. direction: 3.
-	CLEAN.
-step: 27. battery: 13 location: [1,4]. direction: 3.
-	CLEAN.
-step: 28. battery: 12 location: [1,4]. direction: 3.
-	CLEAN.
-step: 29. battery: 11 location: [1,4]. direction: 3.
-	CLEAN.
-step: 30. battery: 10 location: [1,4]. direction: 3.
-	CLEAN.
-step: 31. battery: 9 location: [1,4]. direction: 3.
-	MOVED IN DIR 3.
-step: 32. battery: 8 location: [1,3]. direction: -1.
-	CLEAN.
-step: 33. battery: 7 location: [1,3]. direction: -1.
-	CLEAN.
-step: 34. battery: 6 location: [1,3]. direction: -1.
-	CHARGE. went to the docking station in 5 steps, and stayed charging for 19 steps. battery charged from 6 to 39
-step: 58. battery: 39 location: [2,3]. direction: -1.
-	MOVED IN DIR 1.
-step: 59. battery: 38 location: [2,4]. direction: 1.
-	MOVED IN DIR 1.
-step: 60. battery: 37 location: [2,5]. direction: -1.
-	MOVED IN DIR 0.
-step: 61. battery: 36 location: [3,5]. direction: -1.
-	MOVED IN DIR 2.
-step: 62. battery: 35 location: [2,5]. direction: 2.
-	MOVED IN DIR 2.
-step: 63. battery: 34 location: [1,5]. direction: -1.
-	MOVED IN DIR 3.
-step: 64. battery: 33 location: [1,4]. direction: 3.
-	MOVED IN DIR 3.
-step: 65. battery: 32 location: [1,3]. direction: -1.
-	CLEAN.
-step: 66. battery: 31 location: [1,3]. direction: -1.
-	MOVED IN DIR 1.
-step: 67. battery: 30 location: [1,4]. direction: 1.
-	MOVED IN DIR 1.
-step: 68. battery: 29 location: [1,5]. direction: -1.
-	MOVED IN DIR 0.
-step: 69. battery: 28 location: [2,5]. direction: 0.
-	MOVED IN DIR 0.
-step: 70. battery: 27 location: [3,5]. direction: -1.
-	MOVED IN DIR 3.
-step: 71. battery: 26 location: [3,4]. direction: 3.
-	CLEAN.
-step: 72. battery: 25 location: [3,4]. direction: 3.
-	CLEAN.
-step: 73. battery: 24 location: [3,4]. direction: 3.
-	CLEAN.
-step: 74. battery: 23 location: [3,4]. direction: 3.
-	CLEAN.
-step: 75. battery: 22 location: [3,4]. direction: 3.
-	MOVED IN DIR 3.
-step: 76. battery: 21 location: [3,3]. direction: 3.
-	CLEAN.
-step: 77. battery: 20 location: [3,3]. direction: 3.
-	CLEAN.
-step: 78. battery: 19 location: [3,3]. direction: 3.
-	CLEAN.
-step: 79. battery: 18 location: [3,3]. direction: 3.
-	CLEAN.
-step: 80. battery: 17 location: [3,3]. direction: 3.
-	CLEAN.
-step: 81. battery: 16 location: [3,3]. direction: 3.
-	CLEAN.
-step: 82. battery: 15 location: [3,3]. direction: 3.
-	CLEAN.
-step: 83. battery: 14 location: [3,3]. direction: 3.
-	CLEAN.
-step: 84. battery: 13 location: [3,3]. direction: 3.
-	CLEAN.
-step: 85. battery: 12 location: [3,3]. direction: 3.
-	MOVED IN DIR 3.
-step: 86. battery: 11 location: [3,2]. direction: 3.
-	CLEAN.
-step: 87. battery: 10 location: [3,2]. direction: 3.
-	CLEAN.
-step: 88. battery: 9 location: [3,2]. direction: 3.
-	CLEAN.
-step: 89. battery: 8 location: [3,2]. direction: 3.
-	CLEAN.
-step: 90. battery: 7 location: [3,2]. direction: 3.
-	CHARGE. went to the docking station in 6 steps, and stayed charging for 19 steps. battery charged from 7 to 39
-step: 115. battery: 39 location: [2,3]. direction: -1.
-	MOVED IN DIR 1.
-step: 116. battery: 38 location: [2,4]. direction: 1.
-	MOVED IN DIR 1.
-step: 117. battery: 37 location: [2,5]. direction: -1.
-	MOVED IN DIR 0.
-step: 118. battery: 36 location: [3,5]. direction: -1.
-	MOVED IN DIR 3.
-step: 119. battery: 35 location: [3,4]. direction: 3.
-	MOVED IN DIR 3.
-step: 120. battery: 34 location: [3,3]. direction: 3.
-	MOVED IN DIR 3.
-step: 121. battery: 33 location: [3,2]. direction: 3.
-	CLEAN.
-step: 122. battery: 32 location: [3,2]. direction: 3.
-	CLEAN.
-step: 123. battery: 31 location: [3,2]. direction: 3.
-	CLEAN.
-step: 124. battery: 30 location: [3,2]. direction: 3.
-	CLEAN.
-step: 125. battery: 29 location: [3,2]. direction: 3.
-	MOVED IN DIR 3.
-step: 126. battery: 28 location: [3,1]. direction: -1.
-	CLEAN.
-step: 127. battery: 27 location: [3,1]. direction: -1.
-	CLEAN.
-step: 128. battery: 26 location: [3,1]. direction: -1.
-	CLEAN.
-step: 129. battery: 25 location: [3,1]. direction: -1.
-	CLEAN.
-step: 130. battery: 24 location: [3,1]. direction: -1.
-	CLEAN.
-step: 131. battery: 23 location: [3,1]. direction: -1.
-	CLEAN.
-step: 132. battery: 22 location: [3,1]. direction: -1.
-	CLEAN.
-step: 133. battery: 21 location: [3,1]. direction: -1.
-	MOVED IN DIR 2.
-step: 134. battery: 20 location: [2,1]. direction: 2.
-	CLEAN.
-step: 135. battery: 19 location: [2,1]. direction: 2.
-	CLEAN.
-step: 136. battery: 18 location: [2,1]. direction: 2.
-	CLEAN.
-step: 137. battery: 17 location: [2,1]. direction: 2.
-	CLEAN.
-step: 138. battery: 16 location: [2,1]. direction: 2.
-	MOVED IN DIR 2.
-step: 139. battery: 15 location: [1,1]. direction: -1.
-	CLEAN.
-step: 140. battery: 14 location: [1,1]. direction: -1.
-	MOVED IN DIR 0.
-step: 141. battery: 13 location: [2,1]. direction: 0.
-	MOVED IN DIR 0.
-step: 142. battery: 12 location: [3,1]. direction: -1.
-	MOVED IN DIR 1.
-step: 143. battery: 11 location: [3,2]. direction: 1.
-	MOVED IN DIR 1.
-step: 144. battery: 10 location: [3,3]. direction: 1.
-	MOVED IN DIR 1.
-step: 145. battery: 9 location: [3,4]. direction: 1.
-	MOVED IN DIR 1.
-step: 146. battery: 8 location: [3,5]. direction: -1.
-	MOVED IN DIR 2.
-step: 147. battery: 7 location: [2,5]. direction: 2.
-	MOVED IN DIR 2.
-step: 148. battery: 6 location: [1,5]. direction: -1.
-	MOVED IN DIR 0.
-step: 149. battery: 5 location: [2,5]. direction: 0.
-	MOVED IN DIR 0.
-step: 150. battery: 4 location: [3,5]. direction: -1.
-	CHARGE. went to the docking station in 3 steps, and stayed charging for 19 steps. battery charged from 4 to 39
-step: 172. battery: 39 location: [2,3]. direction: -1.
-	MOVED IN DIR 2.
-step: 173. battery: 38 location: [1,3]. direction: -1.
-	MOVED IN DIR 1.
-step: 174. battery: 37 location: [1,4]. direction: 1.
-	MOVED IN DIR 1.
-step: 175. battery: 36 location: [1,5]. direction: -1.
-	MOVED IN DIR 3.
-step: 176. battery: 35 location: [1,4]. direction: 3.
-	MOVED IN DIR 3.
-step: 177. battery: 34 location: [1,3]. direction: -1.
-	MOVED IN DIR 1.
-step: 178. battery: 33 location: [1,4]. direction: 1.
-	MOVED IN DIR 1.
-step: 179. battery: 32 location: [1,5]. direction: -1.
-	MOVED IN DIR 3.
-step: 180. battery: 31 location: [1,4]. direction: 3.
-	MOVED IN DIR 3.
-step: 181. battery: 30 location: [1,3]. direction: -1.
-	MOVED IN DIR 1.
-step: 182. battery: 29 location: [1,4]. direction: 1.
-	MOVED IN DIR 1.
-step: 183. battery: 28 location: [1,5]. direction: -1.
-	MOVED IN DIR 3.
-step: 184. battery: 27 location: [1,4]. direction: 3.
-	MOVED IN DIR 3.
-step: 185. battery: 26 location: [1,3]. direction: -1.
-	MOVED IN DIR 0.
-step: 186. battery: 25 location: [2,3]. direction: 0.
-	MOVED IN DIR 0.
-step: 187. battery: 24 location: [3,3]. direction: -1.
-	MOVED IN DIR 1.
-step: 188. battery: 23 location: [3,4]. direction: 1.
-	MOVED IN DIR 1.
-step: 189. battery: 22 location: [3,5]. direction: -1.
-	MOVED IN DIR 3.
-step: 190. battery: 21 location: [3,4]. direction: 3.
-	MOVED IN DIR 3.
-step: 191. battery: 20 location: [3,3]. direction: 3.
-	MOVED IN DIR 3.
-step: 192. battery: 19 location: [3,2]. direction: 3.
-	MOVED IN DIR 3.
-step: 193. battery: 18 location: [3,1]. direction: -1.
-	MOVED IN DIR 2.
-step: 194. battery: 17 location: [2,1]. direction: 2.
-	MOVED IN DIR 2.
-step: 195. battery: 16 location: [1,1]. direction: -1.
-	MOVED IN DIR 0.
-step: 196. battery: 15 location: [2,1]. direction: 0.
-	MOVED IN DIR 0.
-step: 197. battery: 14 location: [3,1]. direction: -1.
-	MOVED IN DIR 2.
-step: 198. battery: 13 location: [2,1]. direction: 2.
-	MOVED IN DIR 2.
-step: 199. battery: 12 location: [1,1]. direction: -1.
-	MOVED IN DIR 0.
-step: 200. battery: 11 location: [2,1]. direction: 0.
-	MOVED IN DIR 0.
-step: 201. battery: 10 location: [3,1]. direction: -1.
-	MOVED IN DIR 2.
-step: 202. battery: 9 location: [2,1]. direction: 2.
-	MOVED IN DIR 2.
-step: 203. battery: 8 location: [1,1]. direction: -1.
-	MOVED IN DIR 0.
-step: 204. battery: 7 location: [2,1]. direction: 0.
-	MOVED IN DIR 0.
-step: 205. battery: 6 location: [3,1]. direction: -1.
-	MOVED IN DIR 1.
-step: 206. battery: 5 location: [3,2]. direction: 1.
-	MOVED IN DIR 1.
-step: 207. battery: 4 location: [3,3]. direction: 1.
-	MOVED IN DIR 1.
-step: 208. battery: 3 location: [3,4]. direction: 1.
-	CHARGE. went to the docking station in 2 steps, and stayed charging for 19 steps. battery charged from 3 to 39
-step: 229. battery: 39 location: [2,3]. direction: -1.
-	MOVED IN DIR 1.
-step: 230. battery: 38 location: [2,4]. direction: 1.
-	MOVED IN DIR 1.
-step: 231. battery: 37 location: [2,5]. direction: -1.
-	MOVED IN DIR 0.
-step: 232. battery: 36 location: [3,5]. direction: -1.
-	MOVED IN DIR 2.
-step: 233. battery: 35 location: [2,5]. direction: 2.
-	MOVED IN DIR 2.
-step: 234. battery: 34 location: [1,5]. direction: -1.
-	MOVED IN DIR 3.
-step: 235. battery: 33 location: [1,4]. direction: 3.
-	MOVED IN DIR 3.
-step: 236. battery: 32 location: [1,3]. direction: -1.
-	MOVED IN DIR 1.
-step: 237. battery: 31 location: [1,4]. direction: 1.
-	MOVED IN DIR 1.
-step: 238. battery: 30 location: [1,5]. direction: -1.
-	MOVED IN DIR 3.
-step: 239. battery: 29 location: [1,4]. direction: 3.
-	MOVED IN DIR 3.
-step: 240. battery: 28 location: [1,3]. direction: -1.
-	MOVED IN DIR 0.
-step: 241. battery: 27 location: [2,3]. direction: 0.
-	MOVED IN DIR 0.
-step: 242. battery: 26 location: [3,3]. direction: -1.
-	MOVED IN DIR 1.
-step: 243. battery: 25 location: [3,4]. direction: 1.
-	MOVED IN DIR 1.
-step: 244. battery: 24 location: [3,5]. direction: -1.
-	MOVED IN DIR 3.
-step: 245. battery: 23 location: [3,4]. direction: 3.
-	MOVED IN DIR 3.
-step: 246. battery: 22 location: [3,3]. direction: 3.
-	MOVED IN DIR 3.
-step: 247. battery: 21 location: [3,2]. direction: 3.
-	MOVED IN DIR 3.
-step: 248. battery: 20 location: [3,1]. direction: -1.
-	MOVED IN DIR 2.
-step: 249. battery: 19 location: [2,1]. direction: 2.
-	MOVED IN DIR 2.
-step: 250. battery: 18 location: [1,1]. direction: -1.
-	MOVED IN DIR 0.
-step: 251. battery: 17 location: [2,1]. direction: 0.
-	MOVED IN DIR 0.
-step: 252. battery: 16 location: [3,1]. direction: -1.
-	MOVED IN DIR 2.
-step: 253. battery: 15 location: [2,1]. direction: 2.
-	MOVED IN DIR 2.
-step: 254. battery: 14 location: [1,1]. direction: -1.
-	MOVED IN DIR 0.
-step: 255. battery: 13 location: [2,1]. direction: 0.
-	MOVED IN DIR 0.
-step: 256. battery: 12 location: [3,1]. direction: -1.
-	MOVED IN DIR 1.
-step: 257. battery: 11 location: [3,2]. direction: 1.
-	MOVED IN DIR 1.
-step: 258. battery: 10 location: [3,3]. direction: 1.
-	MOVED IN DIR 1.
-step: 259. battery: 9 location: [3,4]. direction: 1.
-	CHARGE. went to the docking station in 8 steps, and stayed charging for 19 steps. battery charged from 9 to 39
-step: 286. battery: 39 location: [2,3]. direction: -1.
-	MOVED IN DIR 2.
-step: 287. battery: 38 location: [1,3]. direction: -1.
-	MOVED IN DIR 0.
-step: 288. battery: 37 location: [2,3]. direction: 0.
-	MOVED IN DIR 0.
-step: 289. battery: 36 location: [3,3]. direction: -1.
-	MOVED IN DIR 2.
-step: 290. battery: 35 location: [2,3]. direction: 2.
-	MOVED IN DIR 2.
-step: 291. battery: 34 location: [1,3]. direction: -1.
-	MOVED IN DIR 0.
-step: 292. battery: 33 location: [2,3]. direction: 0.
-	MOVED IN DIR 0.
-step: 293. battery: 32 location: [3,3]. direction: -1.
-	MOVED IN DIR 1.
-step: 294. battery: 31 location: [3,4]. direction: 1.
-	MOVED IN DIR 1.
-step: 295. battery: 30 location: [3,5]. direction: -1.
-	MOVED IN DIR 2.
-step: 296. battery: 29 location: [2,5]. direction: 2.
-	finished. return to docking station.
+step: 0. battery: 80 location: [2,3]. direction: -1.
+MOVED IN DIR 2.
+step: 1. battery: 79 location: [1,3]. direction: -1.
+CLEAN.
+step: 2. battery: 78 location: [1,3]. direction: -1.
+CLEAN.
+step: 3. battery: 77 location: [1,3]. direction: -1.
+CLEAN.
+step: 4. battery: 76 location: [1,3]. direction: -1.
+MOVED IN DIR 0.
+step: 5. battery: 75 location: [2,3]. direction: 0.
+MOVED IN DIR 0.
+step: 6. battery: 74 location: [3,3]. direction: -1.
+CLEAN.
+step: 7. battery: 73 location: [3,3]. direction: -1.
+CLEAN.
+step: 8. battery: 72 location: [3,3]. direction: -1.
+MOVED IN DIR 2.
+step: 9. battery: 71 location: [2,3]. direction: 2.
+MOVED IN DIR 2.
+step: 10. battery: 70 location: [1,3]. direction: -1.
+MOVED IN DIR 1.
+step: 11. battery: 69 location: [1,4]. direction: 1.
+CLEAN.
+step: 12. battery: 68 location: [1,4]. direction: 1.
+CLEAN.
+step: 13. battery: 67 location: [1,4]. direction: 1.
+CLEAN.
+step: 14. battery: 66 location: [1,4]. direction: 1.
+CLEAN.
+step: 15. battery: 65 location: [1,4]. direction: 1.
+CLEAN.
+step: 16. battery: 64 location: [1,4]. direction: 1.
+CLEAN.
+step: 17. battery: 63 location: [1,4]. direction: 1.
+CLEAN.
+step: 18. battery: 62 location: [1,4]. direction: 1.
+MOVED IN DIR 1.
+step: 19. battery: 61 location: [1,5]. direction: -1.
+CLEAN.
+step: 20. battery: 60 location: [1,5]. direction: -1.
+CLEAN.
+step: 21. battery: 59 location: [1,5]. direction: -1.
+CLEAN.
+step: 22. battery: 58 location: [1,5]. direction: -1.
+CLEAN.
+step: 23. battery: 57 location: [1,5]. direction: -1.
+CLEAN.
+step: 24. battery: 56 location: [1,5]. direction: -1.
+CLEAN.
+step: 25. battery: 55 location: [1,5]. direction: -1.
+CLEAN.
+step: 26. battery: 54 location: [1,5]. direction: -1.
+CLEAN.
+step: 27. battery: 53 location: [1,5]. direction: -1.
+CLEAN.
+step: 28. battery: 52 location: [1,5]. direction: -1.
+CLEAN.
+step: 29. battery: 51 location: [1,5]. direction: -1.
+CLEAN.
+step: 30. battery: 50 location: [1,5]. direction: -1.
+CLEAN.
+step: 31. battery: 49 location: [1,5]. direction: -1.
+MOVED IN DIR 0.
+step: 32. battery: 48 location: [2,5]. direction: 0.
+CLEAN.
+step: 33. battery: 47 location: [2,5]. direction: 0.
+CLEAN.
+step: 34. battery: 46 location: [2,5]. direction: 0.
+CLEAN.
+step: 35. battery: 45 location: [2,5]. direction: 0.
+CLEAN.
+step: 36. battery: 44 location: [2,5]. direction: 0.
+CLEAN.
+step: 37. battery: 43 location: [2,5]. direction: 0.
+MOVED IN DIR 0.
+step: 38. battery: 42 location: [3,5]. direction: -1.
+CLEAN.
+step: 39. battery: 41 location: [3,5]. direction: -1.
+MOVED IN DIR 2.
+step: 40. battery: 40 location: [2,5]. direction: 2.
+MOVED IN DIR 2.
+step: 41. battery: 39 location: [1,5]. direction: -1.
+MOVED IN DIR 3.
+step: 42. battery: 38 location: [1,4]. direction: 3.
+MOVED IN DIR 3.
+step: 43. battery: 37 location: [1,3]. direction: -1.
+MOVED IN DIR 1.
+step: 44. battery: 36 location: [1,4]. direction: 1.
+MOVED IN DIR 1.
+step: 45. battery: 35 location: [1,5]. direction: -1.
+MOVED IN DIR 0.
+step: 46. battery: 34 location: [2,5]. direction: 0.
+MOVED IN DIR 0.
+step: 47. battery: 33 location: [3,5]. direction: -1.
+MOVED IN DIR 2.
+step: 48. battery: 32 location: [2,5]. direction: 2.
+MOVED IN DIR 2.
+step: 49. battery: 31 location: [1,5]. direction: -1.
+MOVED IN DIR 0.
+step: 50. battery: 30 location: [2,5]. direction: 0.
+MOVED IN DIR 0.
+step: 51. battery: 29 location: [3,5]. direction: -1.
+MOVED IN DIR 2.
+step: 52. battery: 28 location: [2,5]. direction: 2.
+MOVED IN DIR 2.
+step: 53. battery: 27 location: [1,5]. direction: -1.
+MOVED IN DIR 0.
+step: 54. battery: 26 location: [2,5]. direction: 0.
+MOVED IN DIR 0.
+step: 55. battery: 25 location: [3,5]. direction: -1.
+MOVED IN DIR 2.
+step: 56. battery: 24 location: [2,5]. direction: 2.
+MOVED IN DIR 2.
+step: 57. battery: 23 location: [1,5]. direction: -1.
+MOVED IN DIR 3.
+step: 58. battery: 22 location: [1,4]. direction: 3.
+MOVED IN DIR 3.
+step: 59. battery: 21 location: [1,3]. direction: -1.
+MOVED IN DIR 1.
+step: 60. battery: 20 location: [1,4]. direction: 1.
+MOVED IN DIR 1.
+step: 61. battery: 19 location: [1,5]. direction: -1.
+MOVED IN DIR 3.
+step: 62. battery: 18 location: [1,4]. direction: 3.
+MOVED IN DIR 3.
+step: 63. battery: 17 location: [1,3]. direction: -1.
+MOVED IN DIR 1.
+step: 64. battery: 16 location: [1,4]. direction: 1.
+MOVED IN DIR 1.
+step: 65. battery: 15 location: [1,5]. direction: -1.
+MOVED IN DIR 3.
+step: 66. battery: 14 location: [1,4]. direction: 3.
+MOVED IN DIR 3.
+step: 67. battery: 13 location: [1,3]. direction: -1.
+MOVED IN DIR 0.
+step: 68. battery: 12 location: [2,3]. direction: 0.
+MOVED IN DIR 0.
+step: 69. battery: 11 location: [3,3]. direction: -1.
+MOVED IN DIR 3.
+step: 70. battery: 10 location: [3,2]. direction: 3.
+CLEAN.
+step: 71. battery: 9 location: [3,2]. direction: 3.
+CLEAN.
+step: 72. battery: 8 location: [3,2]. direction: 3.
+CLEAN.
+step: 73. battery: 7 location: [3,2]. direction: 3.
+MOVED IN DIR 3.
+step: 74. battery: 6 location: [3,1]. direction: -1.
+CLEAN.
+step: 75. battery: 5 location: [3,1]. direction: -1.
+CLEAN.
+step: 76. battery: 4 location: [3,1]. direction: -1.
+CHARGE.
+step: 98. battery: 77 location: [2,3]. direction: -1.
+MOVED IN DIR 2.
+step: 99. battery: 76 location: [1,3]. direction: -1.
+MOVED IN DIR 1.
+step: 100. battery: 75 location: [1,4]. direction: 1.
+MOVED IN DIR 1.
+step: 101. battery: 74 location: [1,5]. direction: -1.
+MOVED IN DIR 0.
+step: 102. battery: 73 location: [2,5]. direction: 0.
+MOVED IN DIR 0.
+step: 103. battery: 72 location: [3,5]. direction: -1.
+MOVED IN DIR 2.
+step: 104. battery: 71 location: [2,5]. direction: 2.
+MOVED IN DIR 2.
+step: 105. battery: 70 location: [1,5]. direction: -1.
+MOVED IN DIR 0.
+step: 106. battery: 69 location: [2,5]. direction: 0.
+MOVED IN DIR 0.
+step: 107. battery: 68 location: [3,5]. direction: -1.
+MOVED IN DIR 2.
+step: 108. battery: 67 location: [2,5]. direction: 2.
+MOVED IN DIR 2.
+step: 109. battery: 66 location: [1,5]. direction: -1.
+MOVED IN DIR 3.
+step: 110. battery: 65 location: [1,4]. direction: 3.
+MOVED IN DIR 3.
+step: 111. battery: 64 location: [1,3]. direction: -1.
+MOVED IN DIR 1.
+step: 112. battery: 63 location: [1,4]. direction: 1.
+MOVED IN DIR 1.
+step: 113. battery: 62 location: [1,5]. direction: -1.
+MOVED IN DIR 0.
+step: 114. battery: 61 location: [2,5]. direction: 0.
+MOVED IN DIR 0.
+step: 115. battery: 60 location: [3,5]. direction: -1.
+MOVED IN DIR 2.
+step: 116. battery: 59 location: [2,5]. direction: 2.
+MOVED IN DIR 2.
+step: 117. battery: 58 location: [1,5]. direction: -1.
+MOVED IN DIR 3.
+step: 118. battery: 57 location: [1,4]. direction: 3.
+MOVED IN DIR 3.
+step: 119. battery: 56 location: [1,3]. direction: -1.
+MOVED IN DIR 1.
+step: 120. battery: 55 location: [1,4]. direction: 1.
+MOVED IN DIR 1.
+step: 121. battery: 54 location: [1,5]. direction: -1.
+MOVED IN DIR 3.
+step: 122. battery: 53 location: [1,4]. direction: 3.
+MOVED IN DIR 3.
+step: 123. battery: 52 location: [1,3]. direction: -1.
+MOVED IN DIR 0.
+step: 124. battery: 51 location: [2,3]. direction: 0.
+MOVED IN DIR 0.
+step: 125. battery: 50 location: [3,3]. direction: -1.
+MOVED IN DIR 3.
+step: 126. battery: 49 location: [3,2]. direction: 3.
+MOVED IN DIR 3.
+step: 127. battery: 48 location: [3,1]. direction: -1.
+CLEAN.
+step: 128. battery: 47 location: [3,1]. direction: -1.
+CLEAN.
+step: 129. battery: 46 location: [3,1]. direction: -1.
+CLEAN.
+step: 130. battery: 45 location: [3,1]. direction: -1.
+CLEAN.
+step: 131. battery: 44 location: [3,1]. direction: -1.
+CLEAN.
+step: 132. battery: 43 location: [3,1]. direction: -1.
+MOVED IN DIR 2.
+step: 133. battery: 42 location: [2,1]. direction: 2.
+CLEAN.
+step: 134. battery: 41 location: [2,1]. direction: 2.
+CLEAN.
+step: 135. battery: 40 location: [2,1]. direction: 2.
+CLEAN.
+step: 136. battery: 39 location: [2,1]. direction: 2.
+CLEAN.
+step: 137. battery: 38 location: [2,1]. direction: 2.
+MOVED IN DIR 2.
+step: 138. battery: 37 location: [1,1]. direction: -1.
+CLEAN.
+Total steps: 139
+Total dirt left: 0
+Clean was successful.
