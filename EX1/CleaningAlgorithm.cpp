@@ -1,6 +1,8 @@
 #include "index.h"
 
-void CleaningAlgorithm::chooseNextDirection(const std::vector<int> wallSensor){
+
+
+void CleaningAlgorithm::chooseNextDirection(const vector<int> wallSensor){
     int lb=0,ub=3;
     int retDir = (rand() % (ub - lb + 1)) + lb;
     while(wallSensor[retDir])
@@ -12,9 +14,9 @@ void CleaningAlgorithm::chooseNextDirection(const std::vector<int> wallSensor){
     0,1,2,3: move in direction NORTH, EAST, SOUTH, WEST respectively
     4: stay(clean/charge)
 */
-int CleaningAlgorithm::getNextMove(int dirtSensor,const int batterySensor,const std::vector<int>& wallSensor){
+int CleaningAlgorithm::getNextMove(int dirtSensor,const int batterySensor,const vector<int>& wallSensor){
     int ret;
-    if(wallSensor == std::vector<int>{1,1,1,1}){//edge case where docking station is srrounded by walls
+    if(wallSensor == vector<int>{1,1,1,1}){//edge case where docking station is srrounded by walls
         return STAY;
     }
     if(batterySensor<=0 && pathToDocking.size()>0){
@@ -52,7 +54,7 @@ int CleaningAlgorithm::getNextMove(int dirtSensor,const int batterySensor,const 
         curStep++;
         return STAY;
     }
-    // Having charge, maxSteps boundary is not reached and current location is clean- advance to another spot. 
+    // Having charge, maxSteps/battery boundary is not reached and current location is clean- advance to another spot. 
     if (curDirection==-1 || wallSensor[curDirection]==1)//if curDirection is null or there is a wall 1 step in the direction curDirection - decide on new direction to move forward safely. else continue with the same direction.
         chooseNextDirection(wallSensor);
     curStep++;
