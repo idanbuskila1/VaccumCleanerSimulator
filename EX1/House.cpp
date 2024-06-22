@@ -1,5 +1,5 @@
 #include "index.h"
-House::House(const tuple<int,int> dockingLoc,vector<vector<int>> map):houseSize(map.size(),map[0].size()),dockingStationLoc(dockingLoc),houseMap(map){
+House::House(const tuple<int,int> dockingLoc,const vector<vector<int>> map):houseSize(map.size(),map[0].size()),dockingStationLoc(dockingLoc),houseMap(map){
     int totalDirt=0;
     for(int i=0;i<get<0>(houseSize);i++){
         for(int j=0;j<get<1>(houseSize);j++){

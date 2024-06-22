@@ -7,7 +7,7 @@ using std::cerr, std::endl, std::cout;
 
 class VaccumCleaner{
     float batterySteps;
-    int maxBatterySteps;
+    const int maxBatterySteps;
     tuple<int,int> curLoc;
 
 public:

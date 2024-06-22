@@ -1,7 +1,8 @@
 #include "index.h"
 
-int updateDataFromFile(const string& fileName, tuple<int, int>& dockingStationLoc, vector<vector<int>>& houseMap, int& maxBatterySteps, int& maxSteps) {
-    ifstream file(fileName);
+int updateDataFromFile(const string fileName, tuple<int, int> &dockingStationLoc, vector<vector<int>> &houseMap, int &maxBatterySteps, int &maxSteps)
+{
+        ifstream file(fileName);
 
     if (file.is_open()) {
         string line;
@@ -117,7 +118,8 @@ int updateDataFromFile(const string& fileName, tuple<int, int>& dockingStationLo
     return 0;
 }
 
-void makeOutputFile(VaccumCleaner& vc, House& h, vector<string>* stepLog) {
+int makeOutputFile(const VaccumCleaner &vc, const House &h, const vector<string> *stepLog)
+{
     ofstream file("result.txt");
     if (file.is_open()) {
         file << "Total steps: " << stepLog->size() << "." << "\n";
@@ -139,13 +141,14 @@ void makeOutputFile(VaccumCleaner& vc, House& h, vector<string>* stepLog) {
             file << log << endl;
         }
         file.close();
+        return 0;
     } else {
         cerr << "Error: Failed to open file result.txt." << endl;
+        return 1;
     }
 }
 
-
-
+//returns 0 for success, 1 for error.
 int main(int argc, char *argv[]){ 
     if(argc!=2 || !argv[1]){
         cerr << "Error:must pass exactly 1 argument of input file name." << endl;
@@ -159,13 +162,14 @@ int main(int argc, char *argv[]){
     int isError = updateDataFromFile(argv[1],dockingStationLoc,houseMap,maxBatterySteps,MaxSteps);
     if(isError)
         return 1;
-    //initialzie API objects and clean house h with vaccum cleaner vc according to algorithm alg
+    //initialzie class objects.
     House h(dockingStationLoc,houseMap);
     VaccumCleaner vc(maxBatterySteps,dockingStationLoc);
     CleaningAlgorithm alg(maxBatterySteps,MaxSteps);
+    //clean house h with vaccum cleaner vc according to algorithm alg
     vector<string>* stepLog = vc.cleanHouse(h,alg,MaxSteps);
     //create output dile from the log, free memory  and finish with success.
-    makeOutputFile(vc, h, stepLog);
+    isError = makeOutputFile(vc, h, stepLog);
     delete stepLog;
-    return 0;
+    return isError;
 }

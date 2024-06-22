@@ -2,7 +2,7 @@
 CXX = g++
 
 # Compiler flags
-CXXFLAGS =-fsanitize=address -g -Wall -Wextra  -pedantic -std=c++20 
+CXXFLAGS =-fsanitize=address -g -Wall -Wextra -Werror -pedantic -std=c++20 
 
 # Source files
 SRCS = index.cpp House.cpp VaccumCleaner.cpp CleaningAlgorithm.cpp

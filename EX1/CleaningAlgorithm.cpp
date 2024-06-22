@@ -1,7 +1,5 @@
 #include "index.h"
 
-
-
 void CleaningAlgorithm::chooseNextDirection(const vector<int> wallSensor){
     int lb=0,ub=3;
     int retDir = (rand() % (ub - lb + 1)) + lb;
@@ -9,6 +7,7 @@ void CleaningAlgorithm::chooseNextDirection(const vector<int> wallSensor){
         retDir = (rand() % (ub - lb + 1)) + lb;
     curDirection = retDir;
 }
+
 /*returns:One of the following actions-
     -1:failure- empty battery and not on docking station
     0,1,2,3: move in direction NORTH, EAST, SOUTH, WEST respectively
@@ -16,10 +15,10 @@ void CleaningAlgorithm::chooseNextDirection(const vector<int> wallSensor){
 */
 int CleaningAlgorithm::getNextMove(int dirtSensor,const int batterySensor,const vector<int>& wallSensor){
     int ret;
-    if(wallSensor == vector<int>{1,1,1,1}){//edge case where docking station is srrounded by walls
+    if(wallSensor[0]==1 &&wallSensor[1]==1 &&wallSensor[2]==1 &&wallSensor[3]==1){//edge case where docking station is srrounded by walls
         return STAY;
     }
-    if(batterySensor<=0 && pathToDocking.size()>0){
+    if(batterySensor<=0 && pathToDocking.size()>0){//no battery and not on docking station - fail.
         curStep++;
         return -1;
     }
@@ -32,7 +31,7 @@ int CleaningAlgorithm::getNextMove(int dirtSensor,const int batterySensor,const 
     }
     if(static_cast<int>(pathToDocking.size()) == 0 && batterySensor == static_cast<int>(maxBattery) && isCharging){// if vc is at docking, with full battery and on charging mode - we just finished charging, so disable charging mode.
         isCharging=false;
-        curDirection=-1;//choose new direction after exiting charge mode.
+        curDirection=-1;//force to choose new direction after exiting charge mode.
     }
     if (static_cast<int>(pathToDocking.size()) == 0 && batterySensor < static_cast<int>(maxBattery) && isCharging) {// if vc is at docking, with non-full battery and on charging mode - charge for another step.
         curStep++;
@@ -41,7 +40,7 @@ int CleaningAlgorithm::getNextMove(int dirtSensor,const int batterySensor,const 
     if (batterySensor - pathToDocking.size() <2 ) {
         //we have exactly the battery to go back to charge before dying - go 1 step towards docking station.
         curStep++;
-        if(pathToDocking.size()==0){//edge case where max battery is 1 so the vc cant leave the docking and must charge forever
+        if(pathToDocking.size()==0){//edge case where max battery < 1 so the vc cant leave the docking and must charge forever
             return STAY;
         }
         ret = pathToDocking.top();

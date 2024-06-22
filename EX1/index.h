@@ -18,6 +18,6 @@ using std::cerr, std::endl, std::cout;
 enum {WALL=-1,DIRT0,DIRT1,DIRT2,DIRT3,DIRT4,DIRT5,DIRT6,DIRT7,DIRT8,DIRT9};
 enum{NORTH, EAST, SOUTH, WEST,CLEAN, CHARGE, STAY=4};
 
-void updateDataFromFile(string fileName,const tuple<int,int> &dockingStationLoc,vector<vector<int>> &houseMap,int* maxBatterySteps,int* MaxSteps);//TODO:update all data parameters from file.
-void makeOutputFile(VaccumCleaner& vc, House& h, vector<string>* stepLog);
+int updateDataFromFile(const string fileName, tuple<int,int> &dockingStationLoc,vector<vector<int>> &houseMap,int& maxBatterySteps,int& maxSteps);//TODO:update all data parameters from file.
+int makeOutputFile(const VaccumCleaner& vc,const  House& h, const vector<string>* stepLog);
 #endif

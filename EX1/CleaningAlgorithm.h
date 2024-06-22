@@ -15,8 +15,8 @@ class CleaningAlgorithm{
 
     void chooseNextDirection(const vector<int> wallSensor);//randomly choosing a direction to go next, with no wall ahead.
 public:
-    CleaningAlgorithm(int battery,int steps):maxBattery(battery),maxSteps(steps),curStep(0),curDirection(-1),isCharging(false),pathToDocking(){};
-    int getNextMove(int dirtSensor,const int batterySensor,const vector<int>& wallSensor);//decides on next step based on current state and sensors.
+    CleaningAlgorithm(const int battery,const int steps):maxBattery(battery),maxSteps(steps),curStep(0),curDirection(-1),isCharging(false),pathToDocking(){};
+    int getNextMove(const int dirtSensor,const int batterySensor,const vector<int>& wallSensor);//decides on next step based on current state and sensors.
 
 };
 #endif

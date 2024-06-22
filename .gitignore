@@ -1,5 +1,6 @@
 *.o
-out
+myrobot
+result.txt
 .vscode/launch.json
 .vscode/settings.json
 .vscode/tasks.json
