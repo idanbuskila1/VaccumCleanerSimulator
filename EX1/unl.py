@@ -14,9 +14,9 @@ graph.add_edge("Main", "House", label="init House")
 graph.add_edge("Main", "VacuumCleaner", label="init VacuumCleaner")
 graph.add_edge("Main", "CleaningAlgorithm", label="init CleaningAlgorithm")
 graph.add_edge("Main", "VacuumCleaner", label="cleanHouse")
-graph.add_edge("VacuumCleaner", "House", label="getDockingStationLoc")
+graph.add_edge("VacuumCleaner", "House", label="updateCleaningState\n isWallInDirection\n getDirtLevel\n")
+graph.add_edge("VacuumCleaner", "VacuumCleaner", label="Move/Stay")
 graph.add_edge("VacuumCleaner", "CleaningAlgorithm", label="getNextMove")
-graph.add_edge("CleaningAlgorithm", "VacuumCleaner", label="chooseNextDirection")
 graph.add_edge("Main", "main", label="makeOutputFile")
 
 # Draw the graph
