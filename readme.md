@@ -13,8 +13,11 @@ In addition, in index.cpp we have the files I/O functionality, as well as initia
 Here is the input file format the program expects:
 
 a b c d
+
 -row 1-
+
 ...
+
 -row n-
 
 Where <a,b> are positive indexes stating the docking station coordinates (starting from zero); c is a positive integer of max battery steps; d is a positive integer of max steps.
