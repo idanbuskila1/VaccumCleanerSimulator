@@ -11,6 +11,7 @@ The aproach was to model the problem into 3 classes:
 In addition, in index.cpp we have the files I/O functionality, as well as initializing all the objects and initiation of the cleaning process.
 ## Input Format
 Here is the input file format the program expects:
+
 a b c d
 - row 1 -
 ...
