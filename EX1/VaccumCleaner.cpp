@@ -36,13 +36,13 @@ int VaccumCleaner::move(int dir){
     return 1;
 }
 
-const vector<string>& VaccumCleaner::cleanHouse(House& h, CleaningAlgorithm& alg, int maxSteps) {
+const vector<string>* VaccumCleaner::cleanHouse(House& h, CleaningAlgorithm& alg, int maxSteps) {
     int steps = 0, action;
     int dirtSensor;
     vector<string> directionsTranslate{"North", "East", "South","West"};
     vector<int> wallSensor{0, 0, 0, 0}; // wallSensor[i] == 1 if there is a wall in direction dir, where NORTH=0, EAST=1, SOUTH=2, WEST=3
-    vector<string> stepLog; // Vector to store steps log
-    stepLog.reserve(maxSteps);
+    vector<string>* stepLog = new vector<string>(); // Vector to store steps log
+    stepLog->reserve(maxSteps);
     string logMessage;
 
     while (steps < maxSteps) {
@@ -62,7 +62,7 @@ const vector<string>& VaccumCleaner::cleanHouse(House& h, CleaningAlgorithm& alg
         // Perform the move we got from the algorithm
         if (action == -1) {
             logMessage = "failure. battery is empty and not on docking station";
-            stepLog.push_back(logMessage);
+            stepLog->push_back(logMessage);
             break;
         }
         
@@ -70,31 +70,31 @@ const vector<string>& VaccumCleaner::cleanHouse(House& h, CleaningAlgorithm& alg
             steps++;
             if (curLoc == h.getDockingStationLoc()) {//staying on docking is charging
                 logMessage = "step: " + to_string(steps) + ". battery: " + to_string(getBatterySteps()) + ". current location: [" + to_string(get<0>(curLoc)) + "," + to_string(get<1>(curLoc)) + "]. action: charge";
-                stepLog.push_back(logMessage);
+                stepLog->push_back(logMessage);
             } else {//staying elsewhere is cleaning
                 logMessage = "step: " + to_string(steps) + ". battery: " + to_string(getBatterySteps()) + ". current location: [" + to_string(get<0>(curLoc)) + "," + to_string(get<1>(curLoc)) + "]. action: clean.";
-                stepLog.push_back(logMessage);
+                stepLog->push_back(logMessage);
             }
             int err = stay(h);
             if (err) {
                 logMessage = "failure. algorithm tried to make vacuum cleaner clean with no battery.";
-                stepLog.push_back(logMessage);
+                stepLog->push_back(logMessage);
                 break;
             }
             continue;
         } else { // need to advance 1 step in the direction returned with action
             steps++;
             logMessage = "step: " + to_string(steps) + ". battery: " + to_string(getBatterySteps()) + ". current location: [" + to_string(get<0>(curLoc)) + "," + to_string(get<1>(curLoc)) + "]. action: move in direction " + directionsTranslate[action];
-            stepLog.push_back(logMessage);
+            stepLog->push_back(logMessage);
             if (h.isWallInDirection(action, curLoc)) {
                 logMessage = "failure. algorithm tried to move vacuum cleaner into a wall.";
-                stepLog.push_back(logMessage);
+                stepLog->push_back(logMessage);
                 break;
             }
             int err = move(action);
             if (err) {
                 logMessage = "failure. algorithm tried to move vacuum cleaner with no battery.";
-                stepLog.push_back(logMessage);
+                stepLog->push_back(logMessage);
                 break;
             } 
             continue;

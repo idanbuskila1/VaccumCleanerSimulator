@@ -19,5 +19,5 @@ enum {WALL=-1,DIRT0,DIRT1,DIRT2,DIRT3,DIRT4,DIRT5,DIRT6,DIRT7,DIRT8,DIRT9};//hou
 enum{NORTH, EAST, SOUTH, WEST, STAY};//vc actions
 
 int updateDataFromFile(const string fileName, tuple<int,int> &dockingStationLoc,vector<vector<int>> &houseMap,int& maxBatterySteps,int& maxSteps);//TODO:update all data parameters from file.
-int makeOutputFile(const string fileName,const VaccumCleaner& vc,const  House& h, const vector<string>& stepLog);
+int makeOutputFile(const string fileName,const VaccumCleaner& vc,const  House& h, const vector<string>* stepLog);
 #endif

@@ -118,11 +118,11 @@ int updateDataFromFile(const string fileName, tuple<int, int> &dockingStationLoc
     return 0;
 }
 
-int makeOutputFile(const string fileName,const VaccumCleaner &vc, const House &h, const vector<string> &stepLog)
+int makeOutputFile(const string fileName,const VaccumCleaner &vc, const House &h, const vector<string> *stepLog)
 {
     ofstream file("output_"+fileName);
     if (file.is_open()) {
-        file << "Total steps: " << stepLog.size() << "." << "\n";
+        file << "Total steps: " << stepLog->size() << "." << "\n";
         file << "Total dirt left: " << h.getTotalDirtLeft() << "." << "\n";
         file << "Vacuum Cleaner battery is: " << vc.getBatterySteps() << "." << "\n";
         file << "House's state after cleaning:"<<"\n"<<h.toString();
@@ -137,7 +137,7 @@ int makeOutputFile(const string fileName,const VaccumCleaner &vc, const House &h
 
         file << endl;
         file << "Logging of all steps performed by the Vacuum Cleaner:" << endl;
-        for (const auto& log : stepLog) {
+        for (const auto& log : *stepLog) {
             file << log << endl;
         }
         file.close();
@@ -167,8 +167,9 @@ int main(int argc, char *argv[]){
     VaccumCleaner vc(maxBatterySteps,dockingStationLoc);
     CleaningAlgorithm alg(maxBatterySteps,MaxSteps);
     //clean house h with vaccum cleaner vc according to algorithm alg
-    const vector<string> stepLog = vc.cleanHouse(h,alg,MaxSteps);
+    const vector<string>* stepLog = vc.cleanHouse(h,alg,MaxSteps);
     //create output dile from the log, free memory  and finish with success.
     isError = makeOutputFile(argv[1],vc, h, stepLog);
+    delete stepLog;
     return isError;
 }
