@@ -13,9 +13,10 @@ In addition, in index.cpp we have the files I/O functionality, as well as initia
 Here is the input file format the program expects:
 
 a b c d
-- row 1 -
+-row 1-
 ...
-- row n -
+-row n-
+
 Where <a,b> are positive indexes stating the docking station coordinates (starting from zero); c is a positive integer of max battery steps; d is a positive integer of max steps.
 The rows represent the rectangle house map, where there could be any value from -1 to 9. -1 represents a wall, 0-9 indicates dirt level.
 The docking station coordinates on the map must be with value 0 (no dirt or wall there).
