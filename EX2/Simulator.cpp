@@ -1,4 +1,4 @@
-#include "Simulator.h"
+#include "Simulator.hpp"
 using std::vector, std::pair, std::ifstream, std::stringstream;
 using std::cerr, std::endl;
 
@@ -27,10 +27,10 @@ void Simulator::setAlgorithm(unique_ptr<Algorithm> algorithm){
     alg->setMaxSteps(maxSteps);
 }
 int Simulator::readHouseFile(const string& filename){
-    int maxSteps;
-    int maxBattery;
-    int rows;
-    int cols;
+    size_t maxSteps;
+    size_t maxBattery;
+    size_t rows;
+    size_t cols;
     vector<vector<int>> grid; // Changed to store int values for wall=-1, ' '=0, D=-2, and dirt levels as int
     pair<int, int> dockingStation; // Pair to store row and column of the docking station
 
@@ -41,8 +41,8 @@ int Simulator::readHouseFile(const string& filename){
     }
 
     string line;
-    int lineNumber = 0;
-    int currentRows = 0;
+    size_t lineNumber = 0;
+    size_t currentRows = 0;
     bool foundDockingStation = false;
 
     while (getline(file, line)) {
@@ -114,7 +114,7 @@ int Simulator::readHouseFile(const string& filename){
             if (line.size() < cols) {
                 line.append(cols - line.size(), ' '); // Pad with spaces if line is shorter
             }
-            for (int i = 0; i < cols; ++i) {
+            for (size_t i = 0; i < cols; ++i) {
                 char c = line[i];
                 if (c == ' ') {
                     grid[currentRows][i] = 0; // Empty space
@@ -147,5 +147,6 @@ int Simulator::readHouseFile(const string& filename){
         cerr << "Error: No docking station found" << endl;
         return 1;
     }
+    cout << maxSteps << maxBattery;
     return 0;
 }

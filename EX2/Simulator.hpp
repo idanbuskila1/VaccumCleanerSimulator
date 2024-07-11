@@ -1,9 +1,11 @@
 #ifndef SIMULATOR
 #define SIMULATOR
 
-#include "abstractClasses.h"
-#include "Algorithm.h"
-using std::string;
+#include "index.hpp"
+#include "Algorithm.hpp"
+#include "House.hpp"
+#include "VaccumCleaner.hpp"
+using std::string ,std::shared_ptr, std::unique_ptr;
 
 class Simulator{
     shared_ptr<House> h;

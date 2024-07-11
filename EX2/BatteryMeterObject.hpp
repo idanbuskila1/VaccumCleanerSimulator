@@ -1,7 +1,13 @@
 #ifndef BATTERY_METER
 #define BATTERY_METER
-#include "abstractClasses.h"
-#include "VaccumCleaner.h"
+#include "index.hpp"
+#include "VaccumCleaner.hpp"
+class BatteryMeter {
+public:
+	virtual ~BatteryMeter() {}
+	virtual std::size_t getBatteryState() const = 0;
+};
+
 class BatteryMeterObject: public BatteryMeter{
     shared_ptr<VaccumCleaner> vc;
 

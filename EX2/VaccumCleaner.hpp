@@ -1,6 +1,6 @@
 #ifndef VACCUM
 #define VACCUM
-#include "abstractClasses.h"
+#include "index.hpp"
 using  std::pair, std::max,  std::min,std::get;
 using std::cerr, std::endl, std::cout;
 

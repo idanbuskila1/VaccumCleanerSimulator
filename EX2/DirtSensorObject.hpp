@@ -1,8 +1,15 @@
 #ifndef DIRT_SENSOR
 #define DIRT_SENSOR
-#include "abstractClasses.h"
-#include "House.h"
-#include "VaccumCleaner.h"
+#include "index.hpp"
+#include "House.hpp"
+#include "VaccumCleaner.hpp"
+
+class DirtSensor {
+public:
+	virtual ~DirtSensor() {}
+	virtual int dirtLevel() const = 0;
+};
+
 class DirtSensorObject: public DirtSensor{
     shared_ptr<House> h;
     shared_ptr<VaccumCleaner> vc;

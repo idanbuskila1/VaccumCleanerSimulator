@@ -1,8 +1,18 @@
 #ifndef WALLS_SENSOR
 #define WALLS_SENSOR
-#include "abstractClasses.h"
-#include "House.h"
-#include "VaccumCleaner.h"
+#include "index.hpp"
+#include "House.hpp"
+#include "VaccumCleaner.hpp"
+
+using std::shared_ptr;
+
+class WallsSensor {
+public:
+	virtual ~WallsSensor() {}
+	virtual bool isWall(Direction d) const = 0;
+};
+
+
 class WallsSensorObject: public WallsSensor{
     shared_ptr<House> h;
     shared_ptr<VaccumCleaner> vc;

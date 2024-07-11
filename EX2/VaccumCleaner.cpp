@@ -1,4 +1,4 @@
-#include "VaccumCleaner.h"
+#include "VaccumCleaner.hpp"
 int VaccumCleaner::clean(){
     if(batterySteps<1)//no battery for cleaning
             return 1;
