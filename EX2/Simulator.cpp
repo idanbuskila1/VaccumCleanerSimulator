@@ -137,9 +137,7 @@ int Simulator::readHouseFile(const string& filename){
                 } else if (c >= '0' && c <= '9') {
                     grid[currentRows][i] = c - '0'; // Dirt levels (convert char to int)
                 } else {
-                    cerr << "Error: Invalid character in house map" << endl;
-                    file.close();
-                    return -1;
+                    grid[currentRows][i] = 0; // every other char is considered as an empty space
                 }
             }
             currentRows++;
