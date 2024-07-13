@@ -1,20 +1,17 @@
 #ifndef BATTERY_METER
 #define BATTERY_METER
-#include "index.hpp"
-#include "VaccumCleaner.hpp"
-class BatteryMeter {
-public:
-	virtual ~BatteryMeter() {}
-	virtual std::size_t getBatteryState() const = 0;
-};
+
+#include <memory>
+
+#include "abstract_algorithm.hpp"
+#include "Simulator.hpp"
 
 class BatteryMeterObject: public BatteryMeter{
-    shared_ptr<VaccumCleaner> vc;
+    std::shared_ptr<Simulator> sim;
 
 public:
-    BatteryMeterObject(shared_ptr<VaccumCleaner> vaccumCleaner):vc(vaccumCleaner){};
-    ~BatteryMeterObject() =default;
-	std::size_t getBatteryState() const override{return vc->getBatterySteps();};//implicit casting to size_t
+    BatteryMeterObject(std::shared_ptr<Simulator> simulator):sim(simulator){};
+	std::size_t getBatteryState() const override{return this->sim->getBattery();};//implicit casting to size_t
 
 };
 #endif

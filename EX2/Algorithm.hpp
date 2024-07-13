@@ -1,35 +1,27 @@
 #ifndef ALGORITHM
 #define ALGORITHM
-#include "index.hpp"
+
+#include "abstract_algorithm.hpp"
 #include "WallsSensorObject.hpp"
 #include "DirtSensorObject.hpp"
 #include "BatteryMeterObject.hpp"
 
-class AbstractAlgorithm {
-public:
-	virtual ~AbstractAlgorithm() {}
-	virtual void setMaxSteps(std::size_t maxSteps) = 0;
-	virtual void setWallsSensor(const WallsSensor&) = 0;
-	virtual void setDirtSensor(const DirtSensor&) = 0;
-	virtual void setBatteryMeter(const BatteryMeter&) = 0;
-	virtual Step nextStep() = 0;
-};
+using std::unique_ptr, std::make_unique;
 
 class Algorithm: public AbstractAlgorithm{
     size_t stepsRemaining;
-    const size_t maxBattery;
-    const WallsSensor* walls;
-    const DirtSensor* dirt;
-    const BatteryMeter* battery;
+    size_t maxBattery;
+    unique_ptr<const WallsSensor> walls;
+    unique_ptr<const DirtSensor> dirt;
+    unique_ptr<const BatteryMeter> battery;
 
     
 public:
-    Algorithm(int battery):stepsRemaining(0),maxBattery(battery){};
-    ~Algorithm () =default;
-	void setMaxSteps(std::size_t maxSteps) override {stepsRemaining = maxSteps;};
-	void setWallsSensor(const WallsSensor& sensor) override {walls=&sensor;};
-	void setDirtSensor(const DirtSensor& sensor)override {dirt = &sensor;};
-	void setBatteryMeter(const BatteryMeter& sensor)override {battery=&sensor;};
-	Step nextStep()override;
+    Algorithm(size_t battery):stepsRemaining(0),maxBattery(battery){};
+	void setMaxSteps(std::size_t steps) override {stepsRemaining = steps;};
+	void setWallsSensor(const WallsSensor& sensor) override {walls=make_unique< const WallsSensorObject>(dynamic_cast<const WallsSensorObject&>(sensor));};
+	void setDirtSensor(const DirtSensor& sensor) override {dirt = make_unique< const DirtSensorObject>(dynamic_cast<const DirtSensorObject&>(sensor));};
+    void setBatteryMeter(const BatteryMeter& sensor) override{battery = make_unique< const BatteryMeterObject>(dynamic_cast<const BatteryMeterObject&>(sensor));};
+	Step nextStep()override{if(maxBattery>1) return Step::East; return Step::West;};//tmp implementation for compiling.
 };
 #endif

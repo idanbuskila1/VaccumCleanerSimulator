@@ -1,6 +1,10 @@
 #ifndef VACCUM
 #define VACCUM
-#include "index.hpp"
+
+#include "enums.hpp"
+#include <utility>
+#include <iostream>
+
 using  std::pair, std::max,  std::min,std::get;
 using std::cerr, std::endl, std::cout;
 

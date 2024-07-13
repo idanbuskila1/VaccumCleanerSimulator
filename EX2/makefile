@@ -5,10 +5,10 @@ CXX = g++
 CXXFLAGS =-fsanitize=address -Wall -Wextra -Werror -pedantic -std=c++20 
 
 # Source files
-SRCS = index.cpp House.cpp VaccumCleaner.cpp Simulator.cpp  BatteryMeterObject.cpp DirtSensorObject.cpp WallsSensorObject.cpp Algorithm.cpp
+SRCS = index.cpp House.cpp VaccumCleaner.cpp Simulator.cpp Algorithm.cpp
 
 # Header files
-HDRS = index.hpp House.hpp VaccumCleaner.hpp Simulator.hpp BatteryMeterObject.hpp DirtSensorObject.hpp WallsSensorObject.hpp Algorithm.hpp
+HDRS = abstract_algorithm.hpp battery_meter.hpp dirt_sensor.hpp enums.hpp index.hpp House.hpp VaccumCleaner.hpp Simulator.hpp BatteryMeterObject.hpp DirtSensorObject.hpp WallsSensorObject.hpp Algorithm.hpp
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)

@@ -1,23 +1,18 @@
 #ifndef DIRT_SENSOR
 #define DIRT_SENSOR
-#include "index.hpp"
+
+#include <memory>
+
 #include "House.hpp"
 #include "VaccumCleaner.hpp"
-
-class DirtSensor {
-public:
-	virtual ~DirtSensor() {}
-	virtual int dirtLevel() const = 0;
-};
+#include "dirt_sensor.hpp"
 
 class DirtSensorObject: public DirtSensor{
-    shared_ptr<House> h;
-    shared_ptr<VaccumCleaner> vc;
+    std::shared_ptr<Simulator> sim;
 
 public:
-    DirtSensorObject(shared_ptr<House> house,shared_ptr<VaccumCleaner> vaccumCleaner):h(house),vc(vaccumCleaner){};
-    ~DirtSensorObject()=default;
-	int dirtLevel() const override{return h->getDirtLevel(vc->getCurrentLoc());};
+    DirtSensorObject(std::shared_ptr<Simulator> simulator):sim(simulator){};
+	int dirtLevel() const override{return sim->getDirt();};
 
 };
 #endif
