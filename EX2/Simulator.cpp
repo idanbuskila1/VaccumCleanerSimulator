@@ -163,16 +163,8 @@ void Simulator::run() {
       break;
     }
     steps_++;
-    // std::cout << currentStep << " " << house_.totDirt() << std::endl;
   }
-  // if (final_state_ == "FINISHED") {
-  //   if (robot_state_.battery() == 0 &&
-  //       robot_state_.getPosition() != house_.getDockPos())
-  //     final_state_ = "DEAD";
-  // } else {
-  //   final_state_ = "WORKING";
-  // }
-//   std::cout << "After simulation " << house_;
+
 }
 void Simulator::dump(std::string outputFileName) {
   std::ofstream myfile;

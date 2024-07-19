@@ -31,51 +31,57 @@ void MyAlgorithm::updateNeighbors() {
   house_manager_.eraseUnexplored(current_position_);
 
   for (auto dir : dirPriority()) {
-    house_manager_.updateNeighbor(dir, current_position_,
-                                  walls_sensor_->isWall(dir));
+    if (!walls_sensor_->isWall(dir)) {
+      house_manager_.updateNeighbor(dir, current_position_, false);
+    } else {
+      house_manager_.updateNeighbor(dir, current_position_, true);
+    }
   }
 }
 
 bool MyAlgorithm::needCharge() {
   if (current_position_ == DOCK_POS)
     return false;
-  auto st = house_manager_.getShortestPath(current_position_, DOCK_POS);
-  // std::cout << __FUNCTION__ << " st.size " << st.size() << std::endl;
-  if (st.size() + BATTERY_BUFF > battery_meter_->getBatteryState())
+  
+  auto path_to_dock = house_manager_.getShortestPath(current_position_, DOCK_POS);
+  int battery_needed = path_to_dock.size() + BATTERY_BUFF;
+  
+  // Check if we have enough battery to reach the dock and perform some work
+  if (battery_needed > battery_meter_->getBatteryState() * 0.7)  // Return when 70% of battery is needed to reach dock
     return true;
+  
   return false;
 }
 
 Step MyAlgorithm::work() {
-  // Assuming current_pos exists in percieved
-  // priority to cleaning
-  // std::cout << __FUNCTION__ << std::endl;
   if (house_manager_.dirt(current_position_) > 0)
     return Step::Stay;
 
   Direction dir;
   int max_dirt = -1;
-  // it is guaranteed to be in perceived_house_ or unexplored_
-  // due to updateNeighbors()
+  
   for (auto d : dirPriority()) {
     auto point = getPosition(current_position_, d);
+    // Add wall check here
+    if (walls_sensor_->isWall(d)) {
+      continue;  // Skip this direction if there's a wall
+    }
     if (house_manager_.isUnexplored(point)) {
-      current_position_ = getPosition(current_position_, d);
+      current_position_ = point;
       return static_cast<Step>(d);
     } else if (house_manager_.exists(point) && house_manager_.dirt(point) > 0) {
       if (max_dirt < house_manager_.dirt(point)) {
         dir = d;
         max_dirt = house_manager_.dirt(point);
       }
-    } else if (!house_manager_.exists(point)) {
-      std::cout << "ERROR!! INVALID SCENARIO - NOT IN UNEXPLORED OR PERCIEVED"
-                << std::endl;
     }
   }
+  
   if (max_dirt > 0) {
     current_position_ = getPosition(current_position_, dir);
     return static_cast<Step>(dir);
   }
+
   state_ = AlgoState::TO_POS;
   stack_ = house_manager_.getShortestPath(current_position_, {}, true);
   if (stack_.size() * 2 > max_battery_)

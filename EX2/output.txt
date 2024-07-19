@@ -1,4 +1,4 @@
 NumSteps = 20
-DirtLeft = 29
+DirtLeft = 37
 Status = DEAD
-SsssssssSENNNssssssss
+SssssssssWNssssssssss
