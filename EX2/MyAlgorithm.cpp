@@ -76,16 +76,17 @@ Step MyAlgorithm::work() {
     current_position_ = getPosition(current_position_, dir);
     return static_cast<Step>(dir);
   }
-  // BFS ALGORITHM
   state_ = AlgoState::TO_POS;
-  // populate stack
   stack_ = house_manager_.getShortestPath(current_position_, {}, true);
   if (stack_.size() * 2 > max_battery_)
     return Step::Finish;
-  dir = stack_.top();
-  stack_.pop();
+  if(!stack_.empty()){
+    dir = stack_.top();
+    stack_.pop();
   current_position_ = getPosition(current_position_, dir);
   return static_cast<Step>(dir);
+    }
+  return Step::Stay;
 }
 
 /**
@@ -130,27 +131,34 @@ Step MyAlgorithm::nextStep() {
     state_ = AlgoState::TO_DOCK;
     // populate stack
     stack_ = house_manager_.getShortestPath(current_position_, DOCK_POS);
-    auto dir = stack_.top();
-    stack_.pop();
-    current_position_ = getPosition(current_position_, dir);
+    if(!stack_.empty()){
+      auto dir = stack_.top();
+      stack_.pop();
+      current_position_ = getPosition(current_position_, dir);
+      return static_cast<Step>(dir);
+    }
     if (stack_.empty())
       state_ = AlgoState::CHARGING;
-    return static_cast<Step>(dir);
+      return Step::Stay;
   } else if (state_ == AlgoState::TO_DOCK || state_ == AlgoState::TO_POS) {
     // std::cout << __FUNCTION__ << "TO_DOCK/POS" << std::endl;
     // if (state_ == AlgoState::TO_POS && needCharge()) {
     //   stack_ = std::stack<Direction>(); // clear stack
     //   state_ = AlgoState::TO_DOCK;
     // }
-    auto dir = stack_.top();
-    stack_.pop();
+    if(!stack_.empty()){
+      auto dir = stack_.top();
+      stack_.pop();
+      current_position_ = getPosition(current_position_, dir);
+      return static_cast<Step>(dir);
+
+    }
     // @todo check for correctness
     // if position is valid i.e unexplored or perceived
-    current_position_ = getPosition(current_position_, dir);
     if (stack_.empty())
       state_ = DOCK_POS == current_position_ ? AlgoState::CHARGING
                                              : AlgoState::WORKING;
-    return static_cast<Step>(dir);
+    return Step::Stay;
   } else {
     return work();
   }

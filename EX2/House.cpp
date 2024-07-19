@@ -1,22 +1,22 @@
 #include "House.hpp"
 House::House(const vector<vector<int>> map):houseMap(map){
   houseMap.resize(map.size() + 2);
-  for (int i = 0; i < houseMap.size(); i++)
+  for (int i = 0; i < int(houseMap.size()); i++)
     houseMap[i].resize(map[0].size() + 2, 0);
 
   // Pad with wall
-  for (int i = 0; i < houseMap[0].size(); i++) {
+  for (int i = 0; i < int(houseMap[0].size()); i++) {
     houseMap[0][i] = int(LocType::Wall);
     houseMap[houseMap.size() - 1][i] = int(LocType::Wall);
   }
 
-  for (int i = 0; i < houseMap.size(); i++) {
+  for (int i = 0; i < int(houseMap.size()); i++) {
     houseMap[i][0] = int(LocType::Wall);
     houseMap[i][houseMap[0].size() - 1] = int(LocType::Wall);
   }
 
-  for (int i = 0; i < map.size(); i++) {
-    for (int j = 0; j < map[0].size(); j++) {
+  for (int i = 0; i < int(map.size()); i++) {
+    for (int j = 0; j < int(map[0].size()); j++) {
       if (map[i][j] == 100) {
         dockingStationLoc = {i + 1, j + 1};
         houseMap[i + 1][j + 1] = 0;
@@ -31,22 +31,22 @@ House::House(const vector<vector<int>> map):houseMap(map){
 
 void House::init(const vector<vector<int>> map){
   houseMap.resize(map.size() + 2);
-  for (int i = 0; i < houseMap.size(); i++)
+  for (int i = 0; i <int( houseMap.size()); i++)
     houseMap[i].resize(map[0].size() + 2, 0);
 
   // Pad with wall
-  for (int i = 0; i < houseMap[0].size(); i++) {
+  for (int i = 0; i < int(houseMap[0].size()); i++) {
     houseMap[0][i] = int(LocType::Wall);
     houseMap[houseMap.size() - 1][i] = int(LocType::Wall);
   }
 
-  for (int i = 0; i < houseMap.size(); i++) {
+  for (int i = 0; i <int(houseMap.size()); i++) {
     houseMap[i][0] = int(LocType::Wall);
     houseMap[i][houseMap[0].size() - 1] = int(LocType::Wall);
   }
 
-  for (int i = 0; i < map.size(); i++) {
-    for (int j = 0; j < map[0].size(); j++) {
+  for (int i = 0; i < int(map.size()); i++) {
+    for (int j = 0; j < int(map[0].size()); j++) {
       if (map[i][j] == 100) {
         dockingStationLoc = {i + 1, j + 1};
         houseMap[i + 1][j + 1] = 0;
@@ -73,8 +73,9 @@ void House::updateCleaningState(const pair<int,int> loc){
     totalDirtLeft -=1;
 }
 bool House::isWallInDirection(const Direction direction, const pair<int,int> curLoc) const{
+    // #print the curLoc
+    std::cerr << "curLoc: " << curLoc.first << " " << curLoc.second << std::endl;
     if(direction == Direction::North){
-        int in_house = isLocInsideHouse(curLoc.first-1,curLoc.second);
         if(!isLocInsideHouse(curLoc.first-1,curLoc.second)) return true;
         return this->houseMap[curLoc.first-1][curLoc.second] == -1;
     }
