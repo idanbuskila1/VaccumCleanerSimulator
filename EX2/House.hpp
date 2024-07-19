@@ -18,12 +18,16 @@ class House{
 
     bool isLocInsideHouse(const size_t row, const size_t col) const;//returns true iff loc is valid with regard to houseSize
 public:
+    House() {}
     House(const vector<vector<int> > map);
+    void init(const vector<vector<int> > map);
 
     void updateCleaningState(const pair<int,int> loc);//updates cleaning step on location loc, and decreases dirt level by 1.
     int getDirtLevel(const pair<int,int> loc) const;//returns dirt level on loc, or 0 if there is no dirt/wall.
     bool isWallInDirection(const Direction direction, const pair<int,int> curLoc) const;//according to direction and current location return if there is a wall.
     int getTotalDirtLeft()const{return totalDirtLeft;}//returns the sum of dirt left in the entire house.
     pair<int,int> getDockingStationLoc()const{return dockingStationLoc;}//returns the location of the docking station.
+    bool isWall(const pair<int,int> curLoc) const;
+
 };
 #endif

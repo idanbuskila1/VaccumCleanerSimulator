@@ -1,247 +1,187 @@
-#include "Simulator.hpp"
-#include "WallsSensorObject.hpp"
-#include "DirtSensorObject.hpp"
-#include "BatteryMeterObject.hpp"
-#include "Algorithm.hpp"
-using std::vector, std::pair, std::ifstream, std::stringstream;
-using std::cerr, std::endl;
+#include "Simulator.h"
 
-// Function to trim leading and trailing whitespace from a string
-string trim(const string& str) {
-    size_t first = str.find_first_not_of(" \t\n\r");
-    if (first == string::npos) return "";
-    size_t last = str.find_last_not_of(" \t\n\r");
-    return str.substr(first, (last - first + 1));
+#include "ErrorCodes.h"
+#include "Utils.h"
+
+Simulator::Simulator()
+    : robot_state_(), dirt_sensor_(house_, robot_state_),
+      wall_sensor_(house_, robot_state_), battery_meter_(robot_state_) {}
+
+void Simulator::setAlgorithm(AbstractAlgorithm &algorithm) {
+
+  algo = &algorithm;
+  algo->setMaxSteps(max_steps_);
+
+  algo->setDirtSensor(dirt_sensor_);
+  algo->setWallsSensor(wall_sensor_);
+  algo->setBatteryMeter(battery_meter_);
 }
 
-// Function to check if a string represents a valid integer
-bool isInteger(const string& str) {
-    if (str.empty()) return false;
-    stringstream ss(str);
-    int num;
-    ss >> num;
-    return !ss.fail() && ss.eof();
-}
+int Simulator::readHouseFile(const std::string &houseFilePath) {
+  // populate house_ structure here
 
-void Simulator::setAlgorithm(unique_ptr<AbstractAlgorithm> algorithm){
-    alg = std::move(algorithm);
-    alg->setBatteryMeter(BatteryMeterObject(shared_from_this()));
-    alg->setDirtSensor(DirtSensorObject(shared_from_this()));
-    alg->setWallsSensor(WallsSensorObject(shared_from_this()));
-    alg->setMaxSteps(maxSteps);
-    
-}
-int Simulator::readHouseFile(const string& filename){
-    size_t maxSteps;
-    size_t maxBattery;
-    size_t rows;
-    size_t cols;
-    vector<vector<int>> grid; // Changed to store int values for wall=-1, ' '=0, D=-2, and dirt levels as int
-    pair<int, int> dockingStation; // Pair to store row and column of the docking station
+  std::string house_name, max_steps_s, max_battery_s, num_rows_s, num_cols_s;
+  std::ifstream myfile;
+  myfile.open(houseFilePath);
 
-    ifstream file(filename);
-    if (!file.is_open()) {
-        cerr << "Error: Unable to open file" << endl;
+  if (!myfile.is_open()) {
+    return -1;
+  }
+  auto print_read_error = [=](auto e) {
+    std::cout << "ERROR!! While reading input file : " << FileReadError(e)
+              << std::endl;
+  };
+  std::getline(myfile, house_name);
+
+  std::getline(myfile, max_steps_s);
+  max_steps_ = Utils::readAEqb(max_steps_s, "MaxSteps");
+  if (max_steps_ < 0) {
+    print_read_error(max_steps_);
+    return max_steps_;
+  }
+  if (myfile.eof()) {
+    return -1;
+  }
+  std::getline(myfile, max_battery_s);
+  int max_robot_battery_ = Utils::readAEqb(max_battery_s, "MaxBattery");
+  if (max_robot_battery_ < 0) {
+    print_read_error(max_robot_battery_);
+    return max_robot_battery_;
+  }
+  if (myfile.eof()) {
+    return -1;
+  }
+  std::getline(myfile, num_rows_s);
+  int n_rows_ = Utils::readAEqb(num_rows_s, "Rows");
+  if (n_rows_ < 0) {
+    print_read_error(n_rows_);
+    return n_rows_;
+  }
+
+  if (myfile.eof()) {
+    return -1;
+  }
+  std::getline(myfile, num_cols_s);
+  int n_cols_ = Utils::readAEqb(num_cols_s, "Cols");
+  if (n_cols_ < 0) {
+    print_read_error(n_cols_);
+    return n_cols_;
+  }
+
+  std::cout << max_steps_s << std::endl
+            << max_battery_s << std::endl
+            << num_rows_s << std::endl
+            << num_cols_s << std::endl;
+
+  if (myfile.eof()) {
+    return -1;
+  }
+
+  std::cout << max_steps_ << std::endl
+            << max_robot_battery_ << std::endl
+            << n_rows_ << std::endl
+            << n_cols_ << std::endl;
+
+  std::vector<std::vector<int>> data(n_rows_, std::vector<int>(n_cols_, 0));
+
+  int row_number = 0, col_number = 0, dock_found = 0;
+  std::string line;
+  std::getline(myfile, line);
+  while (!myfile.eof()) {
+    for (col_number = 0; col_number < int(line.size()); col_number++) {
+      if (col_number >= n_cols_)
+        break;
+      if (std::isdigit(line[col_number])) {
+        data[row_number][col_number] = line[col_number] - '0';
+      } else if (line[col_number] == ' ') {
+        data[row_number][col_number] = 0;
+      } else if (line[col_number] == 'W') {
+        data[row_number][col_number] = -1; // replace with LocType
+      } else if (line[col_number] == 'D' && !dock_found) {
+        dock_found = 1;
+        data[row_number][col_number] = 100; // replace with LocType
+      } else if (line[col_number] == 'D') {
+        std::cout << "ERROR!! Invalid House file More than one dock found!!"
+                  << std::endl;
         return -1;
-    }
-
-    string line;
-    size_t lineNumber = 0;
-    size_t currentRows = 0;
-    bool foundDockingStation = false;
-
-    while (getline(file, line)) {
-        lineNumber++;
-
-        if (lineNumber == 2) {
-            // Parse MaxSteps
-            size_t pos = line.find('=');
-            if (pos == string::npos) {
-                cerr << "Error: MaxSteps line format is invalid" << endl;
-                file.close();
-                return -1;
-            }
-            string value = trim(line.substr(pos + 1));
-            if (!isInteger(value)) {
-                cerr << "Error: MaxSteps value is not a valid integer" << endl;
-                file.close();
-                return -1;
-            }
-            maxSteps = stoi(value);
-        } else if (lineNumber == 3) {
-            // Parse MaxBattery
-            size_t pos = line.find('=');
-            if (pos == string::npos) {
-                cerr << "Error: MaxBattery line format is invalid" << endl;
-                file.close();
-                return -1;
-            }
-            string value = trim(line.substr(pos + 1));
-            if (!isInteger(value)) {
-                cerr << "Error: MaxBattery value is not a valid integer" << endl;
-                file.close();
-                return -1;
-            }
-            maxBattery = stoi(value);
-        } else if (lineNumber == 4) {
-            // Parse Rows
-            size_t pos = line.find('=');
-            if (pos == string::npos) {
-                cerr << "Error: Rows line format is invalid" << endl;
-                file.close();
-                return -1;
-            }
-            string value = trim(line.substr(pos + 1));
-            if (!isInteger(value)) {
-                cerr << "Error: Rows value is not a valid integer" << endl;
-                file.close();
-                return -1;
-            }
-            rows = stoi(value);
-        } else if (lineNumber == 5) {
-            // Parse Cols
-            size_t pos = line.find('=');
-            if (pos == string::npos) {
-                cerr << "Error: Cols line format is invalid" << endl;
-                file.close();
-                return -1;
-            }
-            string value = trim(line.substr(pos + 1));
-            if (!isInteger(value)) {
-                cerr << "Error: Cols value is not a valid integer" << endl;
-                file.close();
-                return -1;
-            }
-            cols = stoi(value);
-            grid.resize(rows, vector<int>(cols, 0));
-        } else if (lineNumber >= 6 && currentRows < rows) {
-            // Parse house grid rows
-            if (line.size() < cols) {
-                line.append(cols - line.size(), ' '); // Pad with spaces if line is shorter
-            }
-            for (size_t i = 0; i < cols; ++i) {
-                char c = line[i];
-                if (c == ' ') {
-                    grid[currentRows][i] = 0; // Empty space
-                } else if (c == 'W') {
-                    grid[currentRows][i] = -1; // Wall
-                } else if (c == 'D') {
-                    if (foundDockingStation) {
-                        cerr << "Error: More than one docking station found" << endl;
-                        file.close();
-                        return -1;
-                    }
-                    grid[currentRows][i] = -2; // Docking station
-                    dockingStation = {currentRows, i}; // Save docking station coordinates
-                    foundDockingStation = true;
-                } else if (c >= '0' && c <= '9') {
-                    grid[currentRows][i] = c - '0'; // Dirt levels (convert char to int)
-                } else {
-                    grid[currentRows][i] = 0; // every other char is considered as an empty space
-                }
-            }
-            currentRows++;
-        }
-    }
-
-    file.close();
-
-    if (!foundDockingStation) {
-        cerr << "Error: No docking station found" << endl;
+      } else {
+        std::cout << "ERROR!! Invalid House data" << std::endl;
         return -1;
+      }
     }
+    std::getline(myfile, line);
+    row_number++;
+    if (row_number == n_rows_)
+      break;
+  }
+  myfile.close();
+  house_.init(data);
+  robot_state_.init(max_robot_battery_, house_.getDockingStationLoc());
+  std::cout << "Robot: max_robot_battery:" << max_robot_battery_ << std::endl;
+//   std::cout << house_;
 
-    //initialize data members from file data
-    this->maxSteps = maxSteps;
-    this->h = make_unique<House>(grid);
-    this->vc = make_unique<VaccumCleaner>(maxBattery,dockingStation);
-    return maxBattery;
+  return 1;
 }
-void Simulator::run(){
-    size_t steps = 0;
-    Step action;
-    vector<string> directionsTranslate{"North", "East", "South","West"};
-    StepLog.reserve(maxSteps);
-    string logMessage;
-//     vector<int> wallSensor{0, 0, 0, 0}; // wallSensor[i] == 1 if there is a wall in direction dir, where NORTH=0, EAST=1, SOUTH=2, WEST=3
-    
 
-    while (steps < maxSteps) {
-        if (vc->getCurrentLoc() == h->getDockingStationLoc() && h->getTotalDirtLeft() == 0)//success
-            break;
-        // Ask algorithm for next move decision
-        action = alg->nextStep();
-        if(action==Step::Finish)
-            stepDescriptor.append("F");
-            break;
-        // Perform the move we got from the algorithm
-//         if (action == -1) {
-//             logMessage = "failure. battery is empty and not on docking station";
-//             StepLog.push_back(logMessage);
-//             break;
-//         }
-        int x = vc->getCurrentLoc().first;
-        int y = vc->getCurrentLoc().second;
-        if (action == Step::Stay) {
-            steps++;
-            int err;
-            if (vc->getCurrentLoc() == h->getDockingStationLoc()) {//staying on docking is charging
-                logMessage = "step: " + to_string(steps) + ". battery: " + to_string(vc->getBatterySteps()) + ". current location: [" + to_string(x) + "," + to_string(y) + "]. action: Stay (charge)";
-                StepLog.push_back(logMessage);
-                err = vc->charge();
-            } else {//staying elsewhere is cleaning
-                logMessage = "step: " + to_string(steps) + ". battery: " + to_string(vc->getBatterySteps()) + ". current location: [" + to_string(x) + "," + to_string(y) + "]. action: Stay (clean).";
-                StepLog.push_back(logMessage);
-                err=vc->clean();
-            }
-            if (err) {
-                logMessage = "failure. algorithm tried to make vacuum cleaner clean with no battery.";
-                StepLog.push_back(logMessage);
-                break;
-            }
-            stepDescriptor.append("s");
-            continue;
-        } else { // need to advance 1 step in the direction returned with action
-            steps++;
-            Direction dir = static_cast<Direction>(action);
-            logMessage = "step: " + to_string(steps) + ". battery: " + to_string(vc->getBatterySteps()) + ". current location: [" + to_string(x) + "," + to_string(y) + "]. action: move in direction " + directionsTranslate[static_cast<int>(action)];
-            StepLog.push_back(logMessage);
-            if (h->isWallInDirection(dir, vc->getCurrentLoc())) {
-                logMessage = "failure. algorithm tried to move vacuum cleaner into a wall.";
-                StepLog.push_back(logMessage);
-                break;
-            }
-            int err = vc->move(dir);
-            if (err) {
-                logMessage = "failure. algorithm tried to move vacuum cleaner with no battery.";
-                StepLog.push_back(logMessage);
-                break;
-            } 
-            stepDescriptor.append(to_string(directionsTranslate[static_cast<int>(action)].at(0)));
-            continue;
+void Simulator::run() {
+  bool error = true;
+  final_state_ = "WORKING";
+  while (steps_ <= max_steps_) {
+    // std::cout << "Simulator::step " << steps_ << " pos "
+    //           << robot_state_.getPosition()
+    //           << " Battery: " << battery_meter_.getBatteryState()
+    //           << " Dirt: " << dirt_sensor_.dirtLevel() << std::endl;
+    error = false;
+    Step currentStep = algo->nextStep();
+    /** DEAD case handle */
+    step_list_.push_back(str(currentStep)[0]);
+    if (currentStep == Step::Finish) {
+      final_state_ = "FINISHED";
+      break;
+    } else {
+      if (currentStep != Step::Stay &&
+          wall_sensor_.isWall(static_cast<Direction>(currentStep))) {
+        std::cout << "ERROR!! Running into a wall : unexpected behaviour"
+                  << std::endl;
+        error = true;
+      }
+      if (!error) {
+        house_.updateCleaningState(robot_state_.getPosition());
+        if (currentStep == Step::Stay &&
+            robot_state_.getPosition() == house_.getDockingStationLoc()) {
+          robot_state_.charge();
+        } else {
+          robot_state_.step(currentStep);
         }
+      }
     }
+    if (robot_state_.battery() == 0 &&
+        robot_state_.getPosition() != house_.getDockingStationLoc()) {
+      final_state_ = "DEAD";
+      std::cout << "ERROR!! ROBOT REACHED DEAD STATE, STOPPING SIMULATOR"
+                << std::endl;
+      break;
+    }
+    steps_++;
+    // std::cout << currentStep << " " << house_.totDirt() << std::endl;
+  }
+  // if (final_state_ == "FINISHED") {
+  //   if (robot_state_.battery() == 0 &&
+  //       robot_state_.getPosition() != house_.getDockPos())
+  //     final_state_ = "DEAD";
+  // } else {
+  //   final_state_ = "WORKING";
+  // }
+//   std::cout << "After simulation " << house_;
 }
-
-void Simulator::makeOutputFile() {
-    // Open the file in write mode
-    std::ofstream outFile("output.txt");
-    
-    if (!outFile) {
-        std::cerr << "Error opening file for writing!" << std::endl;
-        return;
-    }
-    string status;
-    if(vc->getBatterySteps()<1 && vc->getCurrentLoc() != h->getDockingStationLoc())
-        status="DEAD";
-    else if(stepDescriptor.back()=='F') status = "FINISHED";
-    else status = "WORKING";
-    // Write the data to the file
-    outFile << "NumSteps = " << StepLog.size() << std::endl;
-    outFile << "DirtLeft = " << h->getTotalDirtLeft() << std::endl;
-    outFile << "Status = " << status << std::endl;
-    outFile << "Steps:" << stepDescriptor <<std::endl;
-
-    // Close the file
-    outFile.close();
+void Simulator::dump(std::string outputFileName) {
+  std::ofstream myfile;
+  myfile.open(outputFileName);
+  myfile << "NumSteps = " << steps_ << std::endl;
+  myfile << "DirtLeft = " << house_.getTotalDirtLeft() << std::endl;
+  myfile << "Status = " << final_state_ << std::endl;
+  for (auto step : step_list_)
+    myfile << step;
+  myfile << std::endl;
+  myfile.close();
 }

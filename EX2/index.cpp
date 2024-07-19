@@ -6,11 +6,12 @@ int main(int argc, char *argv[]){
         cerr << "Error:must pass exactly 1 argument of input file name." << endl;
         return 1;
     }
-    shared_ptr<Simulator> simulator = make_shared<Simulator>();
-    int res = simulator->readHouseFile(argv[1]);
-    if(res == -1) return 1;
-	unique_ptr<AbstractAlgorithm> algo = make_unique<Algorithm>(res);
-    simulator->setAlgorithm(std::move(algo));
-	simulator->run();
-    simulator->makeOutputFile();
+    Simulator simulator;
+    //  TODO: Handle empty command line args etc.
+    if (simulator.readHouseFile(argv[1]) < 0)
+        std::cout << "File read error. Stopping Simulator" << std::endl;
+    MyAlgorithm algo;
+    simulator.setAlgorithm(algo);
+    simulator.run();
+    simulator.dump("output.txt");
 }
