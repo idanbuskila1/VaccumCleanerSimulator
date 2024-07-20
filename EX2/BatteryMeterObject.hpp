@@ -11,7 +11,7 @@ class BatteryMeterObject: public BatteryMeter{
 
 public:
     BatteryMeterObject(shared_ptr<VaccumCleaner> vaccum_cleaner):vc(vaccum_cleaner){};
-	std::size_t getBatteryState() const override{return vc->getBatterySteps();};//implicit casting to size_t
+	std::size_t getBatteryState() const override{return vc->getBatterySteps();};
 
 };
 #endif

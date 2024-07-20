@@ -1,5 +1,5 @@
 #include "Simulator.hpp"
-#include "Algorithm.hpp"
+#include "MyAlgorithm.h"
 using std::vector, std::pair, std::ifstream, std::stringstream;
 using std::cerr, std::endl;
 

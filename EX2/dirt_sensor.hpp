@@ -7,4 +7,4 @@ public:
 	virtual int dirtLevel() const = 0;
 };
 
-#endif  // DIRT_SENSOR_H_
+#endif

@@ -5,7 +5,7 @@
 
 #include "VaccumCleaner.hpp"
 #include "House.hpp"
-#include "dirt_sensor.hpp"
+#include "dirt_sensor.h"
 
 class DirtSensorObject: public DirtSensor{
     shared_ptr<VaccumCleaner> vc;

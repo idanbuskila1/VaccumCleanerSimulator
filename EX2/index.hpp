@@ -2,8 +2,8 @@
 #define INDEX
 #include <memory>
 #include <iostream>
-#include "abstract_algorithm.hpp"
+#include "abstract_algorithm.h"
 #include "Simulator.hpp"
-#include "Algorithm.hpp"
+#include "MyAlgorithm.h"
 
 #endif
