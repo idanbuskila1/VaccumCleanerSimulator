@@ -1,4 +1,4 @@
-NumSteps = 0
+NumSteps = 21
 DirtLeft = 36
-Status = WORKING
-Steps:
+Status = DEAD
+Steps:EEEEEEEWEWEWEWEWEWEW

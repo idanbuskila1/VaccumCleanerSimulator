@@ -3,16 +3,16 @@
 
 #include <memory>
 
-#include "House.hpp"
 #include "VaccumCleaner.hpp"
+#include "House.hpp"
 #include "dirt_sensor.hpp"
 
 class DirtSensorObject: public DirtSensor{
-    std::shared_ptr<Simulator> sim;
-
+    shared_ptr<VaccumCleaner> vc;
+    shared_ptr<House> h;
 public:
-    DirtSensorObject(std::shared_ptr<Simulator> simulator):sim(simulator){};
-	int dirtLevel() const override{return sim->getDirt();};
+    DirtSensorObject(shared_ptr<House> house, shared_ptr<VaccumCleaner> vaccum_cleaner):vc(vaccum_cleaner),h(house){};
+	int dirtLevel() const override{return h->getDirtLevel(vc->getCurrentLoc());};
 
 };
 #endif

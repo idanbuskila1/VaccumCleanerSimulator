@@ -4,14 +4,14 @@
 #include <memory>
 
 #include "abstract_algorithm.hpp"
-#include "Simulator.hpp"
+#include "VaccumCleaner.hpp"
 
 class BatteryMeterObject: public BatteryMeter{
-    std::shared_ptr<Simulator> sim;
+    shared_ptr<VaccumCleaner> vc;
 
 public:
-    BatteryMeterObject(std::shared_ptr<Simulator> simulator):sim(simulator){};
-	std::size_t getBatteryState() const override{return this->sim->getBattery();};//implicit casting to size_t
+    BatteryMeterObject(shared_ptr<VaccumCleaner> vaccum_cleaner):vc(vaccum_cleaner){};
+	std::size_t getBatteryState() const override{return vc->getBatterySteps();};//implicit casting to size_t
 
 };
 #endif

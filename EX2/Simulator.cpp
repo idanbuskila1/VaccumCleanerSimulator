@@ -1,7 +1,4 @@
 #include "Simulator.hpp"
-#include "WallsSensorObject.hpp"
-#include "DirtSensorObject.hpp"
-#include "BatteryMeterObject.hpp"
 #include "Algorithm.hpp"
 using std::vector, std::pair, std::ifstream, std::stringstream;
 using std::cerr, std::endl;
@@ -25,10 +22,12 @@ bool isInteger(const string& str) {
 
 void Simulator::setAlgorithm(unique_ptr<AbstractAlgorithm> algorithm){
     alg = std::move(algorithm);
-    alg->setBatteryMeter(BatteryMeterObject(shared_from_this()));
-    alg->setDirtSensor(DirtSensorObject(shared_from_this()));
-    alg->setWallsSensor(WallsSensorObject(shared_from_this()));
-    alg->setMaxSteps(maxSteps);
+    bmo = BatteryMeterObject(vc);
+    dso = DirtSensorObject(h,vc);
+    wso = WallsSensorObject(h,vc);
+    alg->setBatteryMeter(bmo);
+    alg->setDirtSensor(dso);
+    alg->setWallsSensor(wso);
     
 }
 int Simulator::readHouseFile(const string& filename){
@@ -153,9 +152,9 @@ int Simulator::readHouseFile(const string& filename){
 
     //initialize data members from file data
     this->maxSteps = maxSteps;
-    this->h = make_unique<House>(grid);
-    this->vc = make_unique<VaccumCleaner>(maxBattery,dockingStation);
-    return maxBattery;
+    this->h = make_shared<House>(grid);
+    this->vc = make_shared<VaccumCleaner>(maxBattery,dockingStation);
+    return 0;
 }
 void Simulator::run(){
     size_t steps = 0;
@@ -167,13 +166,20 @@ void Simulator::run(){
     
 
     while (steps < maxSteps) {
-        if (vc->getCurrentLoc() == h->getDockingStationLoc() && h->getTotalDirtLeft() == 0)//success
+        //stop id status is DEAD.
+        if(vc->getBatterySteps()<1 && vc->getCurrentLoc() != h->getDockingStationLoc()){
+            logMessage = "failure. battery is empty and not on docking station. DEAD.";
+            cout<<logMessage<<endl;
+            StepLog.push_back(logMessage);
             break;
+        }
         // Ask algorithm for next move decision
         action = alg->nextStep();
-        if(action==Step::Finish)
-            stepDescriptor.append("F");
+        //stop if status is FINISHED
+        if(action==Step::Finish){
+            stepDescriptor+="F";
             break;
+        }
         // Perform the move we got from the algorithm
 //         if (action == -1) {
 //             logMessage = "failure. battery is empty and not on docking station";
@@ -188,36 +194,42 @@ void Simulator::run(){
             if (vc->getCurrentLoc() == h->getDockingStationLoc()) {//staying on docking is charging
                 logMessage = "step: " + to_string(steps) + ". battery: " + to_string(vc->getBatterySteps()) + ". current location: [" + to_string(x) + "," + to_string(y) + "]. action: Stay (charge)";
                 StepLog.push_back(logMessage);
+                cout<<logMessage<<endl;
                 err = vc->charge();
             } else {//staying elsewhere is cleaning
                 logMessage = "step: " + to_string(steps) + ". battery: " + to_string(vc->getBatterySteps()) + ". current location: [" + to_string(x) + "," + to_string(y) + "]. action: Stay (clean).";
                 StepLog.push_back(logMessage);
+                cout<<logMessage<<endl;
                 err=vc->clean();
             }
             if (err) {
                 logMessage = "failure. algorithm tried to make vacuum cleaner clean with no battery.";
                 StepLog.push_back(logMessage);
+                cout<<logMessage<<endl;
                 break;
             }
-            stepDescriptor.append("s");
+            stepDescriptor+="s";
             continue;
         } else { // need to advance 1 step in the direction returned with action
             steps++;
             Direction dir = static_cast<Direction>(action);
             logMessage = "step: " + to_string(steps) + ". battery: " + to_string(vc->getBatterySteps()) + ". current location: [" + to_string(x) + "," + to_string(y) + "]. action: move in direction " + directionsTranslate[static_cast<int>(action)];
             StepLog.push_back(logMessage);
+            cout<<logMessage<<endl;
             if (h->isWallInDirection(dir, vc->getCurrentLoc())) {
                 logMessage = "failure. algorithm tried to move vacuum cleaner into a wall.";
                 StepLog.push_back(logMessage);
+                cout<<logMessage<<endl;
                 break;
             }
             int err = vc->move(dir);
             if (err) {
                 logMessage = "failure. algorithm tried to move vacuum cleaner with no battery.";
                 StepLog.push_back(logMessage);
+                cout<<logMessage<<endl;
                 break;
             } 
-            stepDescriptor.append(to_string(directionsTranslate[static_cast<int>(action)].at(0)));
+            stepDescriptor+= directionsTranslate[static_cast<int>(action)].at(0);
             continue;
         }
     }
