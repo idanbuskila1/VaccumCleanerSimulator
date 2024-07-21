@@ -1,35 +1,68 @@
-# Compiler
+# Compiler and flags
 CXX = g++
+CXXFLAGS = -std=c++17 -fPIC -Wall -Wextra -ICommon -ISimulation -IAlgorithm -g
+LDFLAGS = -shared
 
-# Compiler flags
-CXXFLAGS =-fsanitize=address -Wall -Wextra -Werror -pedantic -std=c++20 
+# Sanitizer flags
+SANITIZER_FLAGS = -fsanitize=address -fno-omit-frame-pointer
+
+# Include directories
+COMMON_INCLUDES = \
+	enums.hpp \
+	abstract_algorithm.hpp \
+	battery_meter.hpp \
+	dirt_sensor.hpp \
+	wall_sensor.hpp
+
+SIM_INCLUDES = \
+	BatteryMeterObject.hpp \
+	WallsSensorObject.hpp \
+	DirtSensorObject.hpp \
+	House.hpp \
+	Utils.h \
+	Simulator.hpp \
+	VaccumCleaner.hpp \
+
+ALGO_INCLUDES = \
+	MyAlgorithm.h \
+	enums.hpp \
+	AlgoUtils.h \
+	HouseManager.h
 
 # Source files
-SRCS = index.cpp House.cpp VaccumCleaner.cpp Simulator.cpp Algorithm.cpp
+SIM_SOURCES = \
+	House.cpp \
+	Utils.cpp \
+	Simulator.cpp \
+	VaccumCleaner.cpp \
 
-# Header files
-HDRS = abstract_algorithm.h battery_meter.hpp dirt_sensor.hpp enums.hpp index.hpp House.hpp VaccumCleaner.hpp Simulator.hpp BatteryMeterObject.hpp DirtSensorObject.hpp WallsSensorObject.hpp Algorithm.hpp
+ALGO_SOURCES = \
+	MyAlgorithm.cpp \
+	HouseManager.cpp \
+	AlgoUtils.cpp
 
 # Object files
-OBJS = $(SRCS:.cpp=.o)
+SIM_OBJECTS = $(SIM_SOURCES:.cpp=.o)
+ALGO_OBJECTS = $(ALGO_SOURCES:.cpp=.o)
+MAIN_OBJECT = index.o
 
-# Target executable
-TARGET = myrobot
+# Targets
+TARGET = EX2
+LIBRARY = libsim.so
 
-# Build the executable
-$(TARGET): $(OBJS) | $(BINDIR)
-	$(CXX) $(CXXFLAGS) -o $@ $^
 
-# Compile source files into object files
-%.o: %.cpp $(HDRS)
-	$(CXX) $(CXXFLAGS) -c $<
-
-# Clean up build files
-clean:
-	rm -f $(OBJS) $(TARGET)
-
-#Phony targets
 .PHONY: all clean
 
-# Default target
 all: $(TARGET)
+
+$(TARGET): $(MAIN_OBJECT) $(ALGO_OBJECTS) $(LIBRARY)
+	$(CXX) $(CXXFLAGS) $(SANITIZER_FLAGS) -o $@ $(MAIN_OBJECT) $(ALGO_OBJECTS) -L. -lsim -Wl,-rpath,.
+
+$(LIBRARY): $(SIM_OBJECTS) $(ALGO_OBJECTS)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(SANITIZER_FLAGS) -o $@ $^
+
+%.o: %.cpp $(COMMON_INCLUDES) $(SIM_INCLUDES) $(ALGO_INCLUDES)
+	$(CXX) $(CXXFLAGS) $(SANITIZER_FLAGS) -c $< -o $@
+
+clean:
+	rm -f $(TARGET) $(LIBRARY) $(MAIN_OBJECT) $(SIM_OBJECTS) $(ALGO_OBJECTS)

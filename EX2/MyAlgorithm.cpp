@@ -5,8 +5,8 @@
 #include <queue>
 
 MyAlgorithm::MyAlgorithm()
-    : steps_(0), house_manager_(), current_position_(DOCK_POS),
-      state_(AlgoState::CHARGING) {
+    : steps_(0), state_(AlgoState::CHARGING), current_position_(DOCK_POS), 
+    house_manager_() {
   house_manager_.setDirt(current_position_, int(LocType::Dock));
 }
 

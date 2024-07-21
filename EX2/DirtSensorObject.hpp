@@ -7,6 +7,8 @@
 #include "House.hpp"
 #include "dirt_sensor.hpp"
 
+using std::shared_ptr;
+
 class DirtSensorObject: public DirtSensor{
     shared_ptr<VaccumCleaner> vc;
     shared_ptr<House> h;

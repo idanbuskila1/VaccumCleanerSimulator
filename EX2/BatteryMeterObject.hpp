@@ -6,6 +6,8 @@
 #include "abstract_algorithm.hpp"
 #include "VaccumCleaner.hpp"
 
+using std::shared_ptr;
+
 class BatteryMeterObject: public BatteryMeter{
     shared_ptr<VaccumCleaner> vc;
 

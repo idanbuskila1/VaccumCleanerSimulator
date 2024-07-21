@@ -107,8 +107,6 @@ std::stack<Direction> HouseManager::getShortestPath(std::pair<int, int> src,
   q.push(src);
   visited[src] = true;
 
-  bool found = false;
-
   // std::cout << __FUNCTION__ << " dst " << dst.first << "," << dst.second
   //           << std::endl;
 

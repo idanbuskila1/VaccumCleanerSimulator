@@ -1,0 +1,4 @@
+NumSteps = 4
+DirtLeft = 2
+Status = FINISHED
+Steps:SWNEF

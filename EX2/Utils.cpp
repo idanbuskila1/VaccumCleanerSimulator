@@ -30,7 +30,7 @@ double Utils::parseInt(string input) {
 
 size_t Utils::readAEqb(string input, string varname) {
   int idx = input.find('=');
-  if (idx == std::string::npos)
+  if (idx == int(std::string::npos))
     return (size_t)FileReadError::Invalid;
   auto varstring = input.substr(0, idx);
 
