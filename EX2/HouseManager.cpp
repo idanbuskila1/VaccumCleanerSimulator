@@ -1,156 +1,184 @@
-#include "MyAlgorithm.h"
+#include "HouseManager.h"
+
 #include "AlgoUtils.h"
+
 #include <queue>
-#include <iostream>
+#include <vector>
 
-MyAlgorithm::MyAlgorithm()
-    : steps_(0), state_(AlgoState::CHARGING), current_position_(DOCK_POS),
-      house_manager_() {
-  house_manager_.setDirt(current_position_, int(LocType::Dock));
+HouseManager::HouseManager() : total_dirt_(0) {}
+
+bool HouseManager::exists(const pair<int,int> pos) const {
+  return percieved_house_.count(pos) != 0;
 }
 
-MyAlgorithm::MyAlgorithm(AbstractAlgorithm &algorithm) { *this = algorithm; }
-
-void MyAlgorithm::setMaxSteps(std::size_t max_steps) { max_steps_ = max_steps; }
-
-void MyAlgorithm::setWallsSensor(const WallsSensor &walls_sensor) {
-  walls_sensor_ = &walls_sensor;
+int HouseManager::dirt(const pair<int,int> pos) {
+  if (exists(pos))
+    return percieved_house_[pos];
+  std::cout << "ERROR!! " << __FUNCTION__ << " position does not exist. "
+            << std::endl;
+  return -2; // @todo errorcodes.h for algo
 }
 
-void MyAlgorithm::setDirtSensor(const DirtSensor &dirt_sensor) {
-  dirt_sensor_ = &dirt_sensor;
+void HouseManager::setDirt(const pair<int,int> pos, int dirtlevel) {
+  if (/* percieved_house_.count(pos) != 0 && */ percieved_house_[pos] > 0 &&
+      percieved_house_[pos] <= MAX_DIRT)
+    total_dirt_ -= percieved_house_[pos];
+
+  percieved_house_[pos] = dirtlevel;
+  total_dirt_ += (dirtlevel >= 0 && dirtlevel <= MAX_DIRT) ? dirtlevel : 0;
 }
 
-void MyAlgorithm::setBatteryMeter(const BatteryMeter &battery_meter) {
-  battery_meter_ = &battery_meter;
-  max_battery_ = battery_meter_->getBatteryState();
+bool HouseManager::isWall(const pair<int,int> pos) {
+  return percieved_house_[pos] == int(LocType::Wall);
 }
 
-void MyAlgorithm::updateNeighbors() {
-  house_manager_.eraseUnexplored(current_position_);
+bool HouseManager::isDock(const pair<int,int> pos) {
+  return percieved_house_[pos] == int(LocType::Dock);
+}
 
-  for (auto dir : dirPriority()) {
-    house_manager_.updateNeighbor(dir, current_position_,
-                                  walls_sensor_->isWall(dir));
+void HouseManager::clean(const pair<int,int> pos) {
+  if (percieved_house_[pos] > 0 && percieved_house_[pos] <= MAX_DIRT) {
+    // clean pos
+    percieved_house_[pos]--;
+    total_dirt_--;
   }
 }
 
-bool MyAlgorithm::needCharge() {
-  if (current_position_ == DOCK_POS)
-    return false;
-  auto st = house_manager_.getShortestPath(current_position_, DOCK_POS);
-  if (st.size() + BATTERY_BUFF > battery_meter_->getBatteryState())
-    return true;
-  return false;
+bool HouseManager::isUnexploredEmpty() {
+  // std::cout << " " << unexplored_points_.size() << " ";
+  return unexplored_points_.empty();
 }
 
-bool MyAlgorithm::isSafeMove(Direction dir) {
-  auto new_pos = getPosition(current_position_, dir);
-  return !walls_sensor_->isWall(dir) && house_manager_.exists(new_pos);
+bool HouseManager::isUnexplored(const pair<int,int> pos) {
+  return unexplored_points_.count(pos) != 0;
 }
 
-Step MyAlgorithm::work() {
-  if (house_manager_.dirt(current_position_) > 0)
-    return Step::Stay;
-
-  Direction best_dir = Direction::Stay;
-  int max_dirt = -1;
-
-  for (auto d : dirPriority()) {
-    auto point = getPosition(current_position_, d);
-    if (house_manager_.isUnexplored(point)) {
-      if (isSafeMove(d)) {
-        current_position_ = point;
-        return static_cast<Step>(d);
-      } else {
-        house_manager_.markExplored(point);
-      }
-    } else if (house_manager_.exists(point) && house_manager_.dirt(point) > 0) {
-      if (max_dirt < house_manager_.dirt(point)) {
-        best_dir = d;
-        max_dirt = house_manager_.dirt(point);
-      }
-    }
-  }
-
-  if (max_dirt > 0 && isSafeMove(best_dir)) {
-    current_position_ = getPosition(current_position_, best_dir);
-    return static_cast<Step>(best_dir);
-  }
-
-  state_ = AlgoState::TO_POS;
-  stack_ = house_manager_.getShortestPath(current_position_, {}, true);
-  
-  if (stack_.size() * 2 > max_battery_)
-    return Step::Finish;
-
-  while (!stack_.empty()) {
-    Direction dir = stack_.top();
-    stack_.pop();
-    if (isSafeMove(dir)) {
-      current_position_ = getPosition(current_position_, dir);
-      return static_cast<Step>(dir);
-    }
-  }
-
-  return Step::Stay;
+void HouseManager::eraseUnexplored(const pair<int,int> pos) {
+  if (isUnexplored(pos))
+    unexplored_points_.erase(pos);
 }
 
-Step MyAlgorithm::nextStep() {
-  steps_++;
-  std::cout << "Step: " << steps_ << ", Position: (" << current_position_.first 
-            << ", " << current_position_.second << "), State: " << static_cast<int>(state_) 
-            << ", Battery: " << battery_meter_->getBatteryState() << std::endl;
-
-  if (battery_meter_->getBatteryState() == 1 && steps_ == 0)
-    return Step::Finish;
-
-  if (steps_ != 1 && house_manager_.isUnexploredEmpty() &&
-      house_manager_.total_dirt() == 0 && current_position_ == DOCK_POS)
-    state_ = AlgoState::FINISH;
-
-  if (state_ == AlgoState::FINISH)
-    return Step::Finish;
-
-  house_manager_.setDirt(current_position_, dirt_sensor_->dirtLevel());
-  updateNeighbors();
-  house_manager_.clean(current_position_, dirt_sensor_->dirtLevel());
-
-  if (state_ == AlgoState::CHARGING) {
-    if (battery_meter_->getBatteryState() != max_battery_)
-      return Step::Stay;
-    state_ = AlgoState::WORKING;
-  }
-
-  if (steps_ != 1 && (needCharge() || (house_manager_.isUnexploredEmpty() &&
-                                       house_manager_.total_dirt() == 0))) {
-    state_ = AlgoState::TO_DOCK;
-    stack_ = house_manager_.getShortestPath(current_position_, DOCK_POS);
-    
-    while (!stack_.empty()) {
-      Direction dir = stack_.top();
-      stack_.pop();
-      if (isSafeMove(dir)) {
-        current_position_ = getPosition(current_position_, dir);
-        return static_cast<Step>(dir);
-      }
-    }
-
-    state_ = AlgoState::CHARGING;
-    return Step::Stay;
-  } else if (state_ == AlgoState::TO_DOCK || state_ == AlgoState::TO_POS) {
-    while (!stack_.empty()) {
-      Direction dir = stack_.top();
-      stack_.pop();
-      if (isSafeMove(dir)) {
-        current_position_ = getPosition(current_position_, dir);
-        return static_cast<Step>(dir);
-      }
-    }
-
-    state_ = (current_position_ == DOCK_POS) ? AlgoState::CHARGING : AlgoState::WORKING;
-    return Step::Stay;
+void HouseManager::updateNeighbor(Direction dir, pair<int,int> position, bool isWall) {
+  auto pos = getPosition(position, dir);
+  if (isWall) {
+    percieved_house_[pos] = int(LocType::Wall);
   } else {
-    return work();
+    if (percieved_house_.count(pos) == 0)
+      unexplored_points_[pos];
   }
+}
+
+/**
+ * @brief update dirt at pos and clean
+ *
+ * @param pos position where value needs to be updated
+ * @param dirt value to be updated
+ */
+void HouseManager::clean(const pair<int,int> pos, int dirt) {
+  if (/* percieved_house_.count(pos) != 0 && */ percieved_house_[pos] > 0 &&
+      percieved_house_[pos] <= MAX_DIRT)
+    total_dirt_ -= percieved_house_[pos];
+
+  percieved_house_[pos] = dirt;
+  total_dirt_ += (dirt >= 0 && dirt <= MAX_DIRT) ? dirt : 0;
+
+  clean(pos);
+}
+
+/**
+ * @brief Returns stack of directions to take to reach given destination if
+ * search is false and if search is true returns path to closest dirt or
+ * unexplored location
+ *
+ * @param src Starting location
+ * @param dst
+ * @param search if true returns closest dirty/unexplored
+ * @return std::stack<Direction>
+ */
+std::stack<Direction> HouseManager::getShortestPath(std::pair<int, int> src,
+                                                    std::pair<int, int> dst,
+                                                    bool search) {
+  std::stack<Direction> path;
+
+  std::queue<pair<int,int>> q; // stack for DFS traversal
+  std::map<pair<int,int>, bool> visited;
+  std::map<pair<int,int>, pair<int,int>> parent;
+
+  q.push(src);
+  visited[src] = true;
+
+  bool found = false;
+
+  // std::cout << __FUNCTION__ << " dst " << dst.first << "," << dst.second
+  //           << std::endl;
+
+  /**
+   * @todo
+   * - multiple paths till some battery level
+   * - Priority queue of paths (with total dirt, distance)
+   * - Store all paths and choose best based on difference battery left and
+   *   min path coupled with dirt cleaned on way back
+   *
+   *  ** for A2 we can implement best path on given depth
+   */
+  while (!q.empty()) {
+    auto t = q.front();
+    // std::cout << __FUNCTION__ << "top " << t.first << "," << t.second
+    //           << std::endl;
+    q.pop();
+    for (std::pair<int, int> v : neighbors(t)) {
+      if (visited.count(v) == 0) { // !visited
+        q.push(v);
+        visited[v] = true;
+        parent[v] = t;
+      }
+    }
+    if (search) {
+      if (!((percieved_house_.count(t) != 0 && percieved_house_[t] > 0) ||
+            unexplored_points_.count(t) != 0)) { // found dirt
+        continue;
+      }
+    }
+    if (!search) {
+      if ((!path.empty() || t != dst))
+        continue; // if path is already found or not target node
+    }
+    // std::cout << __FUNCTION__ << " FOUND PATH! " << std::endl;
+    auto v = t;
+    while (v != src) {
+      // path.push(v);
+      path.push(getDirection(parent[v], v));
+      v = parent[v];
+    }
+    break;
+  }
+  return path;
+}
+
+std::vector<std::pair<int, int>>
+HouseManager::neighbors(std::pair<int, int> point) {
+  static std::vector<std::pair<int, int>> directions = {
+      {-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+  std::vector<std::pair<int, int>> neighbors;
+
+  for (auto dir : directions) {
+    std::pair<int, int> temp = {point.first + dir.first,
+                                point.second + dir.second};
+    // do not add walls
+    // do not add unvisited nodes
+    // std::cout << "temp: " << temp.first << "," << temp.second << std::endl;
+    // std::cout << "values: " << percieved_house_.count(temp) << "  "
+    //           << isWall(temp) << std::endl;
+    if ((percieved_house_.count(temp) != 0 &&
+         !isWall(temp) /*  && !isDock(temp) */) ||
+        unexplored_points_.count(temp) != 0) {
+      neighbors.push_back(temp);
+    }
+  }
+  // std::cout << __FUNCTION__ << " NEIGHBORS PRINT : " << neighbors.size()
+  //           << std::endl;
+  // for (auto n : neighbors) {
+  //   std::cout << __FUNCTION__ << n.first << "," << n.second << std::endl;
+  // }
+  return neighbors;
 }

@@ -28,4 +28,6 @@ enum class LocType {
   Dock = 100,
 };
 
+#define MAX_DIRT 9
+
 #endif
