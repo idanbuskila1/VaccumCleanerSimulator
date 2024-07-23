@@ -1,6 +1,6 @@
-#include "HouseManager.h"
+#include "HouseManager.hpp"
 
-#include "AlgoUtils.h"
+#include "AlgoUtils.hpp"
 
 #include <queue>
 #include <vector>
@@ -18,9 +18,14 @@ int HouseManager::dirt(const pair<int,int> pos) {
             << std::endl;
   return -2; // @todo errorcodes.h for algo
 }
-
+/**
+ * @brief update dirt at pos
+ *
+ * @param pos position where value needs to be updated
+ * @param dirt value to be updated
+ */
 void HouseManager::setDirt(const pair<int,int> pos, int dirtlevel) {
-  if (/* percieved_house_.count(pos) != 0 && */ percieved_house_[pos] > 0 &&
+  if (percieved_house_.count(pos) != 0 &&  percieved_house_[pos] > 0 &&
       percieved_house_[pos] <= MAX_DIRT)
     total_dirt_ -= percieved_house_[pos];
 
@@ -66,23 +71,6 @@ void HouseManager::updateNeighbor(Direction dir, pair<int,int> position, bool is
     if (percieved_house_.count(pos) == 0)
       unexplored_points_[pos];
   }
-}
-
-/**
- * @brief update dirt at pos and clean
- *
- * @param pos position where value needs to be updated
- * @param dirt value to be updated
- */
-void HouseManager::clean(const pair<int,int> pos, int dirt) {
-  if (/* percieved_house_.count(pos) != 0 && */ percieved_house_[pos] > 0 &&
-      percieved_house_[pos] <= MAX_DIRT)
-    total_dirt_ -= percieved_house_[pos];
-
-  percieved_house_[pos] = dirt;
-  total_dirt_ += (dirt >= 0 && dirt <= MAX_DIRT) ? dirt : 0;
-
-  clean(pos);
 }
 
 /**
@@ -133,7 +121,7 @@ std::stack<Direction> HouseManager::getShortestPath(std::pair<int, int> src,
     }
     if (search) {
       if (!((percieved_house_.count(t) != 0 && percieved_house_[t] > 0) ||
-            unexplored_points_.count(t) != 0)) { // found dirt
+            unexplored_points_.count(t) != 0)) { // not found dirt or unexplored point
         continue;
       }
     }
@@ -153,8 +141,7 @@ std::stack<Direction> HouseManager::getShortestPath(std::pair<int, int> src,
   return path;
 }
 
-std::vector<std::pair<int, int>>
-HouseManager::neighbors(std::pair<int, int> point) {
+std::vector<std::pair<int, int>> HouseManager::neighbors(std::pair<int, int> point) {
   static std::vector<std::pair<int, int>> directions = {
       {-1, 0}, {1, 0}, {0, 1}, {0, -1}};
   std::vector<std::pair<int, int>> neighbors;

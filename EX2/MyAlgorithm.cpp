@@ -1,6 +1,6 @@
-#include "MyAlgorithm.h"
+#include "MyAlgorithm.hpp"
 
-#include "AlgoUtils.h"
+#include "AlgoUtils.hpp"
 
 #include <queue>
 
@@ -50,9 +50,10 @@ Step MyAlgorithm::work() {
   // Assuming current_pos exists in percieved
   // priority to cleaning
   // std::cout << __FUNCTION__ << std::endl;
-  if (house_manager_.dirt(current_position_) > 0)
+  if (house_manager_.dirt(current_position_) > 0){
+    house_manager_.clean(current_position_);
     return Step::Stay;
-
+  }
   Direction dir;
   int max_dirt = -1;
   // it is guaranteed to be in perceived_house_ or unexplored_
@@ -114,7 +115,6 @@ Step MyAlgorithm::nextStep() {
   house_manager_.setDirt(current_position_, dirt_sensor_->dirtLevel());
 
   updateNeighbors();
-  house_manager_.clean(current_position_, dirt_sensor_->dirtLevel());
 
   if (state_ == AlgoState::CHARGING) {
     // std::cout << __FUNCTION__ << "CHARGING" << std::endl;

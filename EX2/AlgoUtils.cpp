@@ -1,5 +1,5 @@
 
-#include "AlgoUtils.h"
+#include "AlgoUtils.hpp"
 
 
 inline pair<int,int> toPair(Direction dir, bool invert) {
@@ -46,49 +46,5 @@ Direction getDirection(pair<int,int> src, pair<int,int> dst) {
 }
 
 std::vector<Direction> dirPriority() {
-  /**
-   * @note
-   * UP
-   * DOWN
-   * EAST
-   * WEST
-   */
   return {Direction::North, Direction::South, Direction::East, Direction::West};
-}
-
-Direction nextDir(const Direction &dir) {
-  auto dl = dirPriority();
-  int i = 0;
-  while (dl[i] != dir)
-    i++;
-  return dl[(i + 1) % 4];
-}
-
-std::ostream &operator<<(std::ostream &out, const AlgoState &state) {
-  switch (state) {
-  case AlgoState::CHARGING:
-    out << "CHARGING";
-    break;
-  case AlgoState::TO_DOCK:
-    out << "TO_DOCK";
-    break;
-  case AlgoState::TO_POS:
-    out << "TO_POS";
-    break;
-  case AlgoState::WORKING:
-    out << "WORKING";
-    break;
-  case AlgoState::FINISH:
-    out << "FINISH";
-    break;
-  case AlgoState::EXPLORE:
-    out << "EXPLORE";
-    break;
-  case AlgoState::CLEANING:
-    out << "CLEANING";
-    break;
-  default:
-    out << "State";
-  }
-  return out;
 }

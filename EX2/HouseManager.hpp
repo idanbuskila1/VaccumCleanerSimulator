@@ -26,14 +26,9 @@ public:
   bool isWall(const pair<int,int> pos);
   bool isDock(const pair<int,int> pos);
   void clean(const pair<int,int> pos);
-  // update and clean
-  void clean(const pair<int,int> pos, int dirt);
-
   bool isUnexploredEmpty();
   bool isUnexplored(const pair<int,int> pos);
-  // check and erase
-  void eraseUnexplored(const pair<int,int> pos);
-
+  void eraseUnexplored(const pair<int,int> pos);  // check and erase
   // void updateNeighbors();
   void updateNeighbor(Direction dir, pair<int,int> position, bool isWall);
 

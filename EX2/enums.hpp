@@ -25,7 +25,7 @@ enum class AlgoState {
 
 enum class LocType {
   Wall = -1,
-  Dock = 100,
+  Dock = -2,
 };
 
 #define MAX_DIRT 9

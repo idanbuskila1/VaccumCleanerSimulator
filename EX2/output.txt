@@ -1,4 +1,4 @@
-NumSteps = 4
-DirtLeft = 2
+NumSteps = 107
+DirtLeft = 0
 Status = FINISHED
-Steps:SWNEF
+Steps:SsEssNESsssEssssNESsssssEssssssNESsssssssENWWWWWWWssssssssssssssssssssWSEEEEEEEEssssssssEsssssssssNWWWWWWWWF

@@ -2,7 +2,7 @@
 
 #include "abstract_algorithm.hpp"
 #include "DirtSensorObject.hpp"
-#include "HouseManager.h"
+#include "HouseManager.hpp"
 #include "enums.hpp"
 
 #include <map>

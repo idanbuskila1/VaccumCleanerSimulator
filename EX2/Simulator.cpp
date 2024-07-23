@@ -1,5 +1,5 @@
 #include "Simulator.hpp"
-#include "MyAlgorithm.h"
+#include "MyAlgorithm.hpp"
 using std::vector, std::pair, std::ifstream, std::stringstream;
 using std::cerr, std::endl;
 
@@ -201,6 +201,7 @@ void Simulator::run(){
                 StepLog.push_back(logMessage);
                 cout<<logMessage<<endl;
                 err=vc->clean();
+                h->updateCleaningState(vc->getCurrentLoc());
             }
             if (err) {
                 logMessage = "failure. algorithm tried to make vacuum cleaner clean with no battery.";
