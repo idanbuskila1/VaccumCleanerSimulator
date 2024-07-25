@@ -1,29 +1,29 @@
-#include "HouseManager.hpp"
+#include "HouseMap.h"
 
 // Function to mark a cell as visited-we only put in the cells that aren't walls
-void HouseManager::markVisited(int x, int y, int dirt) {
+void HouseMap::markVisited(int x, int y, int dirt) {
     std::pair<int, int> cell = std::make_pair(x, y);
     visited[cell] = dirt; //TODO check syntax
 }
 
 // Function to mark a cell as seen but not visited
-void HouseManager::markSeen(int x, int y) {
+void HouseMap::markSeen(int x, int y) {
     std::pair<int, int> cell = std::make_pair(x, y);
     mappedHouse.insert(cell);
 }
 
 // Function to check if a cell is visited
-bool HouseManager::isVisited(int x, int y) const {
+bool HouseMap::isVisited(int x, int y) const {
     return visited.find(std::make_pair(x, y)) != visited.end();
 }
 
 // Function to check if a cell is seen
-bool HouseManager::isMapped(int x, int y) const {
+bool HouseMap::isMapped(int x, int y) const {
     return mappedHouse.find(std::make_pair(x, y)) != mappedHouse.end();
 }
 
 // Function to get the dirt level of a cell
-int HouseManager::getCurrDirt(int x, int y) const {
+int HouseMap::getCurrDirt(int x, int y) const {
      try {
         // Attempt to access the value associated with the key
         return visited.at(std::make_pair(x, y));
@@ -33,7 +33,7 @@ int HouseManager::getCurrDirt(int x, int y) const {
     }
 }
 
-vector<Direction> HouseManager::getShortestPath(pair<int,int> start, pair<int,int> end) const {
+vector<Direction> HouseMap::getShortestPath(pair<int,int> start, pair<int,int> end) const {
     vector<Direction> directions;
     if (start == end) return directions;
 
@@ -76,7 +76,7 @@ vector<Direction> HouseManager::getShortestPath(pair<int,int> start, pair<int,in
     return directions;
 }
 
-pair<int, int> HouseManager::findNotVisited() const { 
+pair<int, int> HouseMap::findNotVisited() const { 
     for (const auto& m : mappedHouse) {
         if (!isVisited(m.first, m.second)) {
             return m;

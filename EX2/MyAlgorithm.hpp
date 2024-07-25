@@ -1,54 +1,41 @@
-#pragma once
+#ifndef HOUSE_CLEANING_ALGORITHM_H_
+#define HOUSE_CLEANING_ALGORITHM_H_
 
-#include "abstract_algorithm.hpp"
-#include "DirtSensorObject.hpp"
-#include "HouseManager.hpp"
-#include "enums.hpp"
-
-#include <map>
-#include <memory>
+#include <vector>
+#include <queue>
+#include <fstream>
+#include <iostream>
 #include <stack>
+#include <memory>  // For smart pointers
+#include "abstract_algorithm.hpp"
+#include "enums.hpp"
+#include "wall_sensor.hpp"
+#include "dirt_sensor.hpp"
+#include "battery_meter.hpp"
+#include "VaccumCleaner.hpp"
+#include "HouseMap.h"
+#include "utils.h"
 
 class MyAlgorithm : public AbstractAlgorithm {
 private:
-  int steps_;
-  std::size_t max_steps_;
-  AlgoState state_;
-  std::size_t max_battery_;
-  std::pair<int, int> current_position_;
-
-  const WallsSensor *walls_sensor_ = nullptr;
-  const DirtSensor *dirt_sensor_ = nullptr;
-  const BatteryMeter *battery_meter_ = nullptr;
-
-  HouseManager house_manager_;
-
-  // point to dirt
-  // std::map<std::pair<int, int>, int> percieved_house_;
-  // std::map<std::pair<int, int>, bool> unexplored_points_;
-  std::stack<Direction> stack_;
-
-  // methods
-  void updateNeighbors();
-  // void updateNeighbor(Direction dir);
-  bool needCharge();
-  // void cleanCurrent();
-  Step work();
-
-  // std::stack<Direction> getShortestPath(std::pair<int, int> src,
-  //                                       std::pair<int, int> dst,
-  //                                       bool search = false);
-
-  // std::vector<std::pair<int, int>> neighbors(std::pair<int, int> point);
-
+    VaccumCleaner *robotState;
+    const WallsSensor *wallsSensor = nullptr;
+    const DirtSensor *dirtSensor = nullptr;
+    const BatteryMeter *batteryMeter = nullptr;
+    HouseMap houseMap;
+    std::size_t maxSteps = 0;
+    
+    std::stack<std::pair<int,int>> pathStack;
+    std::set<std::pair<int, int>> uniquePathStack;
 public:
-  MyAlgorithm();
-  MyAlgorithm(AbstractAlgorithm &algorithm);
-
-  void setMaxSteps(std::size_t maxSteps) override;
-  void setWallsSensor(const WallsSensor &walls_sensor) override;
-  void setDirtSensor(const DirtSensor &dirt_sensor) override;
-  void setBatteryMeter(const BatteryMeter &battery_meter) override;
-  // TODO : Complete in cpp file
-  Step nextStep() override;
+    MyAlgorithm();
+    MyAlgorithm(VaccumCleaner &state);
+    void setBatteryMeter(const BatteryMeter& meter) override;
+    void setWallsSensor(const WallsSensor& sensor) override;
+    void setDirtSensor(const DirtSensor& sensor) override;
+    void setMaxSteps(std::size_t maxSteps) override;
+    Direction nextStep() override;
+    // int getDirtLeft() const;
 };
+
+#endif // HOUSE_CLEANING_ALGORITHM_H_

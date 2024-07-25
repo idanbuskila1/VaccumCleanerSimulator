@@ -20,7 +20,7 @@ class House{
 public:
     House(const vector<vector<int> > map);
 
-    void updateCleaningState(const pair<int,int> loc);//updates cleaning step on location loc, and decreases dirt level by 1.
+    void updateCleaningState(const pair<int,int> loc);//updates cleaning Direction on location loc, and decreases dirt level by 1.
     int getDirtLevel(const pair<int,int> loc) const;//returns dirt level on loc, or 0 if there is no dirt/wall.
     bool isWallInDirection(const Direction direction, const pair<int,int> curLoc) const;//according to direction and current location return if there is a wall.
     int getTotalDirtLeft()const{return totalDirtLeft;}//returns the sum of dirt left in the entire house.

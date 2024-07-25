@@ -6,11 +6,11 @@
 #include <utility>  // for std::pair
 #include "utils.h"
 
-class HouseManager {
+class HouseMap {
 public:
     // Constructor
-    HouseManager() = default;
-    HouseManager(pair<int, int> dockingLocation) : dockingLocation(dockingLocation) {}
+    HouseMap() = default;
+    HouseMap(pair<int, int> dockingLocation) : dockingLocation(dockingLocation) {}
     // Function to set the docking location
     void setDockingLocation(pair<int, int> dockingLocation) { this->dockingLocation = dockingLocation; }
     // Function to mark a cell as visited with a certain dirt level

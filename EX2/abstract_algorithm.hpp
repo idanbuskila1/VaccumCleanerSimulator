@@ -14,7 +14,7 @@
 #include "battery_meter.hpp"
 #include "wall_sensor.hpp"
 #include "dirt_sensor.hpp"
-
+#include "VaccumCleaner.hpp"
 
 class AbstractAlgorithm {
 public:
@@ -23,7 +23,7 @@ public:
 	virtual void setWallsSensor(const WallsSensor&) = 0;
 	virtual void setDirtSensor(const DirtSensor&) = 0;
 	virtual void setBatteryMeter(const BatteryMeter&) = 0;
-	virtual Step nextStep() = 0;
+	virtual Direction nextStep() = 0;
 };
 
 #endif  // ROBOT_ALGORITHM_H__

@@ -1,157 +1,155 @@
 #include "MyAlgorithm.hpp"
 
-#include "AlgoUtils.hpp"
+MyAlgorithm::MyAlgorithm() : robotState(nullptr){}
 
-#include <queue>
-
-MyAlgorithm::MyAlgorithm()
-    : steps_(0), state_(AlgoState::CHARGING), current_position_(DOCK_POS), 
-    house_manager_() {
-  house_manager_.setDirt(current_position_, int(LocType::Dock));
+MyAlgorithm::MyAlgorithm(VaccumCleaner &state) {
+    this->robotState = &state;
+    pathStack.push(robotState->getDockingLocation());
+    uniquePathStack.insert(robotState->getDockingLocation());
+    houseMap.setDockingLocation(robotState->getDockingLocation());
 }
 
-MyAlgorithm::MyAlgorithm(AbstractAlgorithm &algorithm) { *this = algorithm; }
-
-void MyAlgorithm::setMaxSteps(std::size_t max_steps) { max_steps_ = max_steps; }
-
-void MyAlgorithm::setWallsSensor(const WallsSensor &walls_sensor) {
-  walls_sensor_ = &walls_sensor;
+void MyAlgorithm::setBatteryMeter(const BatteryMeter& meter) {
+    batteryMeter = &meter;
 }
 
-void MyAlgorithm::setDirtSensor(const DirtSensor &dirt_sensor) {
-  dirt_sensor_ = &dirt_sensor;
+void MyAlgorithm::setWallsSensor(const WallsSensor& sensor) {
+    wallsSensor = &sensor;
 }
 
-void MyAlgorithm::setBatteryMeter(const BatteryMeter &battery_meter) {
-  battery_meter_ = &battery_meter;
-  max_battery_ = battery_meter_->getBatteryState();
+void MyAlgorithm::setDirtSensor(const DirtSensor& sensor) {
+    dirtSensor = &sensor;
 }
 
-void MyAlgorithm::updateNeighbors() {
-  house_manager_.eraseUnexplored(current_position_);
-
-  for (auto dir : dirPriority()) {
-    house_manager_.updateNeighbor(dir, current_position_,
-                                  walls_sensor_->isWall(dir));
-  }
+void MyAlgorithm::setMaxSteps(std::size_t max) {
+    maxSteps = max;
 }
 
-bool MyAlgorithm::needCharge() {
-  if (current_position_ == DOCK_POS)
-    return false;
-  auto st = house_manager_.getShortestPath(current_position_, DOCK_POS);
-  // std::cout << __FUNCTION__ << " st.size " << st.size() << std::endl;
-  if (st.size() + BATTERY_BUFF > battery_meter_->getBatteryState())
-    return true;
-  return false;
-}
-
-Step MyAlgorithm::work() {
-  // Assuming current_pos exists in percieved
-  // priority to cleaning
-  // std::cout << __FUNCTION__ << std::endl;
-  if (house_manager_.dirt(current_position_) > 0){
-    house_manager_.clean(current_position_);
-    return Step::Stay;
-  }
-  Direction dir;
-  int max_dirt = -1;
-  // it is guaranteed to be in perceived_house_ or unexplored_
-  // due to updateNeighbors()
-  for (auto d : dirPriority()) {
-    auto point = getPosition(current_position_, d);
-    if (house_manager_.isUnexplored(point)) {
-      current_position_ = getPosition(current_position_, d);
-      return static_cast<Step>(d);
-    } else if (house_manager_.exists(point) && house_manager_.dirt(point) > 0) {
-      if (max_dirt < house_manager_.dirt(point)) {
-        dir = d;
-        max_dirt = house_manager_.dirt(point);
-      }
-    } else if (!house_manager_.exists(point)) {
-      std::cout << "ERROR!! INVALID SCENARIO - NOT IN UNEXPLORED OR PERCIEVED"
-                << std::endl;
+void printSet(const std::set<std::pair<int, int>>& s) {
+    for (const auto& p : s) {
+        std::cout << "(" << p.first << ", " << p.second << ")\n";
     }
-  }
-  if (max_dirt > 0) {
-    current_position_ = getPosition(current_position_, dir);
-    return static_cast<Step>(dir);
-  }
-  // BFS ALGORITHM
-  state_ = AlgoState::TO_POS;
-  // populate stack
-  stack_ = house_manager_.getShortestPath(current_position_, {}, true);
-  if (stack_.size() * 2 > max_battery_)
-    return Step::Finish;
-  dir = stack_.top();
-  stack_.pop();
-  current_position_ = getPosition(current_position_, dir);
-  return static_cast<Step>(dir);
+    std::cout << "------------------" << endl;
 }
 
-/**
- * @todo
- * 1. handle total dirt
- */
-Step MyAlgorithm::nextStep() {
-  if (battery_meter_->getBatteryState() == 1 && steps_ == 0) // DEAD case
-    return Step::Finish;
-  steps_++;
-  // std::cout << __PRETTY_FUNCTION__ << " currentpos: " <<
-  // current_position_.first
-  //           << " " << current_position_.second
-  //           << " totaldirt: " << house_manager_.total_dirt() << " " << state_
-  //           << " unexplored " << house_manager_.isUnexploredEmpty()
-  //           << std::endl;
-
-  if (steps_ != 1 && house_manager_.isUnexploredEmpty() &&
-      house_manager_.total_dirt() == 0 && current_position_ == DOCK_POS)
-    state_ = AlgoState::FINISH;
-
-  if (state_ == AlgoState::FINISH) {
-    return Step::Finish;
-  }
-
-  house_manager_.setDirt(current_position_, dirt_sensor_->dirtLevel());
-
-  updateNeighbors();
-
-  if (state_ == AlgoState::CHARGING) {
-    // std::cout << __FUNCTION__ << "CHARGING" << std::endl;
-    if (battery_meter_->getBatteryState() != max_battery_) {
-      return Step::Stay;
+void printVector(const vector<Direction>& vec) {
+    for (const auto& row : vec) {
+        std::cout << stepToString(row) << ' ';
     }
-    state_ = AlgoState::WORKING;
-  }
+    cout << endl;
+}
 
-  if (steps_ != 1 && (needCharge() || (house_manager_.isUnexploredEmpty() &&
-                                       house_manager_.total_dirt() == 0))) {
-    // std::cout << __FUNCTION__ << "NEED-CHARGE" << std::endl;
-    state_ = AlgoState::TO_DOCK;
-    // populate stack
-    stack_ = house_manager_.getShortestPath(current_position_, DOCK_POS);
-    auto dir = stack_.top();
-    stack_.pop();
-    current_position_ = getPosition(current_position_, dir);
-    if (stack_.empty())
-      state_ = AlgoState::CHARGING;
-    return static_cast<Step>(dir);
-  } else if (state_ == AlgoState::TO_DOCK || state_ == AlgoState::TO_POS) {
-    // std::cout << __FUNCTION__ << "TO_DOCK/POS" << std::endl;
-    // if (state_ == AlgoState::TO_POS && needCharge()) {
-    //   stack_ = std::stack<Direction>(); // clear stack
-    //   state_ = AlgoState::TO_DOCK;
+Direction MyAlgorithm::nextStep() {
+    
+    if (robotState->getStepsMade() >= 360) {
+        cout << "Battery: " << robotState->getBatterySteps() << ", Counter steps: "<< robotState->getStepsMade() << endl;
+    }
+
+    if (pathStack.empty()) { 
+        std::cout << "pathstack empty" << endl;
+        if (houseMap.getVisited().size() == houseMap.getMappedHouse().size()) {
+            std::cout << "visited size: " << houseMap.getVisited().size() << " mapped size: " << houseMap.getMappedHouse().size() << endl;
+            if (robotState->getCurrentLoc() == robotState->getDockingLocation()) {
+                return Direction::Finish;
+            }
+        }
+    }
+
+    if (robotState->getStepsMade() >= int(maxSteps)) {
+        std::cout << "steps made: " << robotState->getStepsMade() << " max steps: " << maxSteps << endl;
+        return Direction::Finish;
+    }
+    //i check my neighbors and see who is a wall and add myself and my neighbors to the seen map
+    if (batteryMeter->getBatteryState() != (size_t)robotState->getMaxBatterySteps() && robotState->getCurrentLoc() == robotState->getDockingLocation()) {
+        return Direction::Stay;
+    } 
+
+    std::pair<int,int> currPos = robotState->getCurrentLoc();
+    houseMap.markSeen(currPos.first, currPos.second);
+    if (!wallsSensor->isWall(Direction::North)) {
+        houseMap.markSeen(currPos.first - 1, currPos.second);
+    }
+    if (!wallsSensor->isWall(Direction::East)) {
+        houseMap.markSeen(currPos.first, currPos.second + 1);
+    }
+    if (!wallsSensor->isWall(Direction::South)) {
+        houseMap.markSeen(currPos.first + 1, currPos.second);
+    }
+    if (!wallsSensor->isWall(Direction::West)) {
+        houseMap.markSeen(currPos.first, currPos.second - 1);
+    }
+    int currDirt = dirtSensor->dirtLevel();
+    if (currDirt > 0 && currDirt <= 9) {
+        if (uniquePathStack.find(currPos) == uniquePathStack.end() && !houseMap.isVisited(currPos.first, currPos.second)) {
+            pathStack.push(currPos);
+            uniquePathStack.insert(currPos);
+        }
+    }
+
+    //if i need to start returning to the docking station
+    std::size_t currBattery = batteryMeter->getBatteryState();
+    vector<Direction> pathToDocking = houseMap.getShortestPath(currPos, robotState->getDockingLocation());
+    size_t remainingSteps = maxSteps - robotState->getStepsMade();
+    if (currBattery == pathToDocking.size() || remainingSteps == pathToDocking.size())  {
+        return pathToDocking[0];
+    }
+
+    //we still have dirt in the current cell
+    if (currDirt > 0 && currDirt <= 9){
+        return Direction::Stay;
+    }
+
+    //remove myself from the stack and add myself to the visited map
+    // if (!houseMap.isVisited(currPos.first, currPos.second)) {
+    houseMap.markVisited(currPos.first, currPos.second, currDirt);
+    if (pathStack.top() == robotState->getCurrentLoc()) {
+        pathStack.pop();
+        uniquePathStack.erase(currPos);
+    }
+    //add my neighbors to the stack
+    if (!wallsSensor->isWall(Direction::North) && !houseMap.isVisited(currPos.first - 1, currPos.second) && uniquePathStack.find({currPos.first - 1, currPos.second}) == uniquePathStack.end()) {
+        pathStack.push(std::make_pair(currPos.first - 1, currPos.second));
+        uniquePathStack.insert(std::make_pair(currPos.first - 1, currPos.second));
+    }
+    if (!wallsSensor->isWall(Direction::East) && !houseMap.isVisited(currPos.first, currPos.second + 1) && uniquePathStack.find({currPos.first, currPos.second + 1}) == uniquePathStack.end()) {
+        pathStack.push(std::make_pair(currPos.first, currPos.second + 1));
+        uniquePathStack.insert(std::make_pair(currPos.first, currPos.second + 1));
+    }
+    if (!wallsSensor->isWall(Direction::South) && !houseMap.isVisited(currPos.first + 1, currPos.second) && uniquePathStack.find({currPos.first + 1, currPos.second}) == uniquePathStack.end()) {
+        pathStack.push(std::make_pair(currPos.first + 1, currPos.second));
+        uniquePathStack.insert(std::make_pair(currPos.first + 1, currPos.second));
+    }
+    if (!wallsSensor->isWall(Direction::West) && !houseMap.isVisited(currPos.first, currPos.second - 1) && uniquePathStack.find({currPos.first, currPos.second - 1}) == uniquePathStack.end()) {
+        pathStack.push(std::make_pair(currPos.first, currPos.second - 1));
+        uniquePathStack.insert(std::make_pair(currPos.first, currPos.second - 1));
+    }
     // }
-    auto dir = stack_.top();
-    stack_.pop();
-    // @todo check for correctness
-    // if position is valid i.e unexplored or perceived
-    current_position_ = getPosition(current_position_, dir);
-    if (stack_.empty())
-      state_ = DOCK_POS == current_position_ ? AlgoState::CHARGING
-                                             : AlgoState::WORKING;
-    return static_cast<Step>(dir);
-  } else {
-    return work();
-  }
+
+    if (pathStack.empty()) { //TODO check if this actually works + return to docking station and only then finish
+        cout << robotState->getStepsMade() << endl;
+        if (houseMap.getVisited().size() == houseMap.getMappedHouse().size()) {
+            cout << "Printing path to docking: " << endl;
+            printVector(pathToDocking);
+            if (currPos == robotState->getDockingLocation()) {
+                return Direction::Finish;
+            }
+            return pathToDocking[0];
+        } 
+    }
+
+    pair<int,int> newTop = pathStack.top();
+    vector<Direction> pathToNewTop = houseMap.getShortestPath(currPos, newTop);
+    if (pathToNewTop.size() == 0) {
+        cout << "Curr pos: " << currPos.first << "," << currPos.second << " New top: " << newTop.first << "," << newTop.second << endl;
+        cout << "stay3" << endl;
+        return Direction::Stay; //TODO check  this 
+    }
+    vector<Direction> nextStepToDockingPath = houseMap.getShortestPath(calcNewPosition(pathToNewTop[0], currPos), robotState->getDockingLocation());
+    if (nextStepToDockingPath.size() > pathToDocking.size() && (currBattery == pathToDocking.size() + 1 || remainingSteps == pathToDocking.size() + 1)) {
+        return pathToDocking[0];
+    }
+    return pathToNewTop[0];  
 }
+
+
+//TODO what do we do if there is no path

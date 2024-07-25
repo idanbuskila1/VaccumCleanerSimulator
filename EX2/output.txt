@@ -1,4 +1,4 @@
-NumSteps = 107
-DirtLeft = 0
-Status = FINISHED
-Steps:SsEssNESsssEssssNESsssssEssssssNESsssssssENWWWWWWWssssssssssssssssssssWSEEEEEEEEssssssssEsssssssssNWWWWWWWWF
+NumSteps = 100
+DirtLeft = 28
+Status = WORKING
+Steps:WSSWEEEEEEEENWWWWNWWssssssssssssssssssssEEEEEEESssssNWWWWWWWssssssssssssssssssssEEEEEEESssssNWWWWWWW

@@ -20,15 +20,16 @@ bool isInteger(const string& str) {
     return !ss.fail() && ss.eof();
 }
 
-void Simulator::setAlgorithm(unique_ptr<AbstractAlgorithm> algorithm){
-    alg = std::move(algorithm);
+void Simulator::setAlgorithm(AbstractAlgorithm &algorithm){
+    alg = &algorithm;
     bmo = BatteryMeterObject(vc);
     dso = DirtSensorObject(h,vc);
     wso = WallsSensorObject(h,vc);
     alg->setBatteryMeter(bmo);
     alg->setDirtSensor(dso);
-    alg->setWallsSensor(wso);
-    
+    alg->setWallsSensor(wso);    
+    alg->setMaxSteps(maxSteps);
+
 }
 int Simulator::readHouseFile(const string& filename){
     size_t maxSteps;
@@ -158,7 +159,7 @@ int Simulator::readHouseFile(const string& filename){
 }
 void Simulator::run(){
     size_t steps = 0;
-    Step action;
+    Direction action;
     vector<string> directionsTranslate{"North", "East", "South","West"};
     StepLog.reserve(maxSteps);
     string logMessage;
@@ -176,7 +177,7 @@ void Simulator::run(){
         // Ask algorithm for next move decision
         action = alg->nextStep();
         //stop if status is FINISHED
-        if(action==Step::Finish){
+        if(action==Direction::Finish){
             stepDescriptor+="F";
             break;
         }
@@ -188,7 +189,7 @@ void Simulator::run(){
 //         }
         int x = vc->getCurrentLoc().first;
         int y = vc->getCurrentLoc().second;
-        if (action == Step::Stay) {
+        if (action == Direction::Stay) {
             steps++;
             int err;
             if (vc->getCurrentLoc() == h->getDockingStationLoc()) {//staying on docking is charging
