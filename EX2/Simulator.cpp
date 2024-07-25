@@ -174,19 +174,12 @@ void Simulator::run(){
             StepLog.push_back(logMessage);
             break;
         }
-        // Ask algorithm for next move decision
         action = alg->nextStep();
-        //stop if status is FINISHED
         if(action==Direction::Finish){
+            std::cout<<"FINISHED"<<std::endl;
             stepDescriptor+="F";
             break;
         }
-        // Perform the move we got from the algorithm
-//         if (action == -1) {
-//             logMessage = "failure. battery is empty and not on docking station";
-//             StepLog.push_back(logMessage);
-//             break;
-//         }
         int x = vc->getCurrentLoc().first;
         int y = vc->getCurrentLoc().second;
         if (action == Direction::Stay) {
@@ -248,7 +241,7 @@ void Simulator::makeOutputFile() {
     string status;
     if(vc->getBatterySteps()<1 && vc->getCurrentLoc() != h->getDockingStationLoc())
         status="DEAD";
-    else if(stepDescriptor.back()=='F') status = "FINISHED";
+    else if(vc->getCurrentLoc() == vc->getDockingLocation()) status = "FINISHED";
     else status = "WORKING";
     // Write the data to the file
     outFile << "NumSteps = " << StepLog.size() << std::endl;
