@@ -28,7 +28,7 @@ public:
     // Function to get the dirt level of a cell
     int getDirt(int x, int y) const;
     // Function to get the dirt level of a cell
-    int setDirt(int x, int y);
+    int setDirt(int x, int y,int newDirt);
     int getTotalDirt() const{return totalDirt;};
     std::stack<Step> getShortestPath(const pair<int,int> start,const  pair<int,int> end, bool explore=false) const;
     std::pair<int, int> findNotVisited() const;

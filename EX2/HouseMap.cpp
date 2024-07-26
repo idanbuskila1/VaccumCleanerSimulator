@@ -31,10 +31,11 @@ int HouseMap::getDirt(int x, int y) const {
     }
     return -1;
 }
-int HouseMap::setDirt(int x, int y) {
-    if(needToVisit.find(std::make_pair(x, y)) != needToVisit.end()){
-        visited[std::make_pair(x, y)] -=1;
-        totalDirt -=1;
+int HouseMap::setDirt(int x, int y,int newDirt) {
+    if(visited.find(std::make_pair(x, y)) != visited.end()){
+        int oldDirt = visited.at(std::make_pair(x, y));
+        visited[std::make_pair(x, y)] =newDirt;
+        totalDirt -=(oldDirt-newDirt);
     }
     return -1;
 }

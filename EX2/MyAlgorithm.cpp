@@ -65,7 +65,7 @@ Step MyAlgorithm::moveByState(){
         }
         currentLocation = calcNewPosition(static_cast<Direction>(ret), currentLocation);
         if(!houseMap.isVisited(currentLocation.first, currentLocation.second)){
-            houseMap.addToVisited(currentLocation.first, currentLocation.second, dirtSensor->dirtLevel());
+            houseMap.addToVisited(currentLocation.first, currentLocation.second, 0);
         }
         if(houseMap.isInNeedToVisit(currentLocation.first, currentLocation.second)){
             houseMap.eraseFromNeedToVisit(currentLocation.first, currentLocation.second);
@@ -88,6 +88,7 @@ Step MyAlgorithm::moveByState(){
 }
 Step MyAlgorithm::nextStep(){
     updateNeighbors();
+    houseMap.setDirt(currentLocation.first, currentLocation.second,dirtSensor->dirtLevel());
     if(steps!=0&&houseMap.getTotalDirt()==0 && houseMap.isNeedToVisitEmpty()){
         return Step::Finish;
     }
@@ -112,7 +113,7 @@ Step MyAlgorithm::nextStep(){
     }
     if (pathToDocking.size()>0 && dirtSensor->dirtLevel()>0&& dirtSensor->dirtLevel()<=9) {//we are on a tile with dirt on it - clean it.
         steps++;
-        houseMap.setDirt(currentLocation.first, currentLocation.second);
+        houseMap.setDirt(currentLocation.first, currentLocation.second,dirtSensor->dirtLevel()-1);
         return Step::Stay;
     }
     // Having charge, maxSteps/battery boundary is not reached and current location is clean- advance to another spot. 

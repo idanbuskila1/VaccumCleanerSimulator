@@ -1,4 +1,4 @@
-NumSteps = 91
-DirtLeft = 2
+NumSteps = 93
+DirtLeft = 0
 Status = WORKING
-Steps:SSsWsNssNsssssNssWsSssssSsSsWssENNNWWSsWssENEEESEssssssssssssssssssssWNWWWSWSssssWssNssWSsSF
+Steps:SSsWsNssNsssssNssWsSssssSsSsWssENNNWWSsWssENEEESEssssssssssssssssssssWNWWWSWsSssssWssNssWSsSsF
