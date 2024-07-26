@@ -39,11 +39,6 @@ void printVector(const vector<Step>& vec) {
 }
 
 Step MyAlgorithm::nextStep() {
-    
-    /*if (steps >= 360) {
-        cout << "Battery: " << batteryMeter->getBatteryState() << ", Counter steps: "<< steps << endl;
-    }*/
-
     if (pathStack.empty()) { 
         std::cout << "pathstack empty" << endl;
         if (houseMap.getVisited().size() == houseMap.getMappedHouse().size()) {
@@ -53,7 +48,6 @@ Step MyAlgorithm::nextStep() {
             }
         }
     }
-
     if (steps >= maxSteps) {
         std::cout << "steps made: " << steps << " max steps: " << maxSteps << endl;
         return Step::Finish;

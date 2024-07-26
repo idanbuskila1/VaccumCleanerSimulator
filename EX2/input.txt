@@ -1,8 +1,9 @@
 1-Small house
-MaxSteps = 100
-MaxBattery=20
+MaxSteps = 600
+MaxBattery=15
 Rows = 4
 Cols =10
-WWWW
-W D
-W 123456789
+WWWW0012W
+W0231W45D 
+W124WW120
+W1WWW2111
