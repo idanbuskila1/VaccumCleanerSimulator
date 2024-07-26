@@ -70,7 +70,6 @@ Step MyAlgorithm::moveByState(){
         if(houseMap.isInNeedToVisit(currentLocation.first, currentLocation.second)){
             houseMap.eraseFromNeedToVisit(currentLocation.first, currentLocation.second);
         }
-        updateNeighbors();
         steps++;
         return ret;
     } 
@@ -88,9 +87,7 @@ Step MyAlgorithm::moveByState(){
     return nextStep();
 }
 Step MyAlgorithm::nextStep(){
-    if(steps==0){
-        updateNeighbors();
-    }
+    updateNeighbors();
     if(steps!=0&&houseMap.getTotalDirt()==0 && houseMap.isNeedToVisitEmpty()){
         return Step::Finish;
     }

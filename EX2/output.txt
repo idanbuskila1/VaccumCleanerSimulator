@@ -1,4 +1,4 @@
-NumSteps = 5
-DirtLeft = 33
-Status = WORKING
-Steps:SSs
+NumSteps = 35
+DirtLeft = 26
+Status = FINISHED
+Steps:SSsWsNssNssssEsssssssssssssssssss
