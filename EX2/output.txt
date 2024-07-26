@@ -1,4 +1,4 @@
-NumSteps = 21
-DirtLeft = 36
-Status = DEAD
-Steps:Wsssssssssssssssssss
+NumSteps = 100
+DirtLeft = 28
+Status = FINISHED
+Steps:WSSWEEEEEEEENWWWWNWWssssssssssssssssssssEEEEEEESssssNWWWWWWWssssssssssssssssssssEEEEEEESssssNWWWWWWW

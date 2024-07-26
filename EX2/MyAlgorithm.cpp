@@ -91,6 +91,7 @@ Step MyAlgorithm::nextStep() {
     size_t remainingSteps = maxSteps - steps;
     if (currBattery == pathToDocking.size() || remainingSteps == pathToDocking.size())  {
         steps++;
+        currentLocation = calcNewPosition(static_cast<Direction>(pathToDocking[0]), currentLocation);
         return pathToDocking[0];
     }
 
@@ -135,6 +136,7 @@ Step MyAlgorithm::nextStep() {
                 return Step::Finish;
             }
             steps++;
+            currentLocation = calcNewPosition(static_cast<Direction>(pathToDocking[0]), currentLocation);
             return pathToDocking[0];
         } 
     }
@@ -150,9 +152,11 @@ Step MyAlgorithm::nextStep() {
     vector<Step> nextStepToDockingPath = houseMap.getShortestPath(calcNewPosition(static_cast<Direction>(pathToNewTop[0]), currentLocation), DOCK);
     if (nextStepToDockingPath.size() > pathToDocking.size() && (currBattery == pathToDocking.size() + 1 || remainingSteps == pathToDocking.size() + 1)) {
         steps++;
+        currentLocation = calcNewPosition(static_cast<Direction>(pathToDocking[0]), currentLocation);
         return pathToDocking[0];
     }
     steps++;
+    currentLocation = calcNewPosition(static_cast<Direction>(pathToNewTop[0]), currentLocation);
     return pathToNewTop[0];  
 }
 
