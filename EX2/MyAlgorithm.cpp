@@ -60,6 +60,7 @@ Step MyAlgorithm::nextStep() {
     }
 
     if (batteryMeter->getBatteryState() != maxBattery && currentLocation == DOCK) {
+        steps++;
         return Step::Stay;
     } 
     //i check my neighbors and see who is a wall and add myself and my neighbors to the seen map
@@ -89,11 +90,13 @@ Step MyAlgorithm::nextStep() {
     vector<Step> pathToDocking = houseMap.getShortestPath(currentLocation, DOCK);
     size_t remainingSteps = maxSteps - steps;
     if (currBattery == pathToDocking.size() || remainingSteps == pathToDocking.size())  {
+        steps++;
         return pathToDocking[0];
     }
 
     //we still have dirt in the current cell
     if (currDirt > 0 && currDirt <= 9){
+        steps++;
         return Step::Stay;
     }
 
@@ -131,6 +134,7 @@ Step MyAlgorithm::nextStep() {
             if (currentLocation == DOCK) {
                 return Step::Finish;
             }
+            steps++;
             return pathToDocking[0];
         } 
     }
@@ -140,12 +144,15 @@ Step MyAlgorithm::nextStep() {
     if (pathToNewTop.size() == 0) {
         cout << "Curr pos: " << currentLocation.first << "," << currentLocation.second << " New top: " << newTop.first << "," << newTop.second << endl;
         cout << "stay3" << endl;
+        steps++;
         return Step::Stay; //TODO check  this 
     }
     vector<Step> nextStepToDockingPath = houseMap.getShortestPath(calcNewPosition(static_cast<Direction>(pathToNewTop[0]), currentLocation), DOCK);
     if (nextStepToDockingPath.size() > pathToDocking.size() && (currBattery == pathToDocking.size() + 1 || remainingSteps == pathToDocking.size() + 1)) {
+        steps++;
         return pathToDocking[0];
     }
+    steps++;
     return pathToNewTop[0];  
 }
 
