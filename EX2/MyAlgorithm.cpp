@@ -38,16 +38,16 @@ void printVector(const vector<Step>& vec) {
     cout << endl;
 }
 void MyAlgorithm::updateNeighbors(){
-    if (!wallsSensor->isWall(Direction::North)) {
+    if (!wallsSensor->isWall(Direction::North)&& !houseMap.isVisited(currentLocation.first - 1, currentLocation.second)) {
         houseMap.markToVisit(currentLocation.first - 1, currentLocation.second);
     }
-    if (!wallsSensor->isWall(Direction::East)) {
+    if (!wallsSensor->isWall(Direction::East)&& !houseMap.isVisited(currentLocation.first, currentLocation.second+1)) {
         houseMap.markToVisit(currentLocation.first, currentLocation.second + 1);
     }
-    if (!wallsSensor->isWall(Direction::South)) {
+    if (!wallsSensor->isWall(Direction::South)&& !houseMap.isVisited(currentLocation.first + 1, currentLocation.second)) {
         houseMap.markToVisit(currentLocation.first + 1, currentLocation.second);
     }
-    if (!wallsSensor->isWall(Direction::West)) {
+    if (!wallsSensor->isWall(Direction::West)&& !houseMap.isVisited(currentLocation.first, currentLocation.second-1)) {
         houseMap.markToVisit(currentLocation.first, currentLocation.second - 1);
     }
 }

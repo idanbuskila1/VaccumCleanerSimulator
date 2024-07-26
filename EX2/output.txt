@@ -1,4 +1,4 @@
-NumSteps = 3
-DirtLeft = 34
+NumSteps = 5
+DirtLeft = 33
 Status = WORKING
-Steps:E
+Steps:SSs

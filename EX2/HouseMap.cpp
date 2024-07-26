@@ -20,7 +20,8 @@ bool HouseMap::isVisited(int x, int y) const {
 
 // Function to check if a cell is seen
 bool HouseMap::isInNeedToVisit(int x, int y) const {
-    return needToVisit.find(std::make_pair(x, y)) != needToVisit.end();
+    bool ret = needToVisit.find(std::make_pair(x, y)) != needToVisit.end();
+    return ret;
 }
 
 // Function to get the dirt level of a cell
