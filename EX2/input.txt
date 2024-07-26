@@ -2,7 +2,7 @@
 MaxSteps = 600
 MaxBattery=15
 Rows = 4
-Cols =10
+Cols =9
 WWWW0012W
 W0231W45D 
 W124WW120

@@ -8,10 +8,7 @@ enum class AlgoState {
   CHARGING,
   TO_DOCK,
   TO_POS,
-  WORKING,
-  FINISH,
-  EXPLORE,
-  CLEANING
+  INIT
 
 };
 

@@ -26,8 +26,10 @@ private:
     std::size_t maxSteps = 0;
     std::size_t maxBattery = 0;
     std::pair<int, int> currentLocation;
-    std::stack<std::pair<int,int>> pathStack;
-    std::set<std::pair<int, int>> uniquePathStack;
+    queue<Step> path;
+    AlgoState state = AlgoState::INIT;
+
+    void updateNeighbors();
 public:
     MyAlgorithm();
     void setBatteryMeter(const BatteryMeter& meter) override;
@@ -35,6 +37,7 @@ public:
     void setDirtSensor(const DirtSensor& sensor) override;
     void setMaxSteps(std::size_t maxSteps) override;
     Step nextStep() override;
+    Step moveByState();
     // int getDirtLeft() const;
 };
 
