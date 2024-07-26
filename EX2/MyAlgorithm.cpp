@@ -89,7 +89,7 @@ Step MyAlgorithm::moveByState(){
 Step MyAlgorithm::nextStep(){
     updateNeighbors();
     houseMap.setDirt(currentLocation.first, currentLocation.second,dirtSensor->dirtLevel());
-    if(steps!=0&&houseMap.getTotalDirt()==0 && houseMap.isNeedToVisitEmpty()){
+    if(steps!=0&&houseMap.getTotalDirt()==0 && houseMap.isNeedToVisitEmpty() && currentLocation==DOCK){
         return Step::Finish;
     }
     if(state!=AlgoState::INIT){
@@ -119,7 +119,9 @@ Step MyAlgorithm::nextStep(){
     // Having charge, maxSteps/battery boundary is not reached and current location is clean- advance to another spot. 
     path = houseMap.getShortestPath(currentLocation, DOCK,true);
     if(path.size()==0){
-        return Step::Finish;
+        path = pathToDocking;
+        state = AlgoState::TO_DOCK;
+        return moveByState();
     }
     state = AlgoState::TO_POS;
     Step ret = moveByState();
