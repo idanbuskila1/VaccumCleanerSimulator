@@ -33,16 +33,16 @@ int HouseMap::getCurrDirt(int x, int y) const {
     }
 }
 
-vector<Direction> HouseMap::getShortestPath(pair<int,int> start, pair<int,int> end) const {
-    vector<Direction> directions;
+vector<Step> HouseMap::getShortestPath(const pair<int,int> start, const pair<int,int> end) const {
+    vector<Step> directions;
     if (start == end) return directions;
 
     vector<std::pair<int, int>> moves = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-    vector<Direction> moveDirections = {Direction::North, Direction::East, Direction::South, Direction::West};
+    vector<Step> moveDirections = {Step::North, Step::East, Step::South, Step::West};
 
     queue<pair<int, int>> q;
     map<pair<int, int>, pair<int, int>> cameFrom;
-    map<pair<int, int>, Direction> moveTaken;
+    map<pair<int, int>, Step> moveTaken;
 
     q.push(start);
     cameFrom[start] = start;
@@ -60,11 +60,11 @@ vector<Direction> HouseMap::getShortestPath(pair<int,int> start, pair<int,int> e
                 moveTaken[neighbor] = moveDirections[i];
 
                 if (neighbor == end) {
-                    vector<Direction> path;
-                    pair<int, int> Direction = end;
-                    while (Direction != start) {
-                        path.push_back(moveTaken[Direction]);
-                        Direction = cameFrom[Direction];
+                    vector<Step> path;
+                    pair<int, int> loc = end;
+                    while (loc != start) {
+                        path.push_back(moveTaken[loc]);
+                        loc = cameFrom[loc];
                     }
                     std::reverse(path.begin(), path.end());
                     return path;

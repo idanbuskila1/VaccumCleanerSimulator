@@ -26,7 +26,6 @@ class Simulator: public std::enable_shared_from_this<Simulator>{
     public:
     Simulator():h(nullptr),vc(nullptr),alg(nullptr),stepDescriptor(""),wso(h,vc),dso(h,vc),bmo(vc){};
     int readHouseFile(const string& filename);
-    shared_ptr<VaccumCleaner> getVaccumCleaner() {return vc;};
     void setAlgorithm(AbstractAlgorithm &algorithm);
     void run();
     void makeOutputFile();

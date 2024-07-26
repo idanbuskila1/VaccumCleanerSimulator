@@ -9,7 +9,7 @@ int main(int argc, char *argv[]){
     Simulator simulator;
     int res = simulator.readHouseFile(argv[1]);
     if(res == -1) return 1;
-	MyAlgorithm algo(*(simulator.getVaccumCleaner()));
+	MyAlgorithm algo;
     simulator.setAlgorithm(algo);
 	simulator.run();
     simulator.makeOutputFile();

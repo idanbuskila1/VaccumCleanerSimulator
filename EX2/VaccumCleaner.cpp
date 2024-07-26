@@ -15,21 +15,20 @@ int VaccumCleaner::move(Direction dir){
     if(batterySteps<1)
         return 1;
     this->batterySteps--;
-    this->steps_made++;
     if(dir == Direction::North){
-        this->curLoc = {this->curLoc.first-1,this->curLoc.second};
+        this->curLoc.first-=1;
         return 0;
     }
     if(dir == Direction::South){
-        this->curLoc = {this->curLoc.first+1,this->curLoc.second};
+        this->curLoc.first+=1;
         return 0;
     }
     if(dir == Direction::East){
-        this->curLoc = {this->curLoc.first,this->curLoc.second+1};
+        this->curLoc.second+=1;
         return 0;
     }
     if(dir == Direction::West){
-        this->curLoc = {this->curLoc.first,this->curLoc.second-1};
+        this->curLoc.second-=1;
         return 0;
     }
     return 1;

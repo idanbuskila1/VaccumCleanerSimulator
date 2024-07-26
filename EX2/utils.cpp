@@ -10,48 +10,48 @@ string directionToString(Direction direction) {
     }
 }
 
-string stepToString(Direction step) {
+string stepToString(Step step) {
     switch (step) {
-        case Direction::North: return "North";
-        case Direction::East: return "East";
-        case Direction::South: return "South";
-        case Direction::West: return "West";
-        case Direction::Stay: return "Stay";
-        case Direction::Finish: return "Finish";
+        case Step::North: return "North";
+        case Step::East: return "East";
+        case Step::South: return "South";
+        case Step::West: return "West";
+        case Step::Stay: return "Stay";
+        case Step::Finish: return "Finish";
         default: return "Unknown";
     }
 }
 
-char stepToChar(Direction step) {
+char stepToChar(Step step) {
     switch (step) {
-        case Direction::North: return 'N';
-        case Direction::East: return 'E';
-        case Direction::South: return 'S';
-        case Direction::West: return 'W';
-        case Direction::Stay: return 's';
-        case Direction::Finish: return 'F';
+        case Step::North: return 'N';
+        case Step::East: return 'E';
+        case Step::South: return 'S';
+        case Step::West: return 'W';
+        case Step::Stay: return 's';
+        case Step::Finish: return 'F';
         default: return ' ';
     }
 }
 
-pair<int,int> calcNewPosition(Direction s, pair<int,int> pos) {
-    pair<int,int> toCheck = pos;
-    switch (s)
+pair<int,int> calcNewPosition(Direction d, pair<int,int> pos) {
+    pair<int,int> ret = pos;
+    switch (d)
     {
         case Direction::North:
-            toCheck.first = toCheck.first-1;
+            ret.first = ret.first-1;
             break;
         case Direction::South:
-            toCheck.first = toCheck.first+1;
+            ret.first = ret.first+1;
             break;
         case Direction::East:
-            toCheck.second = toCheck.second+1;
+            ret.second = ret.second+1;
             break;
         case Direction::West:
-            toCheck.second = toCheck.second-1;
+            ret.second = ret.second-1;
             break;    
         default:
             break;
     }
-    return toCheck;
+    return ret;
 }

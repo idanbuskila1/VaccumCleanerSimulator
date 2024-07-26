@@ -159,7 +159,7 @@ int Simulator::readHouseFile(const string& filename){
 }
 void Simulator::run(){
     size_t steps = 0;
-    Direction action;
+    Step action;
     vector<string> directionsTranslate{"North", "East", "South","West"};
     StepLog.reserve(maxSteps);
     string logMessage;
@@ -175,14 +175,14 @@ void Simulator::run(){
             break;
         }
         action = alg->nextStep();
-        if(action==Direction::Finish){
+        if(action==Step::Finish){
             std::cout<<"FINISHED"<<std::endl;
             stepDescriptor+="F";
             break;
         }
         int x = vc->getCurrentLoc().first;
         int y = vc->getCurrentLoc().second;
-        if (action == Direction::Stay) {
+        if (action == Step::Stay) {
             steps++;
             int err;
             if (vc->getCurrentLoc() == h->getDockingStationLoc()) {//staying on docking is charging
@@ -241,7 +241,7 @@ void Simulator::makeOutputFile() {
     string status;
     if(vc->getBatterySteps()<1 && vc->getCurrentLoc() != h->getDockingStationLoc())
         status="DEAD";
-    else if(vc->getCurrentLoc() == vc->getDockingLocation()) status = "FINISHED";
+    else if(vc->getCurrentLoc() == h->getDockingStationLoc()) status = "FINISHED";
     else status = "WORKING";
     // Write the data to the file
     outFile << "NumSteps = " << StepLog.size() << std::endl;

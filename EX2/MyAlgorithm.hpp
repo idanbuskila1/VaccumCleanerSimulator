@@ -18,23 +18,23 @@
 
 class MyAlgorithm : public AbstractAlgorithm {
 private:
-    VaccumCleaner *robotState;
     const WallsSensor *wallsSensor = nullptr;
     const DirtSensor *dirtSensor = nullptr;
     const BatteryMeter *batteryMeter = nullptr;
     HouseMap houseMap;
+    size_t steps = 0;
     std::size_t maxSteps = 0;
-    
+    std::size_t maxBattery = 0;
+    std::pair<int, int> currentLocation;
     std::stack<std::pair<int,int>> pathStack;
     std::set<std::pair<int, int>> uniquePathStack;
 public:
     MyAlgorithm();
-    MyAlgorithm(VaccumCleaner &state);
     void setBatteryMeter(const BatteryMeter& meter) override;
     void setWallsSensor(const WallsSensor& sensor) override;
     void setDirtSensor(const DirtSensor& sensor) override;
     void setMaxSteps(std::size_t maxSteps) override;
-    Direction nextStep() override;
+    Step nextStep() override;
     // int getDirtLeft() const;
 };
 

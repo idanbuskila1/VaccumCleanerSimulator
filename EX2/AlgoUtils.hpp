@@ -25,4 +25,4 @@ std::vector<Direction> dirPriority();
 
 Direction getDirection(pair<int,int> src, pair<int,int> dst);
 
-std::ostream &operator<<(std::ostream &out, const AlgoState &Direction);
+//std::ostream &operator<<(std::ostream &out, const AlgoState &Direction);
