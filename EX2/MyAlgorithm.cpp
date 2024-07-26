@@ -57,7 +57,7 @@ Step MyAlgorithm::moveByState(){
         return Step::Finish;
     }
     if(state==AlgoState::TO_DOCK || state==AlgoState::TO_POS){
-        ret = path.front();
+        ret = path.top();
         path.pop();
         if(path.size()==0){
             

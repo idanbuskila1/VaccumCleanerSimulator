@@ -45,8 +45,8 @@ bool HouseMap::isReachable(pair<int,int> dest)const{
     }
     return true;
 }
-queue<Step> HouseMap::getShortestPath(const pair<int,int> start, const pair<int,int> end, bool explore) const {
-    queue<Step> directions;
+std::stack<Step> HouseMap::getShortestPath(const pair<int,int> start, const pair<int,int> end, bool explore) const {
+    std::stack<Step> directions;
     if (!explore && start == end) return directions;
 
     vector<std::pair<int, int>> moves = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
@@ -73,7 +73,7 @@ queue<Step> HouseMap::getShortestPath(const pair<int,int> start, const pair<int,
 
                 if(explore){
                     if(isReachable(neighbor)&&((visited.count(neighbor)!=0 && visited.at(neighbor)>0) || needToVisit.find(neighbor) != needToVisit.end())){
-                        std::queue<Step> path;
+                        std::stack<Step> path;
                         pair<int, int> loc = neighbor;
                          while (loc != start) {
                             path.push(moveTaken[loc]);
@@ -83,7 +83,7 @@ queue<Step> HouseMap::getShortestPath(const pair<int,int> start, const pair<int,
                     }
                 }
                 else if (neighbor == end) {
-                    std::queue<Step> path;
+                    std::stack<Step> path;
                     pair<int, int> loc = end;
                     while (loc != start) {
                         path.push(moveTaken[loc]);

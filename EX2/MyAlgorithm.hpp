@@ -26,7 +26,7 @@ private:
     std::size_t maxSteps = 0;
     std::size_t maxBattery = 0;
     std::pair<int, int> currentLocation;
-    queue<Step> path;
+    std::stack<Step> path;
     AlgoState state = AlgoState::INIT;
 
     void updateNeighbors();

@@ -3,9 +3,10 @@
 
 #include <set>
 #include <map>
+#include <stack>
 #include <utility>  // for std::pair
 #include "utils.h"
-#include <queue>
+
 
 class HouseMap {
     std::map<std::pair<int, int>, int> visited;    // Cells the vacuum has actively been on
@@ -29,7 +30,7 @@ public:
     // Function to get the dirt level of a cell
     int setDirt(int x, int y);
     int getTotalDirt() const{return totalDirt;};
-    queue<Step> getShortestPath(const pair<int,int> start,const  pair<int,int> end, bool explore=false) const;
+    std::stack<Step> getShortestPath(const pair<int,int> start,const  pair<int,int> end, bool explore=false) const;
     std::pair<int, int> findNotVisited() const;
     bool isNeedToVisitEmpty() const{return needToVisit.empty();};
     bool isReachable(pair<int,int> dest)const;
