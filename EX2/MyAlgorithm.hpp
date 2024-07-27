@@ -7,13 +7,13 @@
 #include <iostream>
 #include <stack>
 #include <memory>  // For smart pointers
-#include "abstract_algorithm.hpp"
-#include "enums.hpp"
-#include "wall_sensor.hpp"
-#include "dirt_sensor.hpp"
-#include "battery_meter.hpp"
+#include "abstract_algorithm.h"
+#include "enums.h"
+#include "wall_sensor.h"
+#include "dirt_sensor.h"
+#include "battery_meter.h"
 #include "VaccumCleaner.hpp"
-#include "HouseMap.h"
+#include "HouseManager.h"
 #include "utils.h"
 
 class MyAlgorithm : public AbstractAlgorithm {
@@ -21,7 +21,7 @@ private:
     const WallsSensor *wallsSensor = nullptr;
     const DirtSensor *dirtSensor = nullptr;
     const BatteryMeter *batteryMeter = nullptr;
-    HouseMap houseMap;
+    HouseManager houseMap;
     size_t steps = 0;
     std::size_t maxSteps = 0;
     std::size_t maxBattery = 0;

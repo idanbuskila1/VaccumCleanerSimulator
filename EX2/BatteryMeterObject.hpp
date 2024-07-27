@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "abstract_algorithm.hpp"
+#include "abstract_algorithm.h"
 #include "VaccumCleaner.hpp"
 
 using std::shared_ptr;

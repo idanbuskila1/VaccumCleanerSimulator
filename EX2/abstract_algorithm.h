@@ -10,10 +10,10 @@
 #include <fstream>
 #include <sstream>
 
-#include "enums.hpp"
-#include "battery_meter.hpp"
-#include "wall_sensor.hpp"
-#include "dirt_sensor.hpp"
+#include "enums.h"
+#include "battery_meter.h"
+#include "wall_sensor.h"
+#include "dirt_sensor.h"
 
 class AbstractAlgorithm {
 public:

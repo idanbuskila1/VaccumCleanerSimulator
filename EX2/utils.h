@@ -8,7 +8,7 @@
 #include <set>
 #include <map>
 #include <queue>
-#include "enums.hpp"
+#include "enums.h"
 
 using std::string, std::vector, std::pair, std::queue, std::map, std::set; 
 using std::cout, std::endl, std::ofstream;

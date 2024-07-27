@@ -6,7 +6,7 @@
 #include <cstddef>
 #include <memory>
 #include <iostream>
-#include "enums.hpp"
+#include "enums.h"
 
 using  std::pair, std::make_pair,std::make_unique,std::vector, std::string, std::max,  std::min,std::get;
 using std::cerr, std::endl, std::cout;
@@ -14,16 +14,16 @@ using std::cerr, std::endl, std::cout;
 class House{
     pair<int,int> dockingStationLoc; 
     int totalDirtLeft;
-    vector<vector<int>> houseMap;//vector of vectors 
+    vector<vector<int>> houseMap;
 
-    bool isLocInsideHouse(const size_t row, const size_t col) const;//returns true iff loc is valid with regard to houseSize
+    bool isLocInHouse(const size_t row, const size_t col) const; //true if loc is in house bounds.
 public:
     House(const vector<vector<int> > map);
 
-    void updateCleaningState(const pair<int,int> loc);//updates cleaning step on location loc, and decreases dirt level by 1.
-    int getDirtLevel(const pair<int,int> loc) const;//returns dirt level on loc, or 0 if there is no dirt/wall.
-    bool isWallInDirection(const Direction direction, const pair<int,int> curLoc) const;//according to direction and current location return if there is a wall.
-    int getTotalDirtLeft()const{return totalDirtLeft;}//returns the sum of dirt left in the entire house.
-    pair<int,int> getDockingStationLoc()const{return dockingStationLoc;}//returns the location of the docking station.
+    void updateCleaningState(const pair<int,int> loc); //decrease dirt by 1 in loc and decrease totalDirtLeft by 1.
+    int getDirtLevelInLoc(const pair<int,int> loc) const; //if loc is in house return the dirt eles 0.
+    bool isWallInDirection(const Direction direction, const pair<int,int> curLoc) const; //true if there is a wall in the direction.
+    int getTotalDirtLeft()const{return totalDirtLeft;} //total dirt left in the house.
+    pair<int,int> getDockingStationLoc()const{return dockingStationLoc;} //locaiton of the vaccum docking station.
 };
 #endif

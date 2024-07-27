@@ -12,44 +12,45 @@ House::House(const vector<vector<int>> map):houseMap(map){
     }
     totalDirtLeft=totalDirt;
 }
-bool House::isLocInsideHouse(const size_t row, const size_t col) const{
+bool House::isLocInHouse(const size_t row, const size_t col) const{
     if(row>=houseMap.size()||col>=houseMap[row].size() ||row<0 || col<0  )
         return false;
     return true;
 }
 void House::updateCleaningState(const pair<int,int> loc){
-    if(!isLocInsideHouse(loc.first,loc.second))
-        return;//cur loc not inside the house so practicly clean. dont crash the program.
+    if(!isLocInHouse(loc.first,loc.second))
+        return; //loc not in house
     int oldState = houseMap[loc.first][loc.second];
-    if(oldState== 0 || oldState== -2 ||oldState== -1)//allready clean or a wall or a docking.
-        return;//do anything.
+    if(oldState== 0 || oldState== -2 ||oldState== -1)
+        return;
     houseMap[loc.first][loc.second]-=1;
     totalDirtLeft -=1;
 }
 bool House::isWallInDirection(const Direction direction, const pair<int,int> curLoc) const{
     if(direction == Direction::North){
-        if(!isLocInsideHouse(curLoc.first-1,curLoc.second)) return true;
+        if(!isLocInHouse(curLoc.first-1,curLoc.second)) return true;
         return this->houseMap[curLoc.first-1][curLoc.second] == -1;
     }
     if(direction == Direction::South){
-        if(!isLocInsideHouse(curLoc.first+1,curLoc.second)) return true;
+        if(!isLocInHouse(curLoc.first+1,curLoc.second)) return true;
         return this->houseMap[curLoc.first+1][curLoc.second] == -1;
     }
     if(direction == Direction::East){
-        if(!isLocInsideHouse(curLoc.first,curLoc.second+1)) return true;
+        if(!isLocInHouse(curLoc.first,curLoc.second+1)) return true;
         return this->houseMap[curLoc.first][curLoc.second+1] == -1;
     }
     if(direction == Direction::West){
-        if(!isLocInsideHouse(curLoc.first,curLoc.second-1)) return true;
+        if(!isLocInHouse(curLoc.first,curLoc.second-1)) return true;
         return this->houseMap[curLoc.first][curLoc.second-1] == -1;
     }
     return true;
 }
-int House::getDirtLevel(const pair<int,int> loc)const{
-    if(!isLocInsideHouse(loc.first,loc.second))
-        return 0;//dont crash the program. return there is no dirt if the index is outside the house
+
+int House::getDirtLevelInLoc(const pair<int,int> loc)const{
+    if(!isLocInHouse(loc.first,loc.second))
+        return 0; //return 0 dirt if out of house 
     int state = houseMap[loc.first][loc.second];
-    if(state== 0 || state== -2||state== -1)//allready clean or a wall or a docking.
+    if(state== 0 || state== -2||state== -1)//loc is clean or docking station or wall
         return 0;
     return state;
 

@@ -1,15 +1,16 @@
-#include "HouseManager.hpp"
+#include "HouseManager.h"
 
 // Function to mark a cell as visited-we only put in the cells that aren't walls
 void HouseManager::markVisited(int x, int y, int dirt) {
     std::pair<int, int> cell = std::make_pair(x, y);
     visited[cell] = dirt; //TODO check syntax
+    totalDirt += dirt;
 }
 
 // Function to mark a cell as seen but not visited
-void HouseManager::markSeen(int x, int y) {
+void HouseManager::markToVisit(int x, int y) {
     std::pair<int, int> cell = std::make_pair(x, y);
-    mappedHouse.insert(cell);
+    needToVisit.insert(cell);
 }
 
 // Function to check if a cell is visited
@@ -18,31 +19,43 @@ bool HouseManager::isVisited(int x, int y) const {
 }
 
 // Function to check if a cell is seen
-bool HouseManager::isMapped(int x, int y) const {
-    return mappedHouse.find(std::make_pair(x, y)) != mappedHouse.end();
+bool HouseManager::isInNeedToVisit(int x, int y) const {
+    bool ret = needToVisit.find(std::make_pair(x, y)) != needToVisit.end();
+    return ret;
 }
 
 // Function to get the dirt level of a cell
-int HouseManager::getCurrDirt(int x, int y) const {
-     try {
-        // Attempt to access the value associated with the key
+int HouseManager::getDirt(int x, int y) const {
+    if(needToVisit.find(std::make_pair(x, y)) != needToVisit.end()){
         return visited.at(std::make_pair(x, y));
-    } catch (const std::out_of_range& e) {
-        // Key not found, return -999
-        return -999;
     }
+    return -1;
 }
-
-vector<Direction> HouseManager::getShortestPath(pair<int,int> start, pair<int,int> end) const {
-    vector<Direction> directions;
-    if (start == end) return directions;
+int HouseManager::setDirt(int x, int y,int newDirt) {
+    if(visited.find(std::make_pair(x, y)) != visited.end()){
+        int oldDirt = visited.at(std::make_pair(x, y));
+        visited[std::make_pair(x, y)] =newDirt;
+        totalDirt -=(oldDirt-newDirt);
+    }
+    return -1;
+}
+bool HouseManager::isReachable(pair<int,int> dest)const{
+    auto path = getShortestPath({0,0}, dest);
+    if(path.size()*2 >= maxBattery){
+        return false;
+    }
+    return true;
+}
+std::stack<Step> HouseManager::getShortestPath(const pair<int,int> start, const pair<int,int> end, bool explore) const {
+    std::stack<Step> directions;
+    if (!explore && start == end) return directions;
 
     vector<std::pair<int, int>> moves = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-    vector<Direction> moveDirections = {Direction::North, Direction::East, Direction::South, Direction::West};
+    vector<Step> moveDirections = {Step::North, Step::East, Step::South, Step::West};
 
     queue<pair<int, int>> q;
     map<pair<int, int>, pair<int, int>> cameFrom;
-    map<pair<int, int>, Direction> moveTaken;
+    map<pair<int, int>, Step> moveTaken;
 
     q.push(start);
     cameFrom[start] = start;
@@ -54,30 +67,39 @@ vector<Direction> HouseManager::getShortestPath(pair<int,int> start, pair<int,in
         for (size_t i = 0; i < moves.size(); ++i) {
             pair<int, int> neighbor = {current.first + moves[i].first, current.second + moves[i].second};
 
-            if (mappedHouse.find(neighbor) != mappedHouse.end() && cameFrom.find(neighbor) == cameFrom.end()) {
+            if ((needToVisit.find(neighbor) != needToVisit.end() || visited.count(neighbor) != 0 )&& cameFrom.find(neighbor) == cameFrom.end()) {
                 q.push(neighbor);
                 cameFrom[neighbor] = current;
                 moveTaken[neighbor] = moveDirections[i];
 
-                if (neighbor == end) {
-                    vector<Direction> path;
-                    pair<int, int> Direction = end;
-                    while (Direction != start) {
-                        path.push_back(moveTaken[Direction]);
-                        Direction = cameFrom[Direction];
+                if(explore){
+                    if(isReachable(neighbor)&&((visited.count(neighbor)!=0 && visited.at(neighbor)>0) || needToVisit.find(neighbor) != needToVisit.end())){
+                        std::stack<Step> path;
+                        pair<int, int> loc = neighbor;
+                         while (loc != start) {
+                            path.push(moveTaken[loc]);
+                            loc = cameFrom[loc];
+                        }
+                        return path;
                     }
-                    std::reverse(path.begin(), path.end());
+                }
+                else if (neighbor == end) {
+                    std::stack<Step> path;
+                    pair<int, int> loc = end;
+                    while (loc != start) {
+                        path.push(moveTaken[loc]);
+                        loc = cameFrom[loc];
+                    }
                     return path;
                 }
             }
         }
     }
-
     return directions;
 }
 
 pair<int, int> HouseManager::findNotVisited() const { 
-    for (const auto& m : mappedHouse) {
+    for (const auto& m : needToVisit) {
         if (!isVisited(m.first, m.second)) {
             return m;
         }

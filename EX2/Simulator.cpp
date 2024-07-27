@@ -174,6 +174,9 @@ void Simulator::run(){
             StepLog.push_back(logMessage);
             break;
         }
+        if(steps == 90){
+            cout<<"";
+        }
         action = alg->nextStep();
         if(action==Step::Finish){
             std::cout<<"FINISHED"<<std::endl;

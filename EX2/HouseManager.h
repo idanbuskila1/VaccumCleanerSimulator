@@ -8,14 +8,14 @@
 #include "utils.h"
 
 
-class HouseMap {
+class HouseManager {
     std::map<std::pair<int, int>, int> visited;    // Cells the vacuum has actively been on
     std::set<std::pair<int, int>> needToVisit;  // Cells the vacuum has seen but not visited, no walls
     size_t totalDirt = 0;
     size_t maxBattery = 0;
 public:
     // Constructor
-    HouseMap() = default;
+    HouseManager() = default;
     void setMaxBattery(size_t max){maxBattery = max;};
     // Function to mark a cell as visited with a certain dirt level
     void markVisited(int x, int y, int dirt);

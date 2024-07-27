@@ -5,7 +5,7 @@
 
 #include "VaccumCleaner.hpp"
 #include "House.hpp"
-#include "dirt_sensor.hpp"
+#include "dirt_sensor.h"
 
 using std::shared_ptr;
 
@@ -14,7 +14,7 @@ class DirtSensorObject: public DirtSensor{
     shared_ptr<House> h;
 public:
     DirtSensorObject(shared_ptr<House> house, shared_ptr<VaccumCleaner> vaccum_cleaner):vc(vaccum_cleaner),h(house){};
-	int dirtLevel() const override{return h->getDirtLevel(vc->getCurrentLoc());};
+	int dirtLevel() const override{return h->getDirtLevelInLoc(vc->getCurrentLoc());};
 
 };
 #endif

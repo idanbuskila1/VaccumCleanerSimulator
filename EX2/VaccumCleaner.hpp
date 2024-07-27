@@ -1,7 +1,7 @@
 #ifndef VACCUM
 #define VACCUM
 
-#include "enums.hpp"
+#include "enums.h"
 #include <utility>
 #include <iostream>
 

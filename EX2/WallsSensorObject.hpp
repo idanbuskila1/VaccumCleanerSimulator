@@ -1,8 +1,8 @@
 #ifndef WALLS_SENSOR
 #define WALLS_SENSOR
 
-#include "wall_sensor.hpp"
-#include "enums.hpp"
+#include "wall_sensor.h"
+#include "enums.h"
 #include "VaccumCleaner.hpp"
 #include "House.hpp"
 

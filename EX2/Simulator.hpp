@@ -3,7 +3,7 @@
 
 #include "House.hpp"
 #include "VaccumCleaner.hpp"
-#include "abstract_algorithm.hpp"
+#include "abstract_algorithm.h"
 #include "WallsSensorObject.hpp"
 #include "DirtSensorObject.hpp"
 #include "BatteryMeterObject.hpp"
