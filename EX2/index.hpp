@@ -4,6 +4,6 @@
 #include <iostream>
 #include "abstract_algorithm.hpp"
 #include "Simulator.hpp"
-#include "Algorithm.hpp"
+#include "MyAlgorithm.hpp"
 
 #endif

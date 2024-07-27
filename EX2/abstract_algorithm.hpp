@@ -15,7 +15,6 @@
 #include "wall_sensor.hpp"
 #include "dirt_sensor.hpp"
 
-
 class AbstractAlgorithm {
 public:
 	virtual ~AbstractAlgorithm() {}

@@ -8,7 +8,6 @@
 using  std::pair, std::max,  std::min,std::get;
 using std::cerr, std::endl, std::cout;
 
-//class for maintaining battery and location state
 class VaccumCleaner{
     float batterySteps;
     const int maxBatterySteps;

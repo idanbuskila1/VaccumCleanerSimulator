@@ -9,8 +9,13 @@ int main(int argc, char *argv[]){
     Simulator simulator;
     int res = simulator.readHouseFile(argv[1]);
     if(res == -1) return 1;
-	unique_ptr<AbstractAlgorithm> algo = make_unique<Algorithm>();
-    simulator.setAlgorithm(std::move(algo));
+	MyAlgorithm algo;
+    simulator.setAlgorithm(algo);
 	simulator.run();
-    simulator.makeOutputFile();
+    if(simulator.getIsRuntimeError()){
+        cerr << "Error: " << simulator.getErrorMessage() << endl;
+        return 1;
+    } 
+    simulator.makeOutputFile(argv[1]);
+    simulator.makeLog(argv[1]);
 }

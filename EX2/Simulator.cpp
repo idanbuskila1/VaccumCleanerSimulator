@@ -1,5 +1,5 @@
 #include "Simulator.hpp"
-#include "Algorithm.hpp"
+#include "MyAlgorithm.hpp"
 using std::vector, std::pair, std::ifstream, std::stringstream;
 using std::cerr, std::endl;
 
@@ -20,15 +20,16 @@ bool isInteger(const string& str) {
     return !ss.fail() && ss.eof();
 }
 
-void Simulator::setAlgorithm(unique_ptr<AbstractAlgorithm> algorithm){
-    alg = std::move(algorithm);
+void Simulator::setAlgorithm(AbstractAlgorithm &algorithm){
+    alg = &algorithm;
     bmo = BatteryMeterObject(vc);
     dso = DirtSensorObject(h,vc);
     wso = WallsSensorObject(h,vc);
     alg->setBatteryMeter(bmo);
     alg->setDirtSensor(dso);
-    alg->setWallsSensor(wso);
-    
+    alg->setWallsSensor(wso);    
+    alg->setMaxSteps(maxSteps);
+
 }
 int Simulator::readHouseFile(const string& filename){
     size_t maxSteps;
@@ -171,21 +172,15 @@ void Simulator::run(){
             logMessage = "failure. battery is empty and not on docking station. DEAD.";
             cout<<logMessage<<endl;
             StepLog.push_back(logMessage);
+            isRuntimeError=true;
             break;
         }
-        // Ask algorithm for next move decision
         action = alg->nextStep();
-        //stop if status is FINISHED
         if(action==Step::Finish){
+            std::cout<<"FINISHED"<<std::endl;
             stepDescriptor+="F";
             break;
         }
-        // Perform the move we got from the algorithm
-//         if (action == -1) {
-//             logMessage = "failure. battery is empty and not on docking station";
-//             StepLog.push_back(logMessage);
-//             break;
-//         }
         int x = vc->getCurrentLoc().first;
         int y = vc->getCurrentLoc().second;
         if (action == Step::Stay) {
@@ -201,11 +196,13 @@ void Simulator::run(){
                 StepLog.push_back(logMessage);
                 cout<<logMessage<<endl;
                 err=vc->clean();
+                h->updateCleaningState(vc->getCurrentLoc());
             }
             if (err) {
                 logMessage = "failure. algorithm tried to make vacuum cleaner clean with no battery.";
                 StepLog.push_back(logMessage);
                 cout<<logMessage<<endl;
+                isRuntimeError=true;
                 break;
             }
             stepDescriptor+="s";
@@ -220,6 +217,7 @@ void Simulator::run(){
                 logMessage = "failure. algorithm tried to move vacuum cleaner into a wall.";
                 StepLog.push_back(logMessage);
                 cout<<logMessage<<endl;
+                isRuntimeError=true;
                 break;
             }
             int err = vc->move(dir);
@@ -227,6 +225,7 @@ void Simulator::run(){
                 logMessage = "failure. algorithm tried to move vacuum cleaner with no battery.";
                 StepLog.push_back(logMessage);
                 cout<<logMessage<<endl;
+                isRuntimeError=true;
                 break;
             } 
             stepDescriptor+= directionsTranslate[static_cast<int>(action)].at(0);
@@ -235,18 +234,26 @@ void Simulator::run(){
     }
 }
 
-void Simulator::makeOutputFile() {
+void Simulator::makeOutputFile(string name) {
     // Open the file in write mode
-    std::ofstream outFile("output.txt");
+    std::ofstream outFile("output_"+name);
     
     if (!outFile) {
         std::cerr << "Error opening file for writing!" << std::endl;
         return;
     }
+    //figure out the status of the simulation
     string status;
-    if(vc->getBatterySteps()<1 && vc->getCurrentLoc() != h->getDockingStationLoc())
+    bool isOnDocking = vc->getCurrentLoc() == h->getDockingStationLoc();
+    if(stepDescriptor.back()=='F')
+    { 
+        if(isOnDocking)
+            status="FINISHED";
+        else
+            status="DEAD";
+    }
+    else if(vc->getBatterySteps()<1 && !isOnDocking)
         status="DEAD";
-    else if(stepDescriptor.back()=='F') status = "FINISHED";
     else status = "WORKING";
     // Write the data to the file
     outFile << "NumSteps = " << StepLog.size() << std::endl;
@@ -256,4 +263,16 @@ void Simulator::makeOutputFile() {
 
     // Close the file
     outFile.close();
+}
+void Simulator::makeLog(string name){
+    std::ofstream outFile("log_"+name);
+    if (!outFile) {
+        std::cerr << "Error opening file for writing!" << std::endl;
+        return;
+    }
+    for (const auto& step : StepLog) {
+        outFile << step << std::endl;
+    }
+    outFile.close();
+    
 }

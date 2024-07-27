@@ -1,4 +1,0 @@
-NumSteps = 21
-DirtLeft = 36
-Status = DEAD
-Steps:EEEEEEEWEWEWEWEWEWEW

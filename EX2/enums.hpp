@@ -4,4 +4,14 @@
 enum class Direction { North, East, South, West };
 enum class Step { North, East, South, West, Stay, Finish };
 
-#endif  // ROBOT_ENUMS_H_
+enum class AlgoState {
+  CHARGING,
+  TO_DOCK,
+  TO_POS,
+  INIT
+
+};
+
+#define MAX_DIRT 9
+
+#endif
