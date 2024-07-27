@@ -1,42 +1,36 @@
-#ifndef HOUSEMAP_H
-#define HOUSEMAP_H
+#ifndef HOUSEMANAGER_H
+#define HOUSEMANAGER_H
 
 #include <set>
 #include <map>
 #include <stack>
-#include <utility>  // for std::pair
+#include <utility>
 #include "utils.h"
 
 
 class HouseManager {
-    std::map<std::pair<int, int>, int> visited;    // Cells the vacuum has actively been on
-    std::set<std::pair<int, int>> needToVisit;  // Cells the vacuum has seen but not visited, no walls
+    std::set<std::pair<int, int>> cells_to_visit;  // Cells the vacuum has not visited yet
+    std::map<std::pair<int, int>, int> cells_visited;    // Cells the vacuum has visited already
     size_t totalDirt = 0;
     size_t maxBattery = 0;
 public:
     // Constructor
     HouseManager() = default;
-    void setMaxBattery(size_t max){maxBattery = max;};
-    // Function to mark a cell as visited with a certain dirt level
-    void markVisited(int x, int y, int dirt);
-    // Function to mark a cell as seen but not visited
-    void markToVisit(int x, int y);
-    // Function to check if a cell is visited
-    bool isVisited(int x, int y) const;
-    // Function to check if a cell is unvisited
-    bool isInNeedToVisit(int x, int y) const;
-    // Function to get the dirt level of a cell
-    int getDirt(int x, int y) const;
-    // Function to get the dirt level of a cell
+    void setNeedToVisit(int x, int y); // mark the loc as need to visit
+    int getDirt(int x, int y) const; // get the dirt level in loc
+    bool isReachable(pair<int,int> dest)const; // check if the destination is reachable with the current battery
+    void setMaxBattery(size_t max){maxBattery = max;}; // set the max battery of the vaccum
     int setDirt(int x, int y,int newDirt);
     int getTotalDirt() const{return totalDirt;};
-    std::stack<Step> getShortestPath(const pair<int,int> start,const  pair<int,int> end, bool explore=false) const;
-    std::pair<int, int> findNotVisited() const;
-    bool isNeedToVisitEmpty() const{return needToVisit.empty();};
-    bool isReachable(pair<int,int> dest)const;
-    void addToVisited(int x, int y, int dirt){visited[{x,y}] = dirt;};
-    void eraseFromNeedToVisit(int x, int y){needToVisit.erase({x,y});};
+    bool isNeededVisit(int x, int y) const; // check if a loc is needed a visit
+    std::stack<Step> getShortestPath(const pair<int,int> start,const  pair<int,int> end, bool explore=false) const; // get the shortest path from start to end
+    std::pair<int, int> findNotVisited() const; // find the nearest not visited cell
+    void markAsVisited(int x, int y, int dirt); // set the loc as visited
+    bool isVisited(int x, int y) const; // check if the loc is visited
+    bool isCellsToVisitEmpty() const{return cells_to_visit.empty();};
+    void addToCellsVisited(int x, int y, int dirt){cells_visited[{x,y}] = dirt;};
+    void removeFromNeedVisit(int x, int y){cells_to_visit.erase({x,y});};
 
 };
 
-#endif // HOUSEMAP_H
+#endif // HOUSEMANAGER_H

@@ -1,64 +1,39 @@
 #include "HouseManager.h"
 
-// Function to mark a cell as visited-we only put in the cells that aren't walls
-void HouseManager::markVisited(int x, int y, int dirt) {
+void HouseManager::markAsVisited(int x, int y, int dirt) {
     std::pair<int, int> cell = std::make_pair(x, y);
-    visited[cell] = dirt; //TODO check syntax
+    cells_visited[cell] = dirt; //TODO check syntax
     totalDirt += dirt;
 }
 
-// Function to mark a cell as seen but not visited
-void HouseManager::markToVisit(int x, int y) {
+void HouseManager::setNeedToVisit(int x, int y) {
     std::pair<int, int> cell = std::make_pair(x, y);
-    needToVisit.insert(cell);
+    cells_to_visit.insert(cell);
 }
 
-// Function to check if a cell is visited
 bool HouseManager::isVisited(int x, int y) const {
-    return visited.find(std::make_pair(x, y)) != visited.end();
+    return cells_visited.find(std::make_pair(x, y)) != cells_visited.end();
 }
 
-// Function to check if a cell is seen
-bool HouseManager::isInNeedToVisit(int x, int y) const {
-    bool ret = needToVisit.find(std::make_pair(x, y)) != needToVisit.end();
+bool HouseManager::isNeededVisit(int x, int y) const {
+    bool ret = cells_to_visit.find(std::make_pair(x, y)) != cells_to_visit.end();
     return ret;
 }
 
-// Function to get the dirt level of a cell
-int HouseManager::getDirt(int x, int y) const {
-    if(needToVisit.find(std::make_pair(x, y)) != needToVisit.end()){
-        return visited.at(std::make_pair(x, y));
-    }
-    return -1;
-}
-int HouseManager::setDirt(int x, int y,int newDirt) {
-    if(visited.find(std::make_pair(x, y)) != visited.end()){
-        int oldDirt = visited.at(std::make_pair(x, y));
-        visited[std::make_pair(x, y)] =newDirt;
-        totalDirt -=(oldDirt-newDirt);
-    }
-    return -1;
-}
-bool HouseManager::isReachable(pair<int,int> dest)const{
-    auto path = getShortestPath({0,0}, dest);
-    if(path.size()*2 >= maxBattery){
-        return false;
-    }
-    return true;
-}
-std::stack<Step> HouseManager::getShortestPath(const pair<int,int> start, const pair<int,int> end, bool explore) const {
-    std::stack<Step> directions;
-    if (!explore && start == end) return directions;
+
+std::stack<Step> HouseManager::getShortestPath(const pair<int,int> start, const pair<int,int> end, bool shouldExplore) const {
+    std::stack<Step> dirs;
+    if (!shouldExplore && start == end) return dirs;
 
     vector<std::pair<int, int>> moves = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-    vector<Step> moveDirections = {Step::North, Step::East, Step::South, Step::West};
+    vector<Step> moveDirs = {Step::North, Step::East, Step::South, Step::West};
 
     queue<pair<int, int>> q;
-    map<pair<int, int>, pair<int, int>> cameFrom;
-    map<pair<int, int>, Step> moveTaken;
+    map<pair<int, int>, pair<int, int>> sourceLoc;
+    map<pair<int, int>, Step> stepMade;
 
     q.push(start);
-    cameFrom[start] = start;
+    sourceLoc[start] = start;
 
     while (!q.empty()) {
         pair<int, int> current = q.front();
@@ -67,18 +42,18 @@ std::stack<Step> HouseManager::getShortestPath(const pair<int,int> start, const 
         for (size_t i = 0; i < moves.size(); ++i) {
             pair<int, int> neighbor = {current.first + moves[i].first, current.second + moves[i].second};
 
-            if ((needToVisit.find(neighbor) != needToVisit.end() || visited.count(neighbor) != 0 )&& cameFrom.find(neighbor) == cameFrom.end()) {
+            if ((cells_to_visit.find(neighbor) != cells_to_visit.end() || cells_visited.count(neighbor) != 0 )&& sourceLoc.find(neighbor) == sourceLoc.end()) {
                 q.push(neighbor);
-                cameFrom[neighbor] = current;
-                moveTaken[neighbor] = moveDirections[i];
+                sourceLoc[neighbor] = current;
+                stepMade[neighbor] = moveDirs[i];
 
-                if(explore){
-                    if(isReachable(neighbor)&&((visited.count(neighbor)!=0 && visited.at(neighbor)>0) || needToVisit.find(neighbor) != needToVisit.end())){
+                if(shouldExplore){
+                    if(isReachable(neighbor)&&((cells_visited.count(neighbor)!=0 && cells_visited.at(neighbor)>0) || cells_to_visit.find(neighbor) != cells_to_visit.end())){
                         std::stack<Step> path;
                         pair<int, int> loc = neighbor;
                          while (loc != start) {
-                            path.push(moveTaken[loc]);
-                            loc = cameFrom[loc];
+                            path.push(stepMade[loc]);
+                            loc = sourceLoc[loc];
                         }
                         return path;
                     }
@@ -87,19 +62,43 @@ std::stack<Step> HouseManager::getShortestPath(const pair<int,int> start, const 
                     std::stack<Step> path;
                     pair<int, int> loc = end;
                     while (loc != start) {
-                        path.push(moveTaken[loc]);
-                        loc = cameFrom[loc];
+                        path.push(stepMade[loc]);
+                        loc = sourceLoc[loc];
                     }
                     return path;
                 }
             }
         }
     }
-    return directions;
+    return dirs;
+}
+
+bool HouseManager::isReachable(pair<int,int> dest)const{
+    auto path = getShortestPath({0,0}, dest);
+    if(path.size()*2 >= maxBattery){
+        return false;
+    }
+    return true;
+}
+
+int HouseManager::getDirt(int x, int y) const {
+    if(cells_to_visit.find(std::make_pair(x, y)) != cells_to_visit.end()){
+        return cells_visited.at(std::make_pair(x, y));
+    }
+    return -1;
+}
+
+int HouseManager::setDirt(int x, int y,int newDirt) {
+    if(cells_visited.find(std::make_pair(x, y)) != cells_visited.end()){
+        int previousDirt = cells_visited.at(std::make_pair(x, y));
+        cells_visited[std::make_pair(x, y)] =newDirt;
+        totalDirt -=(previousDirt-newDirt);
+    }
+    return -1;
 }
 
 pair<int, int> HouseManager::findNotVisited() const { 
-    for (const auto& m : needToVisit) {
+    for (const auto& m : cells_to_visit) {
         if (!isVisited(m.first, m.second)) {
             return m;
         }

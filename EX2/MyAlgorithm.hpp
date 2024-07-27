@@ -1,12 +1,12 @@
-#ifndef HOUSE_CLEANING_ALGORITHM_H_
-#define HOUSE_CLEANING_ALGORITHM_H_
+#ifndef MY_ALGO_H
+#define MY_ALGO_H
 
 #include <vector>
 #include <queue>
 #include <fstream>
 #include <iostream>
 #include <stack>
-#include <memory>  // For smart pointers
+#include <memory> 
 #include "abstract_algorithm.h"
 #include "enums.h"
 #include "wall_sensor.h"
@@ -21,15 +21,15 @@ private:
     const WallsSensor *wallsSensor = nullptr;
     const DirtSensor *dirtSensor = nullptr;
     const BatteryMeter *batteryMeter = nullptr;
-    HouseManager houseMap;
+    HouseManager houseManager;
     size_t steps = 0;
-    std::size_t maxSteps = 0;
     std::size_t maxBattery = 0;
-    std::pair<int, int> currentLocation;
+    std::size_t maxSteps = 0;
     std::stack<Step> path;
+    std::pair<int, int> currentPos;
     AlgoState state = AlgoState::INIT;
 
-    void updateNeighbors();
+    void scanNeighbors();
 public:
     MyAlgorithm();
     void setBatteryMeter(const BatteryMeter& meter) override;
@@ -38,7 +38,6 @@ public:
     void setMaxSteps(std::size_t maxSteps) override;
     Step nextStep() override;
     Step moveByState();
-    // int getDirtLeft() const;
-};
+    };
 
-#endif // HOUSE_CLEANING_ALGORITHM_H_
+#endif // MY_ALGO_H
