@@ -170,14 +170,14 @@ void Simulator::run(){
         //stop id status is DEAD.
         if(vc->getBatterySteps()<1 && vc->getCurrentLoc() != h->getDockingStationLoc()){
             logMessage = "failure. battery is empty and not on docking station. DEAD.";
-            cout<<logMessage<<endl;
+            //cout<<logMessage<<endl;
             StepLog.push_back(logMessage);
             isRuntimeError=true;
             break;
         }
         action = alg->nextStep();
         if(action==Step::Finish){
-            std::cout<<"FINISHED"<<std::endl;
+            //std::cout<<"FINISHED"<<std::endl;
             stepDescriptor+="F";
             break;
         }
@@ -189,19 +189,19 @@ void Simulator::run(){
             if (vc->getCurrentLoc() == h->getDockingStationLoc()) {//staying on docking is charging
                 logMessage = "step: " + to_string(steps) + ". battery: " + to_string(vc->getBatterySteps()) + ". current location: [" + to_string(x) + "," + to_string(y) + "]. action: Stay (charge)";
                 StepLog.push_back(logMessage);
-                cout<<logMessage<<endl;
+                //cout<<logMessage<<endl;
                 err = vc->charge();
             } else {//staying elsewhere is cleaning
                 logMessage = "step: " + to_string(steps) + ". battery: " + to_string(vc->getBatterySteps()) + ". current location: [" + to_string(x) + "," + to_string(y) + "]. action: Stay (clean).";
                 StepLog.push_back(logMessage);
-                cout<<logMessage<<endl;
+                //cout<<logMessage<<endl;
                 err=vc->clean();
                 h->updateCleaningState(vc->getCurrentLoc());
             }
             if (err) {
                 logMessage = "failure. algorithm tried to make vacuum cleaner clean with no battery.";
                 StepLog.push_back(logMessage);
-                cout<<logMessage<<endl;
+                //cout<<logMessage<<endl;
                 isRuntimeError=true;
                 break;
             }
@@ -212,11 +212,11 @@ void Simulator::run(){
             Direction dir = static_cast<Direction>(action);
             logMessage = "step: " + to_string(steps) + ". battery: " + to_string(vc->getBatterySteps()) + ". current location: [" + to_string(x) + "," + to_string(y) + "]. action: move in direction " + directionsTranslate[static_cast<int>(action)];
             StepLog.push_back(logMessage);
-            cout<<logMessage<<endl;
+            //cout<<logMessage<<endl;
             if (h->isWallInDirection(dir, vc->getCurrentLoc())) {
                 logMessage = "failure. algorithm tried to move vacuum cleaner into a wall.";
                 StepLog.push_back(logMessage);
-                cout<<logMessage<<endl;
+                //cout<<logMessage<<endl;
                 isRuntimeError=true;
                 break;
             }
@@ -224,7 +224,7 @@ void Simulator::run(){
             if (err) {
                 logMessage = "failure. algorithm tried to move vacuum cleaner with no battery.";
                 StepLog.push_back(logMessage);
-                cout<<logMessage<<endl;
+                //cout<<logMessage<<endl;
                 isRuntimeError=true;
                 break;
             } 
@@ -232,6 +232,15 @@ void Simulator::run(){
             continue;
         }
     }
+    //if the algo didnt make to return FINISH, let a chance to return now, because it not counts as step
+    if(stepDescriptor.back()!='F'){
+        action = alg->nextStep();
+        if(action==Step::Finish){
+            //std::cout<<"FINISHED"<<std::endl;
+            stepDescriptor+="F";
+        }
+    }
+
 }
 
 void Simulator::makeOutputFile(string name) {

@@ -65,6 +65,22 @@ Step MyAlgorithm::moveByState(){
     if(wallsSensor->isWall(Direction::North)&&wallsSensor->isWall(Direction::South) &&wallsSensor->isWall(Direction::East)&&wallsSensor->isWall(Direction::West)){//edge case where docking station is srrounded by walls
         return Step::Finish;
     }
+    //if we are on way to a position but battery is low- go back to docking station
+    auto pathToDocking = houseMap.getShortestPath(currentLocation, DOCK);
+    int leftSteps = batteryMeter->getBatteryState() - pathToDocking.size();
+    if(state==AlgoState::TO_POS && leftSteps<=1){
+        path=pathToDocking;
+        state = AlgoState::TO_DOCK;
+    }
+    //if we are on way to a position but ran out of steps- go back to docking station 
+    if(state==AlgoState::TO_POS && maxSteps-steps==pathToDocking.size()){
+        if(pathToDocking.size()==0){
+            return Step::Finish;
+        }
+        path=pathToDocking;
+        state = AlgoState::TO_POS;
+    }
+    //if we are on a way to somewhere
     if(state==AlgoState::TO_DOCK || state==AlgoState::TO_POS){
         if(path.size()==0){//no path to follow
             state = state == AlgoState::TO_DOCK? AlgoState::CHARGING:AlgoState::INIT;
@@ -86,7 +102,7 @@ Step MyAlgorithm::moveByState(){
         steps++;
         return ret;
     } 
-    
+    //if in charge mode
     if(state==AlgoState::CHARGING){
         if(batteryMeter->getBatteryState() == maxBattery){
             state = AlgoState::INIT;
@@ -100,6 +116,13 @@ Step MyAlgorithm::moveByState(){
     return nextStep();
 }
 Step MyAlgorithm::nextStep(){
+    //if we are done with the steps, return finish if made it to dock in time, else return stay as default val to the simulator.
+    if(steps==maxSteps){
+        if(currentLocation==DOCK){
+            return Step::Finish;
+        }
+        return Step::Stay;
+    }
     updateNeighbors();
     houseMap.setDirt(currentLocation.first, currentLocation.second,dirtSensor->dirtLevel());
     if(steps!=0&&houseMap.getTotalDirt()==0 && houseMap.isNeedToVisitEmpty() && currentLocation==DOCK){
@@ -145,6 +168,7 @@ Step MyAlgorithm::nextStep(){
         state = AlgoState::TO_DOCK;
         return moveByState();
     }
+
     state = AlgoState::TO_POS;
     Step ret = moveByState();
     return ret;
