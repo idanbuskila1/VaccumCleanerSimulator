@@ -1,10 +1,6 @@
 #ifndef HOUSE_CLEANING_ALGORITHM_H_
 #define HOUSE_CLEANING_ALGORITHM_H_
 
-#include <vector>
-#include <queue>
-#include <fstream>
-#include <iostream>
 #include <stack>
 #include <memory>  // For smart pointers
 #include "abstract_algorithm.hpp"
@@ -14,7 +10,8 @@
 #include "battery_meter.hpp"
 #include "VaccumCleaner.hpp"
 #include "HouseMap.h"
-#include "utils.h"
+
+const pair<int,int> DOCK = {0,0};//dock location in the mapping built is set as the zero point.
 
 class MyAlgorithm : public AbstractAlgorithm {
 private:
@@ -29,7 +26,9 @@ private:
     std::stack<Step> path;
     AlgoState state = AlgoState::INIT;
 
+    pair<int,int> calcNewPosition(Direction d, pair<int,int> pos);
     void updateNeighbors();
+    Step moveByState();
 public:
     MyAlgorithm();
     void setBatteryMeter(const BatteryMeter& meter) override;
@@ -37,8 +36,6 @@ public:
     void setDirtSensor(const DirtSensor& sensor) override;
     void setMaxSteps(std::size_t maxSteps) override;
     Step nextStep() override;
-    Step moveByState();
-    // int getDirtLeft() const;
 };
 
 #endif // HOUSE_CLEANING_ALGORITHM_H_

@@ -12,5 +12,10 @@ int main(int argc, char *argv[]){
 	MyAlgorithm algo;
     simulator.setAlgorithm(algo);
 	simulator.run();
-    simulator.makeOutputFile();
+    if(simulator.getIsRuntimeError()){
+        cerr << "Error: " << simulator.getErrorMessage() << endl;
+        return 1;
+    } 
+    simulator.makeOutputFile(argv[1]);
+    simulator.makeLog(argv[1]);
 }

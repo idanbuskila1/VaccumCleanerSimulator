@@ -172,6 +172,7 @@ void Simulator::run(){
             logMessage = "failure. battery is empty and not on docking station. DEAD.";
             cout<<logMessage<<endl;
             StepLog.push_back(logMessage);
+            isRuntimeError=true;
             break;
         }
         action = alg->nextStep();
@@ -201,6 +202,7 @@ void Simulator::run(){
                 logMessage = "failure. algorithm tried to make vacuum cleaner clean with no battery.";
                 StepLog.push_back(logMessage);
                 cout<<logMessage<<endl;
+                isRuntimeError=true;
                 break;
             }
             stepDescriptor+="s";
@@ -215,6 +217,7 @@ void Simulator::run(){
                 logMessage = "failure. algorithm tried to move vacuum cleaner into a wall.";
                 StepLog.push_back(logMessage);
                 cout<<logMessage<<endl;
+                isRuntimeError=true;
                 break;
             }
             int err = vc->move(dir);
@@ -222,6 +225,7 @@ void Simulator::run(){
                 logMessage = "failure. algorithm tried to move vacuum cleaner with no battery.";
                 StepLog.push_back(logMessage);
                 cout<<logMessage<<endl;
+                isRuntimeError=true;
                 break;
             } 
             stepDescriptor+= directionsTranslate[static_cast<int>(action)].at(0);
@@ -230,18 +234,26 @@ void Simulator::run(){
     }
 }
 
-void Simulator::makeOutputFile() {
+void Simulator::makeOutputFile(string name) {
     // Open the file in write mode
-    std::ofstream outFile("output.txt");
+    std::ofstream outFile("output_"+name);
     
     if (!outFile) {
         std::cerr << "Error opening file for writing!" << std::endl;
         return;
     }
+    //figure out the status of the simulation
     string status;
-    if(vc->getBatterySteps()<1 && vc->getCurrentLoc() != h->getDockingStationLoc())
+    bool isOnDocking = vc->getCurrentLoc() == h->getDockingStationLoc();
+    if(stepDescriptor.back()=='F')
+    { 
+        if(isOnDocking)
+            status="FINISHED";
+        else
+            status="DEAD";
+    }
+    else if(vc->getBatterySteps()<1 && !isOnDocking)
         status="DEAD";
-    else if(vc->getCurrentLoc() == h->getDockingStationLoc()) status = "FINISHED";
     else status = "WORKING";
     // Write the data to the file
     outFile << "NumSteps = " << StepLog.size() << std::endl;
@@ -251,4 +263,16 @@ void Simulator::makeOutputFile() {
 
     // Close the file
     outFile.close();
+}
+void Simulator::makeLog(string name){
+    std::ofstream outFile("log_"+name);
+    if (!outFile) {
+        std::cerr << "Error opening file for writing!" << std::endl;
+        return;
+    }
+    for (const auto& step : StepLog) {
+        outFile << step << std::endl;
+    }
+    outFile.close();
+    
 }

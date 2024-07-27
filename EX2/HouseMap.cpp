@@ -11,6 +11,9 @@ void HouseMap::markVisited(int x, int y, int dirt) {
 void HouseMap::markToVisit(int x, int y) {
     std::pair<int, int> cell = std::make_pair(x, y);
     needToVisit.insert(cell);
+    if(!isReachable(cell)){//if not reachable we erase it
+        eraseFromNeedToVisit(x,y);
+    }
 }
 
 // Function to check if a cell is visited
@@ -96,13 +99,4 @@ std::stack<Step> HouseMap::getShortestPath(const pair<int,int> start, const pair
         }
     }
     return directions;
-}
-
-pair<int, int> HouseMap::findNotVisited() const { 
-    for (const auto& m : needToVisit) {
-        if (!isVisited(m.first, m.second)) {
-            return m;
-        }
-    }
-    return pair<int,int>{-1,-1};
 }
