@@ -1,7 +1,4 @@
 # Advanced Topics In Programming: Assignment 1
-## contributors:
-* Idan Buskila
-* Ido Beerie
 ## Brief Description
 The aproach was to model the problem into 3 classes:
 * House: represents the layout of the house with walls and corridors, and maintains the cleaning state of the house (how much dirt per location).
