@@ -1,0 +1,11 @@
+6x7 House
+MaxSteps = 333
+MaxBattery = 20
+Rows = 6
+Cols = 7
+9 34 63
+11W0000
+11D500W
+W  4  2
+{}[]   
+0870001

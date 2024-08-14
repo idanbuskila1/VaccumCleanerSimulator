@@ -1,0 +1,9 @@
+1-Small house
+MaxSteps = 250
+MaxBattery=15
+Rows = 4
+Cols =9
+WWWW0012W
+W0231W45D 
+W124WW120
+W1WWW2111
