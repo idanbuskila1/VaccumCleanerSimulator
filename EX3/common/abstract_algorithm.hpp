@@ -1,5 +1,5 @@
-#ifndef ROBOT_ALGORITHM_H__
-#define ROBOT_ALGORITHM_H__
+#ifndef ABSTRACT_ALGORITHM
+#define ABSTRACT_ALGORITHM
 
 #include <cstddef>
 #include <memory>
@@ -25,4 +25,4 @@ public:
 	virtual Step nextStep() = 0;
 };
 
-#endif  // ROBOT_ALGORITHM_H__
+#endif  // ABSTRACT_ALGORITHM

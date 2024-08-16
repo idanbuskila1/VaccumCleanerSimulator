@@ -4,3 +4,4 @@ result.txt
 .vscode/launch.json
 .vscode/settings.json
 .vscode/tasks.json
+**/build/

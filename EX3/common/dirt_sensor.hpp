@@ -1,5 +1,5 @@
-#ifndef DIRT_SENSOR_H_
-#define DIRT_SENSOR_H_
+#ifndef DIRT_S
+#define DIRT_S
 
 class DirtSensor {
 public:

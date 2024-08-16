@@ -1,5 +1,5 @@
-#ifndef BATTERY_METER_H_
-#define BATTERY_METER_H_
+#ifndef BATTERY_M
+#define BATTERY_M
 
 #include <cstddef>
 
@@ -10,4 +10,4 @@ public:
 	virtual std::size_t getBatteryState() const = 0;
 };
 
-#endif  // BATTERY_METER_H_
+#endif  // BATTERY_M

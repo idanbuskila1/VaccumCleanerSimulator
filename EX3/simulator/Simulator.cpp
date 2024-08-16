@@ -1,5 +1,5 @@
 #include "Simulator.hpp"
-#include "MyAlgorithm.hpp"
+
 using std::vector, std::pair, std::ifstream, std::stringstream;
 using std::cerr, std::endl;
 
@@ -20,8 +20,8 @@ bool isInteger(const string& str) {
     return !ss.fail() && ss.eof();
 }
 
-void Simulator::setAlgorithm(AbstractAlgorithm &algorithm){
-    alg = &algorithm;
+void Simulator::setAlgorithm(unique_ptr<AbstractAlgorithm> algorithm){
+    alg = std::move(algorithm);
     bmo = BatteryMeterObject(vc);
     dso = DirtSensorObject(h,vc);
     wso = WallsSensorObject(h,vc);
@@ -244,8 +244,8 @@ void Simulator::run(){
 
 void Simulator::makeOutputFile(string name) {
     // Open the file in write mode
-    std::ofstream outFile("output_"+name);
-    
+    std::ofstream outFile("output_"+name,'w');
+
     if (!outFile) {
         std::cerr << "Error opening file for writing!" << std::endl;
         return;
@@ -273,7 +273,7 @@ void Simulator::makeOutputFile(string name) {
     outFile.close();
 }
 void Simulator::makeLog(string name){
-    std::ofstream outFile("log_"+name);
+    std::ofstream outFile("log_"+name,'w');
     if (!outFile) {
         std::cerr << "Error opening file for writing!" << std::endl;
         return;
@@ -283,4 +283,9 @@ void Simulator::makeLog(string name){
     }
     outFile.close();
     
+}
+void Simulator::setSimulationData(InputFileData* data){
+    this->maxSteps = data->maxSteps;
+    this->h = make_shared<House>(data->grid);
+    this->vc = make_shared<VaccumCleaner>(data->maxBattery,data->dockingStation);
 }

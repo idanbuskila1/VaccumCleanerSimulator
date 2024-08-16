@@ -1,30 +1,31 @@
-#include "MyAlgorithm.hpp"
+#include "208150953_A.hpp"
 
+REGISTER_ALGORITHM (_208150953_A);
 
-MyAlgorithm::MyAlgorithm() {
+_208150953_A::_208150953_A() {
     currentLocation = {0,0};
     houseMap.markVisited(0, 0, 0);
 }
 
-void MyAlgorithm::setBatteryMeter(const BatteryMeter& meter) {
+void _208150953_A::setBatteryMeter(const BatteryMeter& meter) {
     batteryMeter = &meter;
     maxBattery = batteryMeter->getBatteryState();
     houseMap.setMaxBattery(maxBattery);
 }
 
-void MyAlgorithm::setWallsSensor(const WallsSensor& sensor) {
+void _208150953_A::setWallsSensor(const WallsSensor& sensor) {
     wallsSensor = &sensor;
 }
 
-void MyAlgorithm::setDirtSensor(const DirtSensor& sensor) {
+void _208150953_A::setDirtSensor(const DirtSensor& sensor) {
     dirtSensor = &sensor;
 }
 
-void MyAlgorithm::setMaxSteps(std::size_t max) {
+void _208150953_A::setMaxSteps(std::size_t max) {
     maxSteps = max;
 }
 
-pair<int,int> MyAlgorithm::calcNewPosition(Direction d, pair<int,int> pos) {
+pair<int,int> _208150953_A::calcNewPosition(Direction d, pair<int,int> pos) {
     pair<int,int> ret = pos;
     switch (d)
     {
@@ -46,7 +47,7 @@ pair<int,int> MyAlgorithm::calcNewPosition(Direction d, pair<int,int> pos) {
     return ret;
 }
 
-void MyAlgorithm::updateNeighbors(){
+void _208150953_A::updateNeighbors(){
     if (!wallsSensor->isWall(Direction::North)&& !houseMap.isVisited(currentLocation.first - 1, currentLocation.second)) {
         houseMap.markToVisit(currentLocation.first - 1, currentLocation.second);
     }
@@ -60,7 +61,7 @@ void MyAlgorithm::updateNeighbors(){
         houseMap.markToVisit(currentLocation.first, currentLocation.second - 1);
     }
 }
-Step MyAlgorithm::moveByState(){
+Step _208150953_A::moveByState(){
    Step ret;
     if(wallsSensor->isWall(Direction::North)&&wallsSensor->isWall(Direction::South) &&wallsSensor->isWall(Direction::East)&&wallsSensor->isWall(Direction::West)){//edge case where docking station is srrounded by walls
         return Step::Finish;
@@ -115,7 +116,7 @@ Step MyAlgorithm::moveByState(){
     }
     return nextStep();
 }
-Step MyAlgorithm::nextStep(){
+Step _208150953_A::nextStep(){
     //if we are done with the steps, return finish if made it to dock in time, else return stay as default val to the simulator.
     if(steps==maxSteps){
         if(currentLocation==DOCK){

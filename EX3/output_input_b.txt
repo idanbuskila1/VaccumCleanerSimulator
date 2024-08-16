@@ -1,4 +1,0 @@
-NumSteps = 13
-DirtLeft = 0
-Status = FINISHED
-Steps:SsSWsENNWsssEF

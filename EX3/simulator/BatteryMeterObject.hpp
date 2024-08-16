@@ -1,9 +1,9 @@
-#ifndef BATTERY_METER
-#define BATTERY_METER
+#ifndef BATTERY_M_O
+#define BATTERY_M_O
 
 #include <memory>
 
-#include "abstract_algorithm.hpp"
+#include "../common/abstract_algorithm.hpp"
 #include "VaccumCleaner.hpp"
 
 using std::shared_ptr;

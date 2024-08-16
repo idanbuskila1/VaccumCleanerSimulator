@@ -1,5 +1,5 @@
-#ifndef WALL_SENSOR_H_
-#define WALL_SENSOR_H_
+#ifndef WALL_S
+#define WALL_S
 
 #include "enums.hpp"
 
@@ -10,4 +10,4 @@ public:
 	virtual bool isWall(Direction d) const = 0;
 };
 
-#endif  // WALL_SENSOR_H_
+#endif  // WALL_S

@@ -1,11 +1,11 @@
-#ifndef DIRT_SENSOR
-#define DIRT_SENSOR
+#ifndef DIRT_S_O
+#define DIRT_S_O
 
 #include <memory>
 
 #include "VaccumCleaner.hpp"
 #include "House.hpp"
-#include "dirt_sensor.hpp"
+#include "../common/dirt_sensor.hpp"
 
 using std::shared_ptr;
 

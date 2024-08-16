@@ -6,7 +6,7 @@
 #include <cstddef>
 #include <memory>
 #include <iostream>
-#include "enums.hpp"
+#include "../common/enums.hpp"
 
 using  std::pair, std::make_pair,std::make_unique,std::vector, std::string, std::max,  std::min,std::get;
 using std::cerr, std::endl, std::cout;

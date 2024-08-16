@@ -3,10 +3,11 @@
 
 #include "House.hpp"
 #include "VaccumCleaner.hpp"
-#include "abstract_algorithm.hpp"
+#include "../common/abstract_algorithm.hpp"
 #include "WallsSensorObject.hpp"
 #include "DirtSensorObject.hpp"
 #include "BatteryMeterObject.hpp"
+#include "../common/structs.hpp"
 
 
 using std::string ,std::shared_ptr, std::unique_ptr,std::make_shared, std::to_string;
@@ -14,7 +15,7 @@ using std::string ,std::shared_ptr, std::unique_ptr,std::make_shared, std::to_st
 class Simulator{
     shared_ptr<House> h;
     shared_ptr<VaccumCleaner> vc;
-    AbstractAlgorithm* alg;
+    unique_ptr<AbstractAlgorithm> alg;
     size_t maxSteps;
     vector<string> StepLog; // Vector to store steps log
     string stepDescriptor; // string for the output file
@@ -28,8 +29,10 @@ class Simulator{
     Simulator():h(nullptr),vc(nullptr),alg(nullptr),stepDescriptor(""),wso(h,vc),dso(h,vc),bmo(vc){};
     // read house file and create initial objects and data members
     int readHouseFile(const string& filename);
+    // initialize simulation parameters from a house file data
+    void setSimulationData(InputFileData* data);
     //set the algorithm to be used
-    void setAlgorithm(AbstractAlgorithm &algorithm);
+    void setAlgorithm(unique_ptr<AbstractAlgorithm> algorithm);
     //run the simulation
     void run();
     //make ouput file

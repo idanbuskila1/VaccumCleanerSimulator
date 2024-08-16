@@ -1,8 +1,8 @@
-#ifndef WALLS_SENSOR
-#define WALLS_SENSOR
+#ifndef WALLS_S_O
+#define WALLS_S_O
 
-#include "wall_sensor.hpp"
-#include "enums.hpp"
+#include "../common/wall_sensor.hpp"
+#include "../common/enums.hpp"
 #include "VaccumCleaner.hpp"
 #include "House.hpp"
 
