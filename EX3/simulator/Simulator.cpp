@@ -244,7 +244,7 @@ void Simulator::run(){
 
 void Simulator::makeOutputFile(string name) {
     // Open the file in write mode
-    std::ofstream outFile("output_"+name,'w');
+    std::ofstream outFile("outputs/"+name,std::ios::out);
 
     if (!outFile) {
         std::cerr << "Error opening file for writing!" << std::endl;
@@ -273,7 +273,7 @@ void Simulator::makeOutputFile(string name) {
     outFile.close();
 }
 void Simulator::makeLog(string name){
-    std::ofstream outFile("log_"+name,'w');
+    std::ofstream outFile("logs/"+name,std::ios::out);
     if (!outFile) {
         std::cerr << "Error opening file for writing!" << std::endl;
         return;
@@ -284,8 +284,8 @@ void Simulator::makeLog(string name){
     outFile.close();
     
 }
-void Simulator::setSimulationData(InputFileData* data){
-    this->maxSteps = data->maxSteps;
-    this->h = make_shared<House>(data->grid);
-    this->vc = make_shared<VaccumCleaner>(data->maxBattery,data->dockingStation);
+void Simulator::setSimulationData(InputFileData data){
+    this->maxSteps = data.maxSteps;
+    this->h = make_shared<House>(data.grid);
+    this->vc = make_shared<VaccumCleaner>(data.maxBattery,data.dockingStation);
 }

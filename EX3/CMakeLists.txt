@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(YourProjectName)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 # Allow the user to specify the algorithm folder and source files via CMake variables
 set(ALGORITHM_NAME "" CACHE STRING "Name of the algorithm folder (e.g., algorithem1)")

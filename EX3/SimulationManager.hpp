@@ -11,7 +11,7 @@
 using std::string;
 
 class SimulationManager{
-vector<InputFileData*> houseFiles;
+vector<InputFileData> houseFiles;
 std::atomic_int simulationNo=0;
 
 string processHouseFile(const string& path);

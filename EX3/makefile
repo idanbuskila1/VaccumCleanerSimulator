@@ -1,4 +1,5 @@
 .PHONY: all clean alg1
+CXXFLAGS =-fsanitize=address -Wall -Wextra -Werror -pedantic -std=c++20 
 
 # Default target
 all: alg1
@@ -13,7 +14,7 @@ compile:
 
 build-exe:
 	@echo "Build executables for all algorithms..."
-	@gcc -std=c++17 -g -o myrobot *.cpp simulator/*.cpp -I common -I algorithm -I simulator
+	@g++ $(CXXFLAGS) -g -o myrobot *.cpp simulator/*.cpp -I common -I algorithm -I simulator
 
 run: 
 	@echo "Build executables for all algorithms..."

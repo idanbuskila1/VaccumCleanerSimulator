@@ -30,7 +30,7 @@ class Simulator{
     // read house file and create initial objects and data members
     int readHouseFile(const string& filename);
     // initialize simulation parameters from a house file data
-    void setSimulationData(InputFileData* data);
+    void setSimulationData(InputFileData data);
     //set the algorithm to be used
     void setAlgorithm(unique_ptr<AbstractAlgorithm> algorithm);
     //run the simulation

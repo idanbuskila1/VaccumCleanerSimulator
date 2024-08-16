@@ -148,8 +148,12 @@ string SimulationManager::processHouseFile(const string& filename){
         return error;
     }
     //house file is valid - add to houseFiles
-    InputFileData* house = new InputFileData{filename,maxBattery, maxSteps, grid, dockingStation};
-    houseFiles.push_back(house);
+    string prefix = "houses/";
+    string suffix = ".house";
+    size_t prefixPos = filename.find(prefix);
+    size_t suffixPos = filename.rfind(suffix);
+    string trimmedFilename = filename.substr(prefixPos + prefix.length(), suffixPos - (prefixPos + prefix.length()));
+    houseFiles.emplace_back(trimmedFilename,maxBattery, maxSteps, grid, dockingStation);
     return "";
 }
 
@@ -175,11 +179,10 @@ void SimulationManager::initializeHouses(string path){
 }
 
 void SimulationManager::operateSimulations(){
-    size_t numOfAlgos = AlgorithmRegistrar::getAlgorithmRegistrar().count();
-
+    //size_t numOfAlgos = AlgorithmRegistrar::getAlgorithmRegistrar().count();
     for (size_t i = 0; i < houseFiles.size(); ++i) {
         for (const auto& algo: AlgorithmRegistrar::getAlgorithmRegistrar()){
-            cout<<"house: "<<houseFiles[i]->houseName<<" algo: "<<algo.name()<<endl;
+            cout<<"house: "<<houseFiles[i].houseName<<" algo: "<<algo.name()<<endl;
             Simulator simulator;
             simulator.setSimulationData(houseFiles[i]);
             auto algorithm = algo.create();
@@ -188,8 +191,12 @@ void SimulationManager::operateSimulations(){
             if (simulator.getIsRuntimeError()) {
                 cerr << "Error: " << simulator.getErrorMessage() << endl;
             } else {
-                simulator.makeOutputFile("outputs/"+houseFiles[i]->houseName +"-"+ algo.name());
-                simulator.makeLog("logs/"+houseFiles[i]->houseName +"-"+ algo.name());
+                cout<<houseFiles[i].houseName +"-"+ algo.name()+".txt"<<endl;
+
+                simulator.makeOutputFile(houseFiles[i].houseName +"-"+ algo.name()+".txt");
+                simulator.makeLog(houseFiles[i].houseName +"-"+ algo.name()+".txt");
+                // simulator.makeOutputFile("outputs1.txt");
+                // simulator.makeLog("2.txt");
 
             }
         }

@@ -13,6 +13,8 @@ struct InputFileData{
     size_t maxSteps;
     vector<vector<int>> grid;
     pair<int, int> dockingStation;
+    
+    InputFileData(std::string name, size_t battery, size_t steps, vector<vector<int>> g,pair<int, int> docking):houseName(name),maxBattery(battery),maxSteps(steps),grid(g),dockingStation(docking){};
 };
 
 #endif

@@ -58,6 +58,7 @@ int main(int argc, char *argv[]){
     SimulationManager manager;
     manager.initializeHouses(housePath);
     manager.operateSimulations();
+    AlgorithmRegistrar::getAlgorithmRegistrar().clear();
     closeEntries(files_entries);
     }
 
