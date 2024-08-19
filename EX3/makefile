@@ -20,14 +20,17 @@ run:
 	@echo "Build executables for all algorithms..."
 	$(MAKE) compile
 	@echo "Run the simulator..."
-	@./myrobot -house_path=houses -algo_path=build/soFiles
+#	@./myrobot
+#	@./myrobot -algo_path=build/soFiles
+#	@./myrobot -house_path=houses -algo_path=build/soFiles -summary_only
+	@./myrobot -house_path=houses -algo_path=build/soFiles 
 
 # Target to build the algorithm
 alg1:
 	@echo "Creating build directory if it does not exist..."
 	@mkdir -p build
 	@echo "Running CMake..."
-	@cd build && cmake -DALGORITHM_NAME=algorithem1 -DALGORITHM_SOURCES="208150953_A.cpp;208150953_A.hpp" -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
+	@cd build && cmake -DALGORITHM_NAME=208150953_A -DALGORITHM_SOURCES="208150953_A.cpp;208150953_A.hpp" -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
 	@echo "Building algorithm..."
 	@cd build && $(MAKE)
 
@@ -35,7 +38,7 @@ alg2:
 	@echo "Creating build directory if it does not exist..."
 	@mkdir -p build
 	@echo "Running CMake..."
-	@cd build && cmake -DALGORITHM_NAME=algorithem2 -DALGORITHM_SOURCES="208150953_B.cpp;208150953_B.hpp" -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
+	@cd build && cmake -DALGORITHM_NAME=208150953_B -DALGORITHM_SOURCES="208150953_B.cpp;208150953_B.hpp" -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
 	@echo "Building algorithm..."
 	@cd build && $(MAKE)
 

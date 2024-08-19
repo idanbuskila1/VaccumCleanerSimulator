@@ -17,7 +17,7 @@ bool SimulationManager::isInteger(const string& str) {
     return !ss.fail() && ss.eof();
 }
 // Function to process a house file create a InputFileData object and add it to houseFiles vector
-string SimulationManager::processHouseFile(const string& filename){
+string SimulationManager::processHouseFile(const string& filename, const string& strippedName=""){
     size_t maxSteps;
     size_t maxBattery;
     size_t rows;
@@ -148,12 +148,7 @@ string SimulationManager::processHouseFile(const string& filename){
         return error;
     }
     //house file is valid - add to houseFiles
-    string prefix = "houses/";
-    string suffix = ".house";
-    size_t prefixPos = filename.find(prefix);
-    size_t suffixPos = filename.rfind(suffix);
-    string trimmedFilename = filename.substr(prefixPos + prefix.length(), suffixPos - (prefixPos + prefix.length()));
-    houseFiles.emplace_back(trimmedFilename,maxBattery, maxSteps, grid, dockingStation);
+    houseFiles.emplace_back(strippedName,maxBattery, maxSteps, grid, dockingStation);
     return "";
 }
 
@@ -161,9 +156,14 @@ string SimulationManager::processHouseFile(const string& filename){
 void SimulationManager::initializeHouses(string path){
     string err;
     houseFiles.reserve(15);
+    if (path == ".") {
+        path = std::filesystem::current_path().string();
+    }
     for (const auto& entry : std::filesystem::directory_iterator(path)) {
         if (entry.is_regular_file() && entry.path().extension() == ".house") {
-            if ((err = processHouseFile(entry.path().string())) != "") {
+            cout<<entry.path().stem().string()<<endl;
+            if ((err = processHouseFile(entry.path().string(),entry.path().stem().string() )) != "") {
+                cout<<"error"<<endl;
                  // Create an error file with the same name but with .error extension
                 std::string errorFilePath = entry.path().stem().string() + ".error";
                 std::ofstream errorFile(errorFilePath);
@@ -178,27 +178,67 @@ void SimulationManager::initializeHouses(string path){
     }
 }
 
-void SimulationManager::operateSimulations(){
-    //size_t numOfAlgos = AlgorithmRegistrar::getAlgorithmRegistrar().count();
-    for (size_t i = 0; i < houseFiles.size(); ++i) {
-        for (const auto& algo: AlgorithmRegistrar::getAlgorithmRegistrar()){
-            cout<<"house: "<<houseFiles[i].houseName<<" algo: "<<algo.name()<<endl;
+void SimulationManager::operateSimulations(bool isSummaryOnly){
+    scores.resize(AlgorithmRegistrar::getAlgorithmRegistrar().count(), vector<int>(houseFiles.size(), 0));   
+    cout<<"houses: "<< houseFiles.size()<<". algos: "<<AlgorithmRegistrar::getAlgorithmRegistrar().count()<<endl;
+    int i=0;
+    for (const auto& algo: AlgorithmRegistrar::getAlgorithmRegistrar()){
+        for (size_t j = 0; j < houseFiles.size(); ++j) {
+            cout<<i<<","<<j<<endl;
+            cout<<"house: "<<houseFiles[j].houseName<<" algo: "<<algo.name()<<endl;
             Simulator simulator;
-            simulator.setSimulationData(houseFiles[i]);
+            simulator.setSimulationData(houseFiles[j]);
             auto algorithm = algo.create();
             simulator.setAlgorithm(std::move(algorithm));
             simulator.run();
             if (simulator.getIsRuntimeError()) {
                 cerr << "Error: " << simulator.getErrorMessage() << endl;
+                scores[i][j] = -1;
             } else {
-                cout<<houseFiles[i].houseName +"-"+ algo.name()+".txt"<<endl;
-
-                simulator.makeOutputFile(houseFiles[i].houseName +"-"+ algo.name()+".txt");
-                simulator.makeLog(houseFiles[i].houseName +"-"+ algo.name()+".txt");
-                // simulator.makeOutputFile("outputs1.txt");
-                // simulator.makeLog("2.txt");
-
+                if(!isSummaryOnly){
+                    simulator.makeOutputFile(houseFiles[j].houseName +"-"+ algo.name()+".txt");
+                    simulator.makeLog(houseFiles[j].houseName +"-"+ algo.name()+".txt");
+                }
+                scores[i][j] = simulator.calcScore();
             }
         }
+        i++;
+    }
+}
+void SimulationManager::makeSummary(){
+    std::ofstream summaryFile("summary.csv");
+    if (summaryFile.is_open()) {
+        // Write headers
+        summaryFile << "Algorithm,";
+        for(const auto& h:houseFiles){
+            summaryFile << h.houseName << ",";
+        }
+        summaryFile << "\n";
+
+
+        size_t i=0;
+        for (const auto& algo : AlgorithmRegistrar::getAlgorithmRegistrar()) {
+            summaryFile << algo.name() << ",";
+            for (size_t j = 0; j < houseFiles.size(); ++j) {
+                summaryFile << scores[i][j] << ",";
+            }
+            i++;
+            summaryFile << "\n";
+        }
+
+
+
+        // Write data
+        // for (size_t i = 0; i < houseFiles.size(); ++i) {
+        //     summaryFile << houseFiles[i].houseName << ",";
+        //     for (size_t j = 0; j < AlgorithmRegistrar::getAlgorithmRegistrar().count(); ++j) {
+        //         summaryFile << scores[i][j] << ",";
+        //     }
+        //     summaryFile << "\n";
+        // }
+
+        summaryFile.close();
+    } else {
+        std::cerr << "Error: Could not create summary file" << std::endl;
     }
 }

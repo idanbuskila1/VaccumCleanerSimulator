@@ -12,15 +12,18 @@ using std::string;
 
 class SimulationManager{
 vector<InputFileData> houseFiles;
-std::atomic_int simulationNo=0;
+std::atomic<int> simulationNo{0};
+vector<vector<int>> scores;
 
-string processHouseFile(const string& path);
+
+string processHouseFile(const string& path, const string& strippedName);
 bool isInteger(const string& str);
 string trim(const string& str) ;
 
 public:
     void initializeHouses(string path);
-    void operateSimulations();
+    void operateSimulations(bool isSummaryOnly);
+    void makeSummary();
 };
 
 #endif

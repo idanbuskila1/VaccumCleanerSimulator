@@ -23,6 +23,7 @@ class Simulator{
     DirtSensorObject dso;
     BatteryMeterObject bmo;
     bool isRuntimeError = false;
+    string status="WORKING";
 
 
     public:
@@ -35,6 +36,8 @@ class Simulator{
     void setAlgorithm(unique_ptr<AbstractAlgorithm> algorithm);
     //run the simulation
     void run();
+    //calcualte score after the simulation.
+    int calcScore();
     //make ouput file
     void makeOutputFile(string name);
     //make log file

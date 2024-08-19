@@ -3,5 +3,6 @@
 #include <memory>
 #include <iostream>
 #include "SimulationManager.hpp"
+#include "common/AlgorithmRegistrar.h"
 
 #endif

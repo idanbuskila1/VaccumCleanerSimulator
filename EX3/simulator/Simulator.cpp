@@ -251,7 +251,6 @@ void Simulator::makeOutputFile(string name) {
         return;
     }
     //figure out the status of the simulation
-    string status;
     bool isOnDocking = vc->getCurrentLoc() == h->getDockingStationLoc();
     if(stepDescriptor.back()=='F')
     { 
@@ -263,10 +262,13 @@ void Simulator::makeOutputFile(string name) {
     else if(vc->getBatterySteps()<1 && !isOnDocking)
         status="DEAD";
     else status = "WORKING";
+    string isOnDockingString = isOnDocking ? "TRUE":"FALSE";
     // Write the data to the file
     outFile << "NumSteps = " << StepLog.size() << std::endl;
     outFile << "DirtLeft = " << h->getTotalDirtLeft() << std::endl;
     outFile << "Status = " << status << std::endl;
+    outFile << "InDock = " << isOnDockingString <<std::endl;
+    outFile << "Score = " << calcScore() <<std::endl;
     outFile << "Steps:" << stepDescriptor <<std::endl;
 
     // Close the file
@@ -288,4 +290,17 @@ void Simulator::setSimulationData(InputFileData data){
     this->maxSteps = data.maxSteps;
     this->h = make_shared<House>(data.grid);
     this->vc = make_shared<VaccumCleaner>(data.maxBattery,data.dockingStation);
+}
+
+int Simulator::calcScore(){
+    int score;
+    bool isOnDocking = vc->getCurrentLoc() == h->getDockingStationLoc();
+    if (status=="DEAD") {
+        score = maxSteps + h->getTotalDirtLeft() * 300 + 2000;
+    } else if (stepDescriptor.back() == 'F' && !isOnDocking) {
+        score = maxSteps + h->getTotalDirtLeft() * 300 + 3000;
+    } else {
+        score = StepLog.size() + h->getTotalDirtLeft() * 300 + (isOnDocking ? 0 : 1000);
+    }
+    return score;
 }
