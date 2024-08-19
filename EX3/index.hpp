@@ -4,5 +4,7 @@
 #include <iostream>
 #include "SimulationManager.hpp"
 #include "common/AlgorithmRegistrar.h"
+#include <thread>
+#include <vector>
 
 #endif

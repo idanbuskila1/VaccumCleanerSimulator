@@ -1,13 +1,11 @@
 #include "SimulationManager.hpp"
 
-
 string SimulationManager::trim(const string& str) {
     size_t first = str.find_first_not_of(" \t\n\r");
     if (first == string::npos) return "";
     size_t last = str.find_last_not_of(" \t\n\r");
     return str.substr(first, (last - first + 1));
 }
-
 // Function to check if a string represents a valid integer
 bool SimulationManager::isInteger(const string& str) {
     if (str.empty()) return false;
@@ -161,9 +159,8 @@ void SimulationManager::initializeHouses(string path){
     }
     for (const auto& entry : std::filesystem::directory_iterator(path)) {
         if (entry.is_regular_file() && entry.path().extension() == ".house") {
-            cout<<entry.path().stem().string()<<endl;
+            //cout<<entry.path().stem().string()<<endl;
             if ((err = processHouseFile(entry.path().string(),entry.path().stem().string() )) != "") {
-                cout<<"error"<<endl;
                  // Create an error file with the same name but with .error extension
                 std::string errorFilePath = entry.path().stem().string() + ".error";
                 std::ofstream errorFile(errorFilePath);
@@ -176,34 +173,52 @@ void SimulationManager::initializeHouses(string path){
             }
         }
     }
+    scores.resize(AlgorithmRegistrar::getAlgorithmRegistrar().count(), vector<int>(houseFiles.size(), 0));
 }
-
-void SimulationManager::operateSimulations(bool isSummaryOnly){
-    scores.resize(AlgorithmRegistrar::getAlgorithmRegistrar().count(), vector<int>(houseFiles.size(), 0));   
-    cout<<"houses: "<< houseFiles.size()<<". algos: "<<AlgorithmRegistrar::getAlgorithmRegistrar().count()<<endl;
+auto SimulationManager::getAlgoByIndex(int idx){
     int i=0;
     for (const auto& algo: AlgorithmRegistrar::getAlgorithmRegistrar()){
-        for (size_t j = 0; j < houseFiles.size(); ++j) {
-            cout<<i<<","<<j<<endl;
-            cout<<"house: "<<houseFiles[j].houseName<<" algo: "<<algo.name()<<endl;
-            Simulator simulator;
-            simulator.setSimulationData(houseFiles[j]);
-            auto algorithm = algo.create();
-            simulator.setAlgorithm(std::move(algorithm));
-            simulator.run();
-            if (simulator.getIsRuntimeError()) {
-                cerr << "Error: " << simulator.getErrorMessage() << endl;
-                scores[i][j] = -1;
-            } else {
-                if(!isSummaryOnly){
-                    simulator.makeOutputFile(houseFiles[j].houseName +"-"+ algo.name()+".txt");
-                    simulator.makeLog(houseFiles[j].houseName +"-"+ algo.name()+".txt");
-                }
-                scores[i][j] = simulator.calcScore();
-            }
+        if(i==idx){
+            return algo;
         }
         i++;
     }
+    return *AlgorithmRegistrar::getAlgorithmRegistrar().begin();
+}
+int SimulationManager::getSimulationNumber(){
+    return simulationNo++;
+}
+void SimulationManager::operateSimulations(){
+    int simNum = getSimulationNumber();
+    size_t algosCount = AlgorithmRegistrar::getAlgorithmRegistrar().count();
+    if(simNum>=static_cast<int>(algosCount*houseFiles.size())){
+        isSimulationOver=true;
+        return;
+    }
+    else{
+        int houseIdx, algIdx;
+        houseIdx = simNum / algosCount;
+        algIdx = simNum % algosCount;
+        auto algo = getAlgoByIndex(algIdx);
+        auto house = houseFiles[houseIdx];
+        cout<<"house: "<<house.houseName<<" algo: "<<algo.name()<<"thread name:"<<std::this_thread::get_id()<<endl;
+        Simulator simulator;
+        simulator.setSimulationData(house);
+        auto algorithm = algo.create();
+        simulator.setAlgorithm(std::move(algorithm));
+        simulator.run();
+        if (simulator.getIsRuntimeError()) {
+            cerr << "Error: " << simulator.getErrorMessage() << endl;
+            scores[algIdx][houseIdx] = -1;
+        } else {
+            if(!isSummaryOnly){
+                simulator.makeOutputFile(house.houseName +"-"+ algo.name()+".txt");
+                simulator.makeLog(house.houseName +"-"+ algo.name()+".txt");
+            }
+            scores[algIdx][houseIdx] = simulator.calcScore();
+        }
+    }
+      
 }
 void SimulationManager::makeSummary(){
     std::ofstream summaryFile("summary.csv");
@@ -225,20 +240,59 @@ void SimulationManager::makeSummary(){
             i++;
             summaryFile << "\n";
         }
-
-
-
-        // Write data
-        // for (size_t i = 0; i < houseFiles.size(); ++i) {
-        //     summaryFile << houseFiles[i].houseName << ",";
-        //     for (size_t j = 0; j < AlgorithmRegistrar::getAlgorithmRegistrar().count(); ++j) {
-        //         summaryFile << scores[i][j] << ",";
-        //     }
-        //     summaryFile << "\n";
-        // }
-
         summaryFile.close();
     } else {
         std::cerr << "Error: Could not create summary file" << std::endl;
+    }
+}
+
+void SimulationManager::closeAlgorithms(){
+    AlgorithmRegistrar::getAlgorithmRegistrar().clear();
+    for(void* handle:algorithmEntries){
+        dlclose(handle);
+    }
+}
+
+void SimulationManager::createErrFile(string errorFilePath, string msg){
+    std::ofstream errorFile(errorFilePath);
+    if (errorFile.is_open()) {
+        errorFile << msg << std::endl;
+        errorFile.close();
+    } else {
+        std::cerr << "Failed to create error file: " << errorFilePath << std::endl;
+    }
+}
+
+void SimulationManager::openAlgorithms(string path){
+    // Open the directory
+    if (path == ".") {
+        path = std::filesystem::current_path().string();
+    }
+    DIR* dir = opendir(path.c_str());
+    size_t prev_count=0;
+    if (dir) {
+        // Read all the files in the directory
+        struct dirent* entry;
+        while ((entry = readdir(dir)) != nullptr) {
+            std::string filename = entry->d_name;
+            std::string filepath = path + "/" + filename;
+            // Check if the file is a shared object (.so)
+            if (filename.length() > 3 && filename.substr(filename.length() - 3) == ".so") {
+                // Open the shared object with dlopen
+                //cout<<"algo "<<entry->d_name<<endl;
+                void* handle = dlopen(filepath.c_str(), RTLD_NOW);
+                if (handle) {
+                    algorithmEntries.push_back(handle);
+                    if(AlgorithmRegistrar::getAlgorithmRegistrar().count() != prev_count+1){
+                        createErrFile(filename.substr(0, filename.length() - 3) + ".error", "couldnt registar the algorithm (count did not updated after dlopen).");
+                    }
+                    prev_count++;
+                } else createErrFile(filename.substr(0, filename.length() - 3) + ".error", dlerror());
+            }
+        }      
+        // Close the directory
+        closedir(dir);
+    } else {
+        std::cerr << "Failed to open directory: " << path << std::endl;
     }
 }

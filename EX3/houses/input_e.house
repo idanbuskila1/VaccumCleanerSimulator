@@ -1,0 +1,11 @@
+3-Central Docking Dirt House with Walls
+MaxSteps=200
+MaxBattery = 40
+Rows= 6
+Cols=8
+WWWWWWWW
+W31W 2 W
+W W  5 W
+W1 DW1 W
+W 3 1W4W
+WWWWWWWW

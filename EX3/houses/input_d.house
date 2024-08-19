@@ -1,0 +1,10 @@
+4-Open Dirt House with Walls
+MaxSteps=250
+MaxBattery = 30
+Rows= 5
+Cols=10
+WWWWWWWWWW
+W 1   7  W
+W 2 W D8 W
+W 23W 4 9W
+WWWWWWWWWW
