@@ -1,4 +1,4 @@
-#include "../common/HouseMap.h"
+#include "HouseMap.h"
 
 // Function to mark a cell as visited-we only put in the cells that aren't walls
 void HouseMap::markVisited(int x, int y, int dirt) {

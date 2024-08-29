@@ -14,7 +14,7 @@ compile:
 
 build-exe:
 	@echo "Build executables for all algorithms..."
-	@g++ $(CXXFLAGS) -g -o myrobot *.cpp simulator/*.cpp -I common -I algorithm -I simulator
+	@g++ $(CXXFLAGS) -g -o myrobot *.cpp simulator/*.cpp common/*.cpp -I common -I algorithm -I simulator
 
 run: 
 	@echo "Build executables for all algorithms..."

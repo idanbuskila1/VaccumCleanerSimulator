@@ -207,16 +207,11 @@ void SimulationManager::operateSimulations(){
         auto algorithm = algo.create();
         simulator.setAlgorithm(std::move(algorithm));
         simulator.run();
-        if (simulator.getIsRuntimeError()) {
-            cerr << "Error: " << simulator.getErrorMessage() << endl;
-            scores[algIdx][houseIdx] = -1;
-        } else {
-            if(!isSummaryOnly){
-                simulator.makeOutputFile(house.houseName +"-"+ algo.name()+".txt");
-                simulator.makeLog(house.houseName +"-"+ algo.name()+".txt");
-            }
-            scores[algIdx][houseIdx] = simulator.calcScore();
+        if(!isSummaryOnly){
+            simulator.makeOutputFile(house.houseName +"-"+ algo.name()+".txt");
+            simulator.makeLog(house.houseName +"-"+ algo.name()+".txt");
         }
+        scores[algIdx][houseIdx] = simulator.calcScore();
     }
       
 }

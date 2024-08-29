@@ -297,7 +297,7 @@ int Simulator::calcScore(){
     bool isOnDocking = vc->getCurrentLoc() == h->getDockingStationLoc();
     if (status=="DEAD") {
         score = maxSteps + h->getTotalDirtLeft() * 300 + 2000;
-    } else if (stepDescriptor.back() == 'F' && !isOnDocking) {
+    } else if ((stepDescriptor.back() == 'F' && !isOnDocking) || isRuntimeError) {
         score = maxSteps + h->getTotalDirtLeft() * 300 + 3000;
     } else {
         score = StepLog.size() + h->getTotalDirtLeft() * 300 + (isOnDocking ? 0 : 1000);
