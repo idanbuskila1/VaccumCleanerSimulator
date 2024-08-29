@@ -71,6 +71,14 @@
         "compare": "cpp",
         "concepts": "cpp",
         "algorithm": "cpp",
-        "*.ipp": "cpp"
+        "*.ipp": "cpp",
+        "any": "cpp",
+        "codecvt": "cpp",
+        "condition_variable": "cpp",
+        "csignal": "cpp",
+        "coroutine": "cpp",
+        "future": "cpp",
+        "list": "cpp",
+        "shared_mutex": "cpp"
     }
 }

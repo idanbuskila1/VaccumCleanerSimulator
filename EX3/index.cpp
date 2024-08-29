@@ -28,39 +28,37 @@ void parseArguments(int argc, char *argv[], std::string &housePath, std::string 
 void killThread(){
     std::cout<<"Thread is killed"<<std::endl;
 }
-void conductAllSimulations(int numThreads, std::string housePath, std::string algoPath, bool isSummaryOnly) {
+void conductAllSimulations(int numThreads, std::string housePath, std::string algoPath, bool isSummaryOnly,SimulationManager& manager) {
     std::vector<std::thread> threadPool;
-    std::vector<Simulator> simulators;
-    SimulationManager manager;
+    
     boost::asio::io_context io;
-
     manager.openAlgorithms(algoPath);
     manager.initializeHouses(housePath);
     manager.setIsSummaryOnly(isSummaryOnly);
+    std::vector<Simulator> simulators = manager.prepareAllSimulations();
 
        // Start threads
     for (int i = 0; i < numThreads; ++i) {
-        threadPool.emplace_back([&manager,&io] {
+        threadPool.emplace_back([&manager,&simulators] {
             while(!manager.isSimulationDone()){
-                
-
-
-
-
-
-                boost::asio::steady_timer t(io, boost::asio::chrono::seconds(4));
-                t.async_wait(&killThread);
-                io.restart();
-                manager.operateSimulations();
-                t.cancel();
+                int curSim = manager.getSimulationNumber();
+                if(curSim==-1){
+                    break;
+                }
+                // boost::asio::steady_timer t(io, boost::asio::chrono::seconds(4));
+                // t.async_wait(&killThread);
+                // io.restart();
+                std::cout<<"simulation number: "<<curSim<<std::endl;
+                simulators[curSim].run();
+                //t.cancel();
             }
         });
     }
     for (auto &thread : threadPool) {
         thread.join();
     }
+    manager.sumerrizeAllSimulations(simulators);
     manager.makeSummary();
-    manager.closeAlgorithms();
 }
 
 void print(const boost::system::error_code& /*e*/)
@@ -70,24 +68,26 @@ void print(const boost::system::error_code& /*e*/)
 
 
 int main(int argc, char *argv[]){ 
-    boost::asio::io_context io;
-    boost::asio::steady_timer t(io, boost::asio::chrono::seconds(4));
-    t.async_wait(&print);
-    boost::asio::steady_timer t2(io, boost::asio::chrono::seconds(6));
-    t2.async_wait(&print);
-    io.run_one();
-    io.run_one();
+    // boost::asio::io_context io;
+    // boost::asio::steady_timer t(io, boost::asio::chrono::seconds(4));
+    // t.async_wait(&print);
+    // boost::asio::steady_timer t2(io, boost::asio::chrono::seconds(6));
+    // t2.async_wait(&print);
+    // io.run_one();
+    // io.run_one();
 
-    io.restart();
-    boost::asio::steady_timer t3(io, boost::asio::chrono::seconds(8));
-    t3.async_wait(&print);
-    io.run();
+    // io.restart();
+    // boost::asio::steady_timer t3(io, boost::asio::chrono::seconds(8));
+    // t3.async_wait(&print);
+    // io.run();
 
     //parse arguments
     std::string housePath=".";
     std::string algoPath=".";
     bool isSummaryOnly=false;
     int numThreads=10;
+    SimulationManager manager;
     parseArguments(argc, argv, housePath, algoPath, isSummaryOnly, numThreads);
-    // conductAllSimulations(numThreads, housePath, algoPath, isSummaryOnly);
+    conductAllSimulations(numThreads, housePath, algoPath, isSummaryOnly, manager);
+    manager.closeAlgorithms();
 }

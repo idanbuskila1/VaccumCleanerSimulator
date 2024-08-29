@@ -186,34 +186,50 @@ auto SimulationManager::getAlgoByIndex(int idx){
     return *AlgorithmRegistrar::getAlgorithmRegistrar().begin();
 }
 int SimulationManager::getSimulationNumber(){
-    return simulationNo++;
-}
-void SimulationManager::operateSimulations(){
-    int simNum = getSimulationNumber();
+    int ret = simulationNo++;
     size_t algosCount = AlgorithmRegistrar::getAlgorithmRegistrar().count();
-    if(simNum>=static_cast<int>(algosCount*houseFiles.size())){
+    if(ret>=static_cast<int>(algosCount*houseFiles.size())){
         isSimulationOver=true;
-        return;
+        return -1;
     }
-    else{
+    return ret;
+}
+std::vector<Simulator> SimulationManager::prepareAllSimulations(){
+    std::vector<Simulator> simulators;
+    size_t algosCount = AlgorithmRegistrar::getAlgorithmRegistrar().count();
+    size_t simulationsCount = algosCount*houseFiles.size();
+    simulators.reserve(simulationsCount);
+    for(size_t i=0; i<simulationsCount; i++){
+        simulators.emplace_back();
         int houseIdx, algIdx;
-        houseIdx = simNum / algosCount;
-        algIdx = simNum % algosCount;
+        houseIdx = i / algosCount;
+        algIdx = i % algosCount;
         auto algo = getAlgoByIndex(algIdx);
         auto house = houseFiles[houseIdx];
         cout<<"house: "<<house.houseName<<" algo: "<<algo.name()<<"thread name:"<<std::this_thread::get_id()<<endl;
-        Simulator simulator;
-        simulator.setSimulationData(house);
+        simulators.back().setSimulationData(house);
         auto algorithm = algo.create();
-        simulator.setAlgorithm(std::move(algorithm));
-        simulator.run();
-        if(!isSummaryOnly){
-            simulator.makeOutputFile(house.houseName +"-"+ algo.name()+".txt");
-            simulator.makeLog(house.houseName +"-"+ algo.name()+".txt");
-        }
-        scores[algIdx][houseIdx] = simulator.calcScore();
+        simulators.back().setAlgorithm(std::move(algorithm));
     }
-      
+    return simulators;
+}
+
+void SimulationManager::sumerrizeAllSimulations(std::vector<Simulator>& simulators){
+    int N = static_cast<int>(simulators.size());
+    for(int i=0; i<N; i++){
+        int houseIdx, algoIdx;
+        size_t algosCount = AlgorithmRegistrar::getAlgorithmRegistrar().count();
+        houseIdx = i / algosCount;
+        algoIdx = i % algosCount;
+        if(!isSummaryOnly){
+            string houseName = houseFiles[houseIdx].houseName;
+            string algoName = getAlgoByIndex(algoIdx).name();
+            simulators[i].makeOutputFile(houseName +"-"+ algoName+".txt");
+            simulators[i].makeLog(houseName +"-"+ algoName+".txt");
+        }
+        scores[algoIdx][houseIdx] = simulators[i].calcScore();
+    }
+        
 }
 void SimulationManager::makeSummary(){
     std::ofstream summaryFile("summary.csv");
