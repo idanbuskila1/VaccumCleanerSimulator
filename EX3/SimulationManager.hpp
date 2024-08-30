@@ -29,12 +29,13 @@ auto getAlgoByIndex(int idx);
 
 public:
     void initializeHouses(string path);
-    void sumerrizeAllSimulations(std::vector<Simulator>& simulators);
+    void sumerrizeAllSimulations(std::vector<Simulator>& simulators,vector<int>& results);
     int getSimulationNumber();
     void openAlgorithms(string path);
     void createErrFile(string errorFilePath, string msg);
     void closeAlgorithms();
     std::vector<Simulator> prepareAllSimulations();
+    size_t getTimeLimit(int simNo);
     void setIsSummaryOnly(bool flag){isSummaryOnly=flag;};
     bool isSimulationDone(){return isSimulationOver;};
     void makeSummary();

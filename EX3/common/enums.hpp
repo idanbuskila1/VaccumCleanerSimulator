@@ -3,7 +3,6 @@
 
 enum class Direction { North, East, South, West };
 enum class Step { North, East, South, West, Stay, Finish };
-
 enum class AlgoState {
   CHARGING,
   TO_DOCK,
@@ -11,6 +10,7 @@ enum class AlgoState {
   INIT
 
 };
+
 
 #define MAX_DIRT 9
 

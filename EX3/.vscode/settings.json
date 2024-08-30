@@ -79,6 +79,10 @@
         "coroutine": "cpp",
         "future": "cpp",
         "list": "cpp",
-        "shared_mutex": "cpp"
+        "shared_mutex": "cpp",
+        "latch": "cpp",
+        "typeindex": "cpp",
+        "utility": "cpp",
+        "semaphore": "cpp"
     }
 }

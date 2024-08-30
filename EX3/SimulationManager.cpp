@@ -20,6 +20,7 @@ string SimulationManager::processHouseFile(const string& filename, const string&
     size_t maxBattery;
     size_t rows;
     size_t cols;
+    size_t initialDirt = 0;
     vector<vector<int>> grid; // Changed to store int values for wall=-1, ' '=0, D=-2, and dirt levels as int
     pair<int, int> dockingStation; // Pair to store row and column of the docking station
     string error = "";
@@ -130,6 +131,7 @@ string SimulationManager::processHouseFile(const string& filename, const string&
                     foundDockingStation = true;
                 } else if (c >= '0' && c <= '9') {
                     grid[currentRows][i] = c - '0'; // Dirt levels (convert char to int)
+                    initialDirt += c - '0';
                 } else {
                     grid[currentRows][i] = 0; // every other char is considered as an empty space
                 }
@@ -146,7 +148,7 @@ string SimulationManager::processHouseFile(const string& filename, const string&
         return error;
     }
     //house file is valid - add to houseFiles
-    houseFiles.emplace_back(strippedName,maxBattery, maxSteps, grid, dockingStation);
+    houseFiles.emplace_back(strippedName,maxBattery, maxSteps, grid, dockingStation,initialDirt);
     return "";
 }
 
@@ -194,6 +196,11 @@ int SimulationManager::getSimulationNumber(){
     }
     return ret;
 }
+size_t SimulationManager::getTimeLimit(int simNo){
+    size_t algosCount = AlgorithmRegistrar::getAlgorithmRegistrar().count();
+    size_t houseIdx = simNo / algosCount;
+    return houseFiles[houseIdx].maxSteps * 1000;
+}
 std::vector<Simulator> SimulationManager::prepareAllSimulations(){
     std::vector<Simulator> simulators;
     size_t algosCount = AlgorithmRegistrar::getAlgorithmRegistrar().count();
@@ -214,7 +221,7 @@ std::vector<Simulator> SimulationManager::prepareAllSimulations(){
     return simulators;
 }
 
-void SimulationManager::sumerrizeAllSimulations(std::vector<Simulator>& simulators){
+void SimulationManager::sumerrizeAllSimulations(std::vector<Simulator>& simulators, vector<int>& results){
     int N = static_cast<int>(simulators.size());
     for(int i=0; i<N; i++){
         int houseIdx, algoIdx;
@@ -227,9 +234,12 @@ void SimulationManager::sumerrizeAllSimulations(std::vector<Simulator>& simulato
             simulators[i].makeOutputFile(houseName +"-"+ algoName+".txt");
             simulators[i].makeLog(houseName +"-"+ algoName+".txt");
         }
+        if(results[i]==-1){
+            scores[algoIdx][houseIdx] = houseFiles[houseIdx].maxSteps*2 + houseFiles[houseIdx].initialDirt*300+2000;
+            continue;
+        }
         scores[algoIdx][houseIdx] = simulators[i].calcScore();
-    }
-        
+    }  
 }
 void SimulationManager::makeSummary(){
     std::ofstream summaryFile("summary.csv");

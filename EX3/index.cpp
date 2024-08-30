@@ -4,7 +4,10 @@
 #include <dlfcn.h>
 #include <dirent.h>
 #include <boost/asio.hpp>
-
+#include <boost/thread/thread.hpp>
+#include <boost/bind/bind.hpp>
+#include <semaphore>
+#include "simulator/Task.hpp"
 
 
 using std::cerr, std::endl, std::make_unique, std::unique_ptr,std::make_shared ,std::vector;
@@ -25,69 +28,122 @@ void parseArguments(int argc, char *argv[], std::string &housePath, std::string 
         }
     }
 }
-void killThread(){
-    std::cout<<"Thread is killed"<<std::endl;
-}
-void conductAllSimulations(int numThreads, std::string housePath, std::string algoPath, bool isSummaryOnly,SimulationManager& manager) {
+
+void run_tasks(boost::asio::io_context& ioContext,int numThreads, std::string housePath, std::string algoPath, bool isSummaryOnly,unique_ptr<SimulationManager>& manager) {
+    using namespace std::chrono_literals;
+
+    auto start = std::chrono::system_clock::now();
     std::vector<std::thread> threadPool;
-    
     boost::asio::io_context io;
-    manager.openAlgorithms(algoPath);
-    manager.initializeHouses(housePath);
-    manager.setIsSummaryOnly(isSummaryOnly);
-    std::vector<Simulator> simulators = manager.prepareAllSimulations();
+    manager->openAlgorithms(algoPath);
+    manager->initializeHouses(housePath);
+    manager->setIsSummaryOnly(isSummaryOnly);
+    unique_ptr<std::vector<Simulator>> simulators = make_unique<std::vector<Simulator>>(manager->prepareAllSimulations());
+    const long num_tasks = long(simulators->size());
+    std::latch work_done(num_tasks);
+    shared_ptr<std::counting_semaphore<>> currentThreads= make_shared<std::counting_semaphore<>>(numThreads);
+    
 
-       // Start threads
-    for (int i = 0; i < numThreads; ++i) {
-        threadPool.emplace_back([&manager,&simulators] {
-            while(!manager.isSimulationDone()){
-                int curSim = manager.getSimulationNumber();
-                if(curSim==-1){
-                    break;
-                }
-                // boost::asio::steady_timer t(io, boost::asio::chrono::seconds(4));
-                // t.async_wait(&killThread);
-                // io.restart();
-                std::cout<<"simulation number: "<<curSim<<std::endl;
-                simulators[curSim].run();
-                //t.cancel();
-            }
-        });
+    // initiate tasks
+    std::list<Task> tasks;
+    size_t task_index = 0;
+    for(int i=0;i<num_tasks;i++){ 
+        //manager.getTimeLimit(i)
+        tasks.emplace_back(task_index, (*simulators)[i], 3, ioContext, work_done,currentThreads);
+        ++task_index;
     }
-    for (auto &thread : threadPool) {
-        thread.join();
+
+    task_index = 0;
+    for(auto& task: tasks) {
+        currentThreads->acquire();
+        auto now = std::chrono::system_clock::now();
+        auto duration = std::chrono::duration_cast<TIME_UNIT>(now - start);
+        std::cout << "Starting task " << task_index << " at time: " << duration.count() << std::endl;
+        ++task_index;
+        task.run();
     }
-    manager.sumerrizeAllSimulations(simulators);
-    manager.makeSummary();
+    // wait on latch, for all threads to report done
+    work_done.wait();
+
+    std::vector<int> results;
+    for(auto& task: tasks) {
+        results.push_back(task.get_result());
+        task.join();
+    }
+    manager->sumerrizeAllSimulations(*simulators,results);
+    manager->makeSummary();
 }
 
-void print(const boost::system::error_code& /*e*/)
-{
-  std::cout << "Hello, world!" << std::endl;
-}
-
-
-int main(int argc, char *argv[]){ 
-    // boost::asio::io_context io;
-    // boost::asio::steady_timer t(io, boost::asio::chrono::seconds(4));
-    // t.async_wait(&print);
-    // boost::asio::steady_timer t2(io, boost::asio::chrono::seconds(6));
-    // t2.async_wait(&print);
-    // io.run_one();
-    // io.run_one();
-
-    // io.restart();
-    // boost::asio::steady_timer t3(io, boost::asio::chrono::seconds(8));
-    // t3.async_wait(&print);
-    // io.run();
-
+int main(int argc, char *argv[]){
     //parse arguments
     std::string housePath=".";
     std::string algoPath=".";
     bool isSummaryOnly=false;
     int numThreads=10;
-    SimulationManager manager;
     parseArguments(argc, argv, housePath, algoPath, isSummaryOnly, numThreads);
-    conductAllSimulations(numThreads, housePath, algoPath, isSummaryOnly, manager);
-    manager.closeAlgorithms();
+    auto ioContext = std::make_shared<boost::asio::io_context>();
+    auto manager = make_unique<SimulationManager>();
+    auto start = std::chrono::system_clock::now();
+    
+    // work guard to keep io_context running till stopped
+    // even if there is no active timer to wait for
+    auto workGuard = boost::asio::make_work_guard(*ioContext);
+    // Run io_context in a separate thread
+    std::thread ioThread([ioContext]() {
+        ioContext->run();
+    });
+    run_tasks(*ioContext,numThreads,housePath,algoPath,isSummaryOnly,manager);
+
+    // stop the io_context, and join the io_thread
+    ioContext->stop();
+    if(ioThread.joinable()) {
+        ioThread.join();
+    }
+
+    
+    auto now = std::chrono::system_clock::now();
+    auto duration = std::chrono::duration_cast<TIME_UNIT>(now - start);
+    // print duration that passed
+    std::cout << "Total runtime: " << duration.count() << std::endl;
+    // conductAllSimulations(numThreads, housePath, algoPath, isSummaryOnly, manager);
+    manager->closeAlgorithms();
 }
+
+// void conductAllSimulations(int numThreads, std::string housePath, std::string algoPath, bool isSummaryOnly,SimulationManager& manager) {
+//     std::vector<std::thread> threadPool;
+//     boost::asio::io_context io;
+//     manager.openAlgorithms(algoPath);
+//     manager.initializeHouses(housePath);
+//     manager.setIsSummaryOnly(isSummaryOnly);
+//     std::vector<Simulator> simulators = manager.prepareAllSimulations();
+//     std::atomic<size_t> simulationsLeft{simulators.size()};
+
+
+//        // Start threads
+//     for (int i = 0; i < numThreads; ++i) {
+//         threadPool.emplace_back([&manager,&io,&simulators] {
+//             while(!manager.isSimulationDone()){
+//                 int curSim = manager.getSimulationNumber();
+//                 if(curSim==-1){
+//                     break;
+//                 }
+//                 boost::asio::steady_timer t(io, boost::asio::chrono::milliseconds(20000));
+//                 t.async_wait([&](const boost::system::error_code& error) {
+//     killThread(error, &t,curSim);
+// });
+//                 std::cout<<"simulation number: "<<curSim<<std::endl;
+//                 simulators[curSim].run();
+//                 t.cancel();
+//             }
+//         });
+//     }
+//     while(!manager.isSimulationDone()){
+//         io.restart();
+//         io.run_one();
+//     }
+//     for (auto &thread : threadPool) {
+//         thread.join();
+//     }
+//     manager.sumerrizeAllSimulations(simulators);
+//     manager.makeSummary();
+// }

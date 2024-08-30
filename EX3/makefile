@@ -1,5 +1,5 @@
 .PHONY: all clean alg1
-CXXFLAGS =-fsanitize=address -Wall -Wextra -Werror -pedantic -std=c++20 
+CXXFLAGS =-fsanitize=address -Wall -Wextra -pedantic -std=c++20 -pthread
 
 # Default target
 all: alg1
