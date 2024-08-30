@@ -29,7 +29,7 @@ void Task::timerHandler(const boost::system::error_code& ec, Task& task, time_po
             pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, nullptr);
             pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, nullptr);            
             // set the timer
-            boost::asio::steady_timer timer(ioContext, TIME_UNIT(max_time));
+            boost::asio::steady_timer timer(*ioContext, TIME_UNIT(max_time));
             auto curr_time = std::chrono::system_clock::now();
             auto thread_handler = pthread_self();
             timer.async_wait([&](const boost::system::error_code& ec) {

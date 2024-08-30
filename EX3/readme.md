@@ -18,8 +18,10 @@
 ### build all three projects:
 * make compile
 ### build all projects and run:
+* make compile-run
+### run simulator project(without re-compiling):
 * make run
 ## Running Description:
-The run command is in the makefile, under the targer "run" (the last row in the "run" target).
+The run command is in the makefile, under the target "run".
 you can change the line there by the arguments you want to send, and after done editing run the command "make run" as mentioned.
 

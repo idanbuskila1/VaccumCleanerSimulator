@@ -13,7 +13,7 @@
 #include "../algorithm/AlgorithmRegistration.h"
 
 const pair<int,int> DOCK = {0,0};//dock location in the mapping built is set as the zero point.
-
+const auto priorities = {Step::North, Step::East, Step::South, Step::West};
 class _208150953_A : public AbstractAlgorithm {
 private:
     const WallsSensor *wallsSensor = nullptr;

@@ -1,8 +1,9 @@
-#ifndef ALGO1
-#define ALGO1
+#ifndef ALGO2
+#define ALGO2
 
 #include <stack>
 #include <memory>  // For smart pointers
+#include <random>
 #include "../common/abstract_algorithm.hpp"
 #include "../common/enums.hpp"
 #include "../common/wall_sensor.hpp"
@@ -30,6 +31,7 @@ private:
     pair<int,int> calcNewPosition(Direction d, pair<int,int> pos);
     void updateNeighbors();
     Step moveByState();
+    vector<Step> getRandomPriorities();
 public:
     _208150953_B();
     void setBatteryMeter(const BatteryMeter& meter) override;
@@ -39,4 +41,4 @@ public:
     Step nextStep() override;
 };
 
-#endif // ALGO1
+#endif // ALGO2

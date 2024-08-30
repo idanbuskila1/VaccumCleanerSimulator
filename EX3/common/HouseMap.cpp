@@ -1,5 +1,28 @@
 #include "HouseMap.h"
 
+vector<std::pair<int, int>> HouseMap::directionsToMoves(vector<Step> directionPriorities) const{
+        vector<std::pair<int, int>> moves;
+        for(auto dir:directionPriorities){
+            switch (dir)
+            {
+            case Step::North:
+                moves.push_back({-1,0});
+                break;
+            case Step::East:
+                moves.push_back({0,1});
+                break;
+            case Step::South:
+                moves.push_back({1,0});
+                break;
+            case Step::West:
+                moves.push_back({0,-1});
+                break;
+            default:
+                break;
+            }
+        }
+        return moves;
+    }
 // Function to mark a cell as visited-we only put in the cells that aren't walls
 void HouseMap::markVisited(int x, int y, int dirt) {
     std::pair<int, int> cell = std::make_pair(x, y);
@@ -43,19 +66,19 @@ int HouseMap::setDirt(int x, int y,int newDirt) {
     return -1;
 }
 bool HouseMap::isReachable(pair<int,int> dest)const{
-    auto path = getShortestPath({0,0}, dest);
+    auto path = getShortestPath({0,0}, dest,{Step::North, Step::East, Step::South, Step::West});
     if(path.size()*2 >= maxBattery){
         return false;
     }
     return true;
 }
-std::stack<Step> HouseMap::getShortestPath(const pair<int,int> start, const pair<int,int> end, bool explore) const {
+std::stack<Step> HouseMap::getShortestPath(const pair<int,int> start, const pair<int,int> end,vector<Step> directionPriorities, bool explore) const {
+    vector<std::pair<int, int>> moves = directionsToMoves(directionPriorities);
     std::stack<Step> directions;
     if (!explore && start == end) return directions;
 
-    vector<std::pair<int, int>> moves = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-    vector<Step> moveDirections = {Step::North, Step::East, Step::South, Step::West};
-
+    //vector<std::pair<int, int>> moves = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+    //vector<Step> directionPriorities = {Step::North, Step::East, Step::South, Step::West};
     queue<pair<int, int>> q;
     map<pair<int, int>, pair<int, int>> cameFrom;
     map<pair<int, int>, Step> moveTaken;
@@ -73,7 +96,7 @@ std::stack<Step> HouseMap::getShortestPath(const pair<int,int> start, const pair
             if ((needToVisit.find(neighbor) != needToVisit.end() || visited.count(neighbor) != 0 )&& cameFrom.find(neighbor) == cameFrom.end()) {
                 q.push(neighbor);
                 cameFrom[neighbor] = current;
-                moveTaken[neighbor] = moveDirections[i];
+                moveTaken[neighbor] = directionPriorities[i];
 
                 if(explore){
                     if(isReachable(neighbor)&&((visited.count(neighbor)!=0 && visited.at(neighbor)>0) || needToVisit.find(neighbor) != needToVisit.end())){

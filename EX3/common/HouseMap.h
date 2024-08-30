@@ -16,6 +16,8 @@ class HouseMap {
     std::set<std::pair<int, int>> needToVisit;  // Cells the vacuum has seen but not visited, no walls
     size_t totalDirt = 0;
     size_t maxBattery = 0;
+
+    vector<std::pair<int, int>> directionsToMoves(vector<Step> directionPriorities) const;
 public:
     // Constructor
     HouseMap() = default;
@@ -44,7 +46,7 @@ public:
     // Function to erase a cell from needToVisit
     void eraseFromNeedToVisit(int x, int y){needToVisit.erase({x,y});};
     //when explore=false returns a shortest path between start and end. when explore=true returns a path to a visited cell with left dirt/a cell in needToVisit/empty path if there is none of the above.
-    std::stack<Step> getShortestPath(const pair<int,int> start,const  pair<int,int> end, bool explore=false) const;
+    std::stack<Step> getShortestPath(const pair<int,int> start, const pair<int,int> end,vector<Step> directionPriorities, bool explore=false) const ;
 
 };
 

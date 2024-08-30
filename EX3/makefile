@@ -16,14 +16,18 @@ sim:
 	@echo "Build Simulator"
 	@g++ $(CXXFLAGS) -g -o myrobot simulator/*.cpp common/*.cpp -I common -I algorithm -I simulator
 
-run: 
+compile-run: 
 	@echo "Build executables for all projects..."
 	$(MAKE) compile
+	$(MAKE) run
+	
+
+run:
 	@echo "Run the simulator..."
 #	@./myrobot
 #	@./myrobot -algo_path=build/soFiles
 #	@./myrobot -house_path=houses -algo_path=build/soFiles -summary_only
-	@./myrobot -house_path=houses -algo_path=build/soFiles -num_threads=5 
+	@./myrobot -house_path=houses -algo_path=build/soFiles -num_threads=8 
 
 # Target to build the algorithm
 alg1:

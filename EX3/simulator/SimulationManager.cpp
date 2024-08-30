@@ -199,7 +199,7 @@ int SimulationManager::getSimulationNumber(){
 size_t SimulationManager::getTimeLimit(int simNo){
     size_t algosCount = AlgorithmRegistrar::getAlgorithmRegistrar().count();
     size_t houseIdx = simNo / algosCount;
-    return houseFiles[houseIdx].maxSteps * 1000;
+    return houseFiles[houseIdx].maxSteps * 1;
 }
 std::vector<Simulator> SimulationManager::prepareAllSimulations(){
     std::vector<Simulator> simulators;

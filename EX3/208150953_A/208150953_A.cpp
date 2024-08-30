@@ -67,7 +67,7 @@ Step _208150953_A::moveByState(){
         return Step::Finish;
     }
     //if we are on way to a position but battery is low- go back to docking station
-    auto pathToDocking = houseMap.getShortestPath(currentLocation, DOCK);
+    auto pathToDocking = houseMap.getShortestPath(currentLocation, DOCK,priorities);
     int leftSteps = batteryMeter->getBatteryState() - pathToDocking.size();
     if(state==AlgoState::TO_POS && leftSteps<=1){
         path=pathToDocking;
@@ -132,7 +132,7 @@ Step _208150953_A::nextStep(){
     if(state!=AlgoState::INIT){
         return moveByState();
     }
-    auto pathToDocking = houseMap.getShortestPath(currentLocation, DOCK);
+    auto pathToDocking = houseMap.getShortestPath(currentLocation, DOCK,priorities);
     if(maxSteps-steps==pathToDocking.size() && pathToDocking.size()>0){
          // The way back to the docking station is exactly as long as the steps left. Go back to docking station and finish (without charging) so we wont fail in mission.
         path = pathToDocking;
@@ -160,7 +160,7 @@ Step _208150953_A::nextStep(){
         return Step::Stay;
     }
     // Having charge, maxSteps/battery boundary is not reached and current location is clean- advance to another spot. 
-    path = houseMap.getShortestPath(currentLocation, DOCK,true);
+    path = houseMap.getShortestPath(currentLocation, DOCK,priorities,true);
     if(path.size()==0){//no more to clean - go to dock and end!
         path = pathToDocking;
         if(path.size()==0&&houseMap.getTotalDirt()==0 && houseMap.isNeedToVisitEmpty()){//allready on dock
