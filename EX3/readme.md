@@ -1,11 +1,25 @@
 # Advanced Topics In Programming: Assignment 2
-## contributors:
+## contributor:
 * Idan Buskila 208150953
-* Ido Beerie 315140830
-## Brief Description
-The design ensures a clear separation of responsibilities and efficient operation of each
-component. The `VacuumCleaner` class tracks the robot's state, the `HouseManager` class
-manages the mapping and cleaning status of the house, and the `MyAlgorithm` class
-implements the logic for the robot's actions using an enum `AlgoState` to manage different
-states. This modular design allows for easy maintenance and scalability while ensuring that the
-robot can effectively navigate and clean the house.
+## Folders Description
+* 208150953_A, 208150953_B: the folders of the 2 algorithm projects.
+* algorithm: contains AlgorithmRegistration.h
+* common: folder of files that are common to both simulator project and algorithms.
+* houses: folder with all the .house files
+* outputs: all the output files of house-algorithm simulations.
+* logs: more descriptive log for every house-algorithm simulation.
+* Simulator: files of the simulator project.
+## Build Description
+### build only algo projects:
+* make alg1
+* make alg2
+### build only simulator project:
+* make sim
+### build all three projects:
+* make compile
+### build all projects and run:
+* make run
+## Running Description:
+The run command is in the makefile, under the targer "run" (the last row in the "run" target).
+you can change the line there by the arguments you want to send, and after done editing run the command "make run" as mentioned.
+

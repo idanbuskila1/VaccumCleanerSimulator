@@ -9,21 +9,21 @@ compile:
 	$(MAKE) alg1
 	@echo "Build Algorithem 2"
 	$(MAKE) alg2
-	@echo "Build executables for all algorithms..."
-	$(MAKE) build-exe
+	@echo "Build Simulator"
+	$(MAKE) sim
 
-build-exe:
-	@echo "Build executables for all algorithms..."
-	@g++ $(CXXFLAGS) -g -o myrobot *.cpp simulator/*.cpp common/*.cpp -I common -I algorithm -I simulator
+sim:
+	@echo "Build Simulator"
+	@g++ $(CXXFLAGS) -g -o myrobot simulator/*.cpp common/*.cpp -I common -I algorithm -I simulator
 
 run: 
-	@echo "Build executables for all algorithms..."
+	@echo "Build executables for all projects..."
 	$(MAKE) compile
 	@echo "Run the simulator..."
 #	@./myrobot
 #	@./myrobot -algo_path=build/soFiles
 #	@./myrobot -house_path=houses -algo_path=build/soFiles -summary_only
-	@./myrobot -house_path=houses -algo_path=build/soFiles 
+	@./myrobot -house_path=houses -algo_path=build/soFiles -num_threads=5 
 
 # Target to build the algorithm
 alg1:

@@ -3,7 +3,8 @@
 #include <memory>
 #include <iostream>
 #include "SimulationManager.hpp"
-#include "common/AlgorithmRegistrar.h"
+#include "Task.hpp"
+#include "../common/AlgorithmRegistrar.h"
 #include <thread>
 #include <vector>
 

@@ -213,7 +213,7 @@ std::vector<Simulator> SimulationManager::prepareAllSimulations(){
         algIdx = i % algosCount;
         auto algo = getAlgoByIndex(algIdx);
         auto house = houseFiles[houseIdx];
-        cout<<"house: "<<house.houseName<<" algo: "<<algo.name()<<"thread name:"<<std::this_thread::get_id()<<endl;
+        //cout<<"house: "<<house.houseName<<" algo: "<<algo.name()<<"thread name:"<<std::this_thread::get_id()<<endl;
         simulators.back().setSimulationData(house);
         auto algorithm = algo.create();
         simulators.back().setAlgorithm(std::move(algorithm));

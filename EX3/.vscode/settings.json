@@ -83,6 +83,7 @@
         "latch": "cpp",
         "typeindex": "cpp",
         "utility": "cpp",
-        "semaphore": "cpp"
+        "semaphore": "cpp",
+        "filesystem": "cpp"
     }
 }

@@ -7,7 +7,6 @@
 #include <boost/thread/thread.hpp>
 #include <boost/bind/bind.hpp>
 #include <semaphore>
-#include "simulator/Task.hpp"
 
 
 using std::cerr, std::endl, std::make_unique, std::unique_ptr,std::make_shared ,std::vector;
@@ -48,8 +47,7 @@ void run_tasks(boost::asio::io_context& ioContext,int numThreads, std::string ho
     std::list<Task> tasks;
     size_t task_index = 0;
     for(int i=0;i<num_tasks;i++){ 
-        //manager.getTimeLimit(i)
-        tasks.emplace_back(task_index, (*simulators)[i], 3, ioContext, work_done,currentThreads);
+        tasks.emplace_back(task_index, (*simulators)[i], manager->getTimeLimit(i), ioContext, work_done,currentThreads);
         ++task_index;
     }
 
@@ -81,21 +79,22 @@ int main(int argc, char *argv[]){
     bool isSummaryOnly=false;
     int numThreads=10;
     parseArguments(argc, argv, housePath, algoPath, isSummaryOnly, numThreads);
-    auto ioContext = std::make_shared<boost::asio::io_context>();
+    //auto ioContext = std::make_shared<boost::asio::io_context>();
+    auto ioContext = boost::asio::io_context();
     auto manager = make_unique<SimulationManager>();
     auto start = std::chrono::system_clock::now();
     
     // work guard to keep io_context running till stopped
     // even if there is no active timer to wait for
-    auto workGuard = boost::asio::make_work_guard(*ioContext);
+    auto workGuard = boost::asio::make_work_guard(ioContext);
     // Run io_context in a separate thread
-    std::thread ioThread([ioContext]() {
-        ioContext->run();
+    std::thread ioThread([&ioContext]() {
+        ioContext.run();
     });
-    run_tasks(*ioContext,numThreads,housePath,algoPath,isSummaryOnly,manager);
+    run_tasks(ioContext,numThreads,housePath,algoPath,isSummaryOnly,manager);
 
     // stop the io_context, and join the io_thread
-    ioContext->stop();
+    ioContext.stop();
     if(ioThread.joinable()) {
         ioThread.join();
     }

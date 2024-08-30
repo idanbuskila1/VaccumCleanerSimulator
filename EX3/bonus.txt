@@ -1,2 +1,1 @@
-we added the generation of a log file of all the steps made by the algorithm with more extensive details.
-in addition we added an HLD document.
+stuck threads are terminated when the timeout exceeds, and a new thread is generated instead.

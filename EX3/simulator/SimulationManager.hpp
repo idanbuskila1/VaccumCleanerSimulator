@@ -1,8 +1,8 @@
 #ifndef SIMULATION_MANAGER
 #define SIMULATION_MANAGER
-#include "common/structs.hpp"
-#include "simulator/Simulator.hpp"
-#include "common/AlgorithmRegistrar.h"
+#include "../common/structs.hpp"
+#include "Simulator.hpp"
+#include "../common/AlgorithmRegistrar.h"
 #include <atomic>
 #include <string>
 #include <filesystem>
