@@ -3,4 +3,4 @@ DirtLeft = 0
 Status = FINISHED
 InDock = TRUE
 Score = 128
-Steps:EESsssSssssWNWssWsSsssssWsENENssssssssssssssssssssWsWssSEEESEEsssssEENNSSWWWWNWNssssssssssssssssssssSESEEEENNsWsssssssESSWWWWNWNF
+Steps:WsSsWSsEsssssNEssENESsssSsNNWWssssssssssssssssssssWWssSEEESEsssEsssssEENSWWWWNWNssssssssssssssssssssEESSEEENNsWsssssssESSWWWWNWNF

@@ -1,13 +1,13 @@
-step: 1. battery: 50.000000. current location: [0,1]. action: move in direction South
-step: 2. battery: 49.000000. current location: [1,1]. action: Stay (clean).
-step: 3. battery: 48.000000. current location: [1,1]. action: move in direction South
-step: 4. battery: 47.000000. current location: [2,1]. action: move in direction West
-step: 5. battery: 46.000000. current location: [2,0]. action: Stay (clean).
-step: 6. battery: 45.000000. current location: [2,0]. action: move in direction East
-step: 7. battery: 44.000000. current location: [2,1]. action: move in direction North
-step: 8. battery: 43.000000. current location: [1,1]. action: move in direction North
-step: 9. battery: 42.000000. current location: [0,1]. action: move in direction West
-step: 10. battery: 41.000000. current location: [0,0]. action: Stay (clean).
-step: 11. battery: 40.000000. current location: [0,0]. action: Stay (clean).
-step: 12. battery: 39.000000. current location: [0,0]. action: Stay (clean).
-step: 13. battery: 38.000000. current location: [0,0]. action: move in direction East
+step: 1. battery: 50.000000. current location: [0,1]. action: move in direction West
+step: 2. battery: 49.000000. current location: [0,0]. action: Stay (clean).
+step: 3. battery: 48.000000. current location: [0,0]. action: Stay (clean).
+step: 4. battery: 47.000000. current location: [0,0]. action: Stay (clean).
+step: 5. battery: 46.000000. current location: [0,0]. action: move in direction East
+step: 6. battery: 45.000000. current location: [0,1]. action: move in direction South
+step: 7. battery: 44.000000. current location: [1,1]. action: Stay (clean).
+step: 8. battery: 43.000000. current location: [1,1]. action: move in direction South
+step: 9. battery: 42.000000. current location: [2,1]. action: move in direction West
+step: 10. battery: 41.000000. current location: [2,0]. action: Stay (clean).
+step: 11. battery: 40.000000. current location: [2,0]. action: move in direction East
+step: 12. battery: 39.000000. current location: [2,1]. action: move in direction North
+step: 13. battery: 38.000000. current location: [1,1]. action: move in direction North
