@@ -1,2 +1,0 @@
-There is an extensive logging of the vaccum cleaner steps, more than just a list of the steps made.
-The log is displayed in the generated output files, along with the rest of the output.
