@@ -81,10 +81,10 @@ An output file shall be generated for each algorithm-ouse pair in the /outputs d
 * **InDock = <TRUE/FALSE>** : if the robot ended on the docking.
 * **Steps:** list of characters in one line, no spaces, from: NESWsF – the small s is for STAY, NESW are for North, East, South, West. F is for Finished - only if the algorithm actually returned “Finished”.
 * **Score = <NUMBER>**: the grade of the algorithm on this given house, based on the following formula:
-  If DEAD => Score = MaxSteps + DirtLeft * 300 + 2000
-  Otherwise, If reported FINISHED and robot is NOT InDock 
-  => Score = MaxSteps + DirtLeft * 300 + 3000
-  Otherwise => Score = NumSteps + DirtLeft * 300 + (InDock? 0 : 1000).
+  * If DEAD => Score = MaxSteps + DirtLeft * 300 + 2000
+  * Otherwise, If reported FINISHED and robot is NOT InDock => Score = MaxSteps + DirtLeft * 300 + 3000
+  * Otherwise => Score = NumSteps + DirtLeft * 300 + (InDock? 0 : 1000).
+  * lower score is better.
   
 ## Log Files
 An additional log file will be generateed for each simulation, with elaborated information about each step.
