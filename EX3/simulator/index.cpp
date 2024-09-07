@@ -61,13 +61,12 @@ void run_tasks(auto ioContext,int numThreads, std::string housePath, std::string
     // wait on latch, for all threads to report done
     cout<<"waiting for all tasks to finish"<<endl;
     work_done.wait();
-cout<<"all tasks done"<<endl;
     std::vector<int> results;
+    //std::this_thread::sleep_for(std::chrono::seconds(2));
     for(auto& task: tasks) {
         results.push_back(task.get_result());
         task.join();
     }
-cout<<"all tasks joined"<<endl;
     manager->sumerrizeAllSimulations(*simulators,results);
     manager->makeSummary();
 }
@@ -91,7 +90,6 @@ int main(int argc, char *argv[]){
     run_tasks(ioContext,numThreads,housePath,algoPath,isSummaryOnly,manager);
     // stop the io_context, and join the io_thread
     if(ioThread.joinable()) {
-        workGuard.reset();
         ioContext->stop();
         ioThread.join();
     }

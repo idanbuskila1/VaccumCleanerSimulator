@@ -1,8 +1,9 @@
 #include "Task.hpp"
 // private function for the timer handler
 void Task::timerHandler(const boost::system::error_code& ec, Task& task, time_point start, pthread_t thread_handler) {
-        if (ec == boost::asio::error::operation_aborted) {
+        if (ec == boost::asio::error::operation_aborted || task.ioContext->stopped()) {
             //std::cout << "Timer for task " << task.index << " was canceled" << std::endl;
+            return;
         } else if (!ec) {
             auto now = std::chrono::system_clock::now();
             auto duration = std::chrono::duration_cast<TIME_UNIT>(now - start);

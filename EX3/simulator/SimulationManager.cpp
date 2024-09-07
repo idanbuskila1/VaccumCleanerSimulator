@@ -234,7 +234,7 @@ void SimulationManager::sumerrizeAllSimulations(std::vector<Simulator>& simulato
             simulators[i].makeOutputFile(houseName +"-"+ algoName+".txt");
             simulators[i].makeLog(houseName +"-"+ algoName+".txt");
         }
-        if(results[i]==-1){
+        if(results[i]==-1){//the thread was stopped due to timeout
             scores[algoIdx][houseIdx] = houseFiles[houseIdx].maxSteps*2 + houseFiles[houseIdx].initialDirt*300+2000;
             continue;
         }

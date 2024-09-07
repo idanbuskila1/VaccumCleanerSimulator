@@ -1,5 +1,5 @@
 .PHONY: all clean alg1
-CXXFLAGS =-fsanitize=address -Wall -Wextra -pedantic -std=c++20 -pthread
+CXXFLAGS =-std=c++20 -Wall -Wextra -Werror -pedantic -pthread
 
 # Default target
 all: alg1
@@ -12,9 +12,10 @@ compile:
 	@echo "Build Simulator"
 	$(MAKE) sim
 
+
 sim:
 	@echo "Build Simulator"
-	@g++ $(CXXFLAGS) -g -o myrobot simulator/*.cpp common/*.cpp -I common -I algorithm -I simulator
+	@g++ $(CXXFLAGS) -o myrobot simulator/*.cpp common/*.cpp -I common -I algorithm -I simulator
 
 compile-run: 
 	@echo "Build executables for all projects..."
@@ -25,9 +26,9 @@ compile-run:
 run:
 	@echo "Run the simulator..."
 #	@./myrobot
-#	@./myrobot -algo_path=build/soFiles
+#	@./myrobot -house_path=houses
 #	@./myrobot -house_path=houses -algo_path=build/soFiles -summary_only
-	@./myrobot -house_path=houses -algo_path=build/soFiles -num_threads=8 
+	@./myrobot -algo_path=build/soFiles -house_path=houses  -num_threads=8
 
 # Target to build the algorithm
 alg1:
