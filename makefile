@@ -15,7 +15,7 @@ compile:
 
 sim:
 	@echo "Build Simulator"
-	@g++ $(CXXFLAGS) -o myrobot simulator/*.cpp common/*.cpp -I common -I algorithm -I simulator
+	@g++ $(CXXFLAGS) -o myrobot simulator/*.cpp common/*.cpp -I common -I algorithm -I simulator -Wl,--export-dynamic
 
 compile-run: 
 	@echo "Build executables for all projects..."
@@ -35,7 +35,7 @@ alg1:
 	@echo "Creating build directory if it does not exist..."
 	@mkdir -p build
 	@echo "Running CMake..."
-	@cd build && cmake -DALGORITHM_NAME=208150953_A -DALGORITHM_SOURCES="208150953_A.cpp;208150953_A.hpp" -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
+	@cd build && cmake -DALGORITHM_NAME=208150953_A -DALGORITHM_SOURCES="208150953_A.cpp;208150953_A.hpp" ..
 	@echo "Building algorithm..."
 	@cd build && $(MAKE)
 
@@ -43,7 +43,7 @@ alg2:
 	@echo "Creating build directory if it does not exist..."
 	@mkdir -p build
 	@echo "Running CMake..."
-	@cd build && cmake -DALGORITHM_NAME=208150953_B -DALGORITHM_SOURCES="208150953_B.cpp;208150953_B.hpp" -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
+	@cd build && cmake -DALGORITHM_NAME=208150953_B -DALGORITHM_SOURCES="208150953_B.cpp;208150953_B.hpp" ..
 	@echo "Building algorithm..."
 	@cd build && $(MAKE)
 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -Wl,--unresolved-symbols=ignore-all -shared -Wl,-soname,lib208150953_B.so -o soFiles/lib208150953_B.so CMakeFiles/208150953_B.dir/208150953_B/208150953_B.cpp.o 

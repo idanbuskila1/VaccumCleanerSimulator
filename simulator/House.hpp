@@ -16,7 +16,7 @@ class House{
     int totalDirtLeft;
     vector<vector<int>> houseMap;//vector of vectors 
 
-    bool isLocInsideHouse(const size_t row, const size_t col) const;//returns true iff loc is valid with regard to houseSize
+    bool isLocInsideHouse(const int row, const int col) const;//returns true iff loc is valid with regard to houseSize
 public:
     House(const vector<vector<int> > map);
 

@@ -12,8 +12,8 @@ House::House(const vector<vector<int>> map):houseMap(map){
     }
     totalDirtLeft=totalDirt;
 }
-bool House::isLocInsideHouse(const size_t row, const size_t col) const{
-    if(row>=houseMap.size()||col>=houseMap[row].size() ||row<0 || col<0  )
+bool House::isLocInsideHouse(const int row, const int col) const{
+    if(row<0 || col<0  || row>=int(houseMap.size())||col>=int(houseMap[row].size()))
         return false;
     return true;
 }

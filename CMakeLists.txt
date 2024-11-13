@@ -17,11 +17,6 @@ list(TRANSFORM ALGORITHM_SOURCES PREPEND "${ALGORITHM_NAME}/")
 # Add the specified algorithm directory as a library
 add_library(${ALGORITHM_NAME} SHARED ${ALGORITHM_SOURCES})
 
-# Force the architecture to ARM64 for Apple Silicon (M1)
-if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "arm64")
-    set(CMAKE_OSX_ARCHITECTURES "arm64")
-endif()
-
 # Add the NOT_IMPLEMENTED_FLAG
 add_definitions(-DNOT_IMPLEMENTED_FLAG)
 
@@ -30,7 +25,7 @@ target_include_directories(${ALGORITHM_NAME} PUBLIC common)
 
 # Allow undefined symbols to be resolved later
 set_target_properties(${ALGORITHM_NAME} PROPERTIES
-    LINK_FLAGS "-undefined dynamic_lookup"
+    LINK_FLAGS "-Wl,--unresolved-symbols=ignore-all"
     LINKER_LANGUAGE CXX
     OUTPUT_NAME ${ALGORITHM_NAME}
     SUFFIX ".so"
